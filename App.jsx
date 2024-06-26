@@ -15,12 +15,12 @@ import {
   DrawerItemList,
 } from "@react-navigation/drawer";
 import Appbar from "./src/components/Appbar";
-import PostDetails from "./src/components/PostDetails";
+import PostDetails from "./src/screens/subScreens/PostDetails";
 import SettingsScreen from "./src/screens/SettingsScreen";
-import DonateScreen from "./src/screens/DonateScreen";
+import DonateScreen from "./src/screens/subScreens/DonateScreen";
 import Post from "./src/components/Post";
 import Explore from "./src/components/Explore";
-import AddPostScreen from "./src/screens/AddPostScreen";
+import AddPostScreen from "./src/screens/subScreens/AddPostScreen";
 import {
   useFonts,
   Poppins_100Thin,
@@ -42,9 +42,9 @@ import {
   Poppins_900Black,
   Poppins_900Black_Italic,
 } from "@expo-google-fonts/poppins";
-import SharedPostsScreen from "./src/screens/SharedPostsScreen";
-import CommentsSreen from "./src/screens/CommentsScreen";
-import CustomizeProfileScreen from "./src/screens/CustomizeProfileScreen";
+import SharedPostsScreen from "./src/screens/subScreens/SharedPostsScreen";
+import CommentsSreen from "./src/screens/subScreens/CommentsScreen";
+import CustomizeProfileScreen from "./src/screens/subScreens/CustomizeProfileScreen";
 import NotificationsScreen from "./src/screens/subScreens/NotificationsScreen";
 import PrivacyScreen from "./src/screens/subScreens/PrivacyScreen";
 import LanguageScreen from "./src/screens/subScreens/LanguageScreen";

@@ -112,9 +112,17 @@ const styles = StyleSheet.create({
     marginTop: 10
   },
   searchBar: {
-    width: 280,
+    width: 350,
     marginHorizontal: 5,
-    backgroundColor: '#f1f1f1'
+    backgroundColor: '#f1f1f1',
+    shadowColor: colors.black,
+    shadowOffset: {
+      width: 0,
+      height: -2
+    },
+    elevation: 5,
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84
   },
   menuWrapper: {
     marginHorizontal: 10,
