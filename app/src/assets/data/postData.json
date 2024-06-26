@@ -1,0 +1,110 @@
+[
+  {
+    "userId": 1,
+    "id": 1,
+    "title": "et ea vero quia laudantium autem",
+    "image": "https://picsum.photos/700",
+    "place": "USA",
+    "body": "delectus reiciendis molestiae occaecati non minima eveniet qui voluptatibus\naccusamus in eum beatae sit\nvel qui neque voluptates ut commodi qui incidunt\nut animi commodi",
+    "price": "$300",
+    "rating": "5",
+    "duration": "2"
+  },
+  {
+    "userId": 1,
+    "id": 2,
+    "title": "in quibusdam tempore odit est dolorem",
+    "image": "https://picsum.photos/700",
+    "place": "Mexico",
+    "body": "itaque id aut magnam\npraesentium quia et ea odit et ea voluptas et\nsapiente quia nihil amet occaecati quia id voluptatem\nincidunt ea est distinctio odio",
+    "price": "$310",
+    "rating": "5",
+    "duration": "2"
+  },
+  {
+    "userId": 1,
+    "id": 3,
+    "title": "dolorum ut in voluptas mollitia et saepe quo animi",
+    "image": "https://picsum.photos/700",
+    "place": "Spain",
+    "body": "aut dicta possimus sint mollitia voluptas commodi quo doloremque\niste corrupti reiciendis voluptatem eius rerum\nsit cumque quod eligendi laborum minima\nperferendis recusandae assumenda consectetur porro architecto ipsum ipsam",
+    "price": "$320",
+    "rating": "5",
+    "duration": "2"
+  },
+  {
+    "userId": 1,
+    "id": 4,
+    "title": "voluptatem eligendi optio",
+    "image": "https://picsum.photos/700",
+    "place": "Malta",
+    "body": "fuga et accusamus dolorum perferendis illo voluptas\nnon doloremque neque facere\nad qui dolorum molestiae beatae\nsed aut voluptas totam sit illum",
+    "price": "$330",
+    "rating": "5",
+    "duration": "2"
+  },
+  {
+    "userId": 1,
+    "id": 5,
+    "title": "eveniet quod temporibus",
+    "body": "reprehenderit quos placeat\nvelit minima officia dolores impedit repudiandae molestiae nam\nvoluptas recusandae quis delectus\nofficiis harum fugiat vitae",
+    "price": "$340",
+    "rating": "5",
+    "duration": "2"
+  },
+  {
+    "userId": 1,
+    "id": 6,
+    "title": "sint suscipit perspiciatis velit dolorum rerum ipsa laboriosam odio",
+    "image": "https://picsum.photos/700",
+    "place": "Canada",
+    "body": "suscipit nam nisi quo aperiam aut\nasperiores eos fugit maiores voluptatibus quia\nvoluptatem quis ullam qui in alias quia est\nconsequatur magni mollitia accusamus ea nisi voluptate dicta",
+    "price": "$350",
+    "rating": "5",
+    "duration": "2"
+  },
+  {
+    "userId": 1,
+    "id": 7,
+    "title": "fugit voluptas sed molestias voluptatem provident",
+    "image": "https://picsum.photos/700",
+    "place": "Italy",
+    "body": "eos voluptas et aut odit natus earum\naspernatur fuga molestiae ullam\ndeserunt ratione qui eos\nqui nihil ratione nemo velit ut aut id quo",
+    "price": "$360",
+    "rating": "5",
+    "duration": "2"
+  },
+  {
+    "userId": 1,
+    "id": 8,
+    "title": "voluptate et itaque vero tempora molestiae",
+    "image": "https://picsum.photos/700",
+    "place": "China",
+    "body": "eveniet quo quis\nlaborum totam consequatur non dolor\nut et est repudiandae\nest voluptatem vel debitis et magnam",
+    "price": "$370",
+    "rating": "5",
+    "duration": "2"
+  },
+  {
+    "userId": 1,
+    "id": 9,
+    "title": "adipisci placeat illum aut reiciendis qui",
+    "image": "https://picsum.photos/700",
+    "place": "Norway",
+    "body": "illum quis cupiditate provident sit magnam\nea sed aut omnis\nveniam maiores ullam consequatur atque\nadipisci quo iste expedita sit quos voluptas",
+    "price": "$380",
+    "rating": "5",
+    "duration": "2"
+  },
+  {
+    "userId": 1,
+    "id": 10,
+    "title": "doloribus ad provident suscipit at",
+    "image": "https://picsum.photos/700",
+    "place": "Brazil",
+    "body": "qui consequuntur ducimus possimus quisquam amet similique\nsuscipit porro ipsam amet\neos veritatis officiis exercitationem vel fugit aut necessitatibus totam\nomnis rerum consequatur expedita quidem cumque explicabo",
+    "price": "$390",
+    "rating": "5",
+    "duration": "2"
+  }
+]
