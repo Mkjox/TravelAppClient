@@ -17,7 +17,6 @@ import Post from '../components/Post';
 import { ScrollView } from "react-native-gesture-handler";
 import { Searchbar } from "react-native-paper";
 import colors from "../assets/colors/colors";
-import Animated from 'react-native-reanimated';
 
 {/* DO NOT FORGET TO ADD SCROLLVIEW OR FIX THE ERROR ABOUT VIRTUALIZED LISTS */ }
 
@@ -47,13 +46,6 @@ const HomeScreen = ({ navigation }) => {
       <ScrollView nestedScrollEnabled={true} contentContainerStyle={{ flexGrow: 1 }}
         refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh} />}>
         <View style={styles.container}>
-            <Animated.View
-                        style={{
-                          width: 100,
-                          height: 100,
-                          backgroundColor: 'violet',
-                        }}
-                      />
           <View style={styles.menuWrapper}>
             <Feather
               name="menu"
