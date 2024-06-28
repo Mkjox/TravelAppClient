@@ -53,6 +53,16 @@ const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
 const Drawer = createDrawerNavigator();
 
+
+function Sidebar () {
+  return (
+      <Drawer.Navigator initialRouteName="Home">
+          <Drawer.Screen name='Home' component={HomeScreen}/>
+          <Drawer.Screen name='Settings' component={SettingsScreen}/>
+      </Drawer.Navigator>
+  );
+}; 
+
 const TabNavigator = () => {
   return (
     <Tab.Navigator
@@ -98,14 +108,7 @@ const TabNavigator = () => {
   );
 };
 
-// const Sidebar = () => {
-//   return (
-//     <Drawer.Navigator initialRouteName="Appbar">
-//       <Drawer.Screen name="Appbar" component={Appbar}/>
-//       <Drawer.Screen name="Settings" component={SettingsScreen}/>
-//     </Drawer.Navigator>
-//   );
-// }
+
 
 const App = () => {
   let [fontsLoaded] = useFonts({
@@ -136,8 +139,6 @@ const App = () => {
           component={TabNavigator}
           options={styles.header}
         />
-
-        {/* <Stack.Screen name="Sidebar" component={Sidebar} /> */}
 
         <Stack.Screen
           name="PostDetails"

@@ -31,13 +31,14 @@ const AddPostScreen = ({ navigation }) => {
                     <TouchableOpacity onPress={() => navigation.goBack()}>
                         <Entypo name='chevron-left' size={32} color={colors.black} />
                     </TouchableOpacity>
+                    <Text style={styles.title}>Add Post</Text>
                 </View>
                 <View>
                     <TextInput style={styles.textInput}
                         onChangeText={text => handleInputChange('title', text)}
                         value={inputs.title}
                         placeholder='Enter Title' />
-                    <TextInput style={styles.textInput}
+                    <TextInput style={[styles.textInput,{height: 200}]}
                         onChangeText={text => handleInputChange('description', text)}
                         value={inputs.description}
                         placeholder='Enter Description'
@@ -79,7 +80,12 @@ var styles = StyleSheet.create({
     header: {
         marginTop: 20,
         marginLeft: 20,
-        position: 'relative'
+        position: 'relative',
+        flexDirection: 'row'
+    },
+    title:{
+        marginTop: 5,
+        fontFamily: 'Poppins_400Regular'
     },
     textInput: {
         marginHorizontal: 10,
@@ -90,13 +96,16 @@ var styles = StyleSheet.create({
         backgroundColor: colors.white,
         height: 70,
         textAlign: 'center',
-        borderRadius: 15
+        borderRadius: 15,
+        fontFamily: 'Poppins_400Regular'
     },
     button: {
         width: 300,
         margin: 10,
         alignSelf:'center',
-        borderRadius: 20
+        borderRadius: 20,
+        padding: 20,
+        bottom: -40
     }
 });
 

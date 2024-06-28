@@ -51,7 +51,7 @@ const HomeScreen = ({ navigation }) => {
               name="menu"
               size={32}
               style={styles.menuButton}
-              onPress={() => navigation.navigate("Appbar")}
+              onPress={() => navigation.toggleDrawer}
             />
             {/* Don't forget to add post parameters for this */}
             <Searchbar style={styles.searchBar}
@@ -135,11 +135,13 @@ const styles = StyleSheet.create({
   },
   activityTitle: {
     fontSize: 18,
-    fontFamily: 'Poppins_600SemiBold'
+    fontFamily: 'Poppins_600SemiBold',
+    marginLeft: -15
   },
   activityAll: {
     color: colors.teallight,
-    fontFamily: 'Poppins_500Medium'
+    fontFamily: 'Poppins_500Medium',
+    marginLeft: 10
   },
   activityCategories: {
     flexDirection: 'row',
