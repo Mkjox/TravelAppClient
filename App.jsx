@@ -48,6 +48,7 @@ import CustomizeProfileScreen from "./src/screens/subScreens/CustomizeProfileScr
 import NotificationsScreen from "./src/screens/subScreens/NotificationsScreen";
 import PrivacyScreen from "./src/screens/subScreens/PrivacyScreen";
 import LanguageScreen from "./src/screens/subScreens/LanguageScreen";
+import StartPage from "./src/screens/subScreens/StartPage";
 
 const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
@@ -214,6 +215,12 @@ const App = () => {
         <Stack.Screen
           name="Privacy"
           component={PrivacyScreen}
+          options={styles.header}
+        />
+
+        <Stack.Screen 
+          name= "Start"
+          component={StartPage}
           options={styles.header}
         />
 
