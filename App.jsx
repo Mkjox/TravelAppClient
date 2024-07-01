@@ -50,6 +50,7 @@ import PrivacyScreen from "./src/screens/subScreens/PrivacyScreen";
 import LanguageScreen from "./src/screens/subScreens/LanguageScreen";
 import StartPage from "./src/screens/subScreens/StartPage";
 import RegisterScreen from "./src/screens/subScreens/RegisterScreen";
+import LoginScreen from "./src/screens/subScreens/LoginScreen";
 
 const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
@@ -228,6 +229,12 @@ const App = () => {
         <Stack.Screen
           name="Register"
           component={RegisterScreen}
+          options={styles.header}
+        />
+
+        <Stack.Screen
+          name="Login"
+          component={LoginScreen}
           options={styles.header}
         />
 
