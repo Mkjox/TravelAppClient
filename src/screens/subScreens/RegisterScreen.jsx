@@ -57,6 +57,9 @@ const RegisterScreen = () => {
                     <Text style={styles.buttonText}>Register</Text>
                 </TouchableOpacity>
 
+                <TouchableOpacity onPress={() => navigation.navigate("Login")}>
+                    <Text style={styles.information}>Already have an account? {<Text style={{ color: colors.blue }}>Sign in</Text>}</Text>
+                </TouchableOpacity>
             </View>
         </SafeAreaView>
     )
@@ -69,12 +72,13 @@ const styles = StyleSheet.create({
     },
     header: {
         alignSelf: 'center',
-        marginTop: 25
+        marginTop: 100
     },
     headerTextMain: {
-        fontFamily: 'Poppins_600SemiBold',
+        fontFamily: 'Poppins_700Bold',
         alignSelf: 'center',
-        marginVertical: 15
+        marginVertical: 15,
+        fontSize: 24
     },
     headerTextSecondary: {
         fontFamily: 'Poppins_400Regular'
@@ -86,7 +90,7 @@ const styles = StyleSheet.create({
         color: colors.teallight,
         width: 300,
         backgroundColor: colors.white,
-        height: 70,
+        height: 65,
         textAlign: 'center',
         borderRadius: 25,
         fontFamily: 'Poppins_400Regular'
@@ -97,12 +101,17 @@ const styles = StyleSheet.create({
         alignSelf: 'center',
         borderRadius: 15,
         padding: 20,
-        bottom: -300,
+        bottom: -170,
         backgroundColor: colors.teallight,
         alignItems: 'center'
     },
     buttonText: {
         color: colors.white
+    },
+    information: {
+        bottom: -180,
+        alignSelf: 'center',
+        fontFamily: 'Poppins_400Regular'
     }
 });
 
