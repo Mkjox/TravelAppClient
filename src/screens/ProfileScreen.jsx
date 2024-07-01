@@ -28,13 +28,13 @@ const ProfileScreen = () => {
           <Text style={styles.headerText}>Welcome USER</Text>
           <Text style={[styles.headerText, { marginBottom: 5 }]}>@</Text>
           <Entypo name="location-pin" size={18} color={'#F5F5F5'} style={styles.profileDetails}>
-            <Text style={styles.profileDetailsText}>Location</Text>
+            <Text style={styles.profileDetailsText}> Location</Text>
           </Entypo>
           <Entypo name="phone" size={18} color={'#F5F5F5'} style={styles.profileDetails}>
-            <Text style={styles.profileDetailsText}>Phone Number</Text>
+            <Text style={styles.profileDetailsText}> Phone Number</Text>
           </Entypo>
           <Entypo name="mail" size={18} color={'#F5F5F5'} style={styles.profileDetails}>
-            <Text style={styles.profileDetailsText}>Email</Text>
+            <Text style={styles.profileDetailsText}> Email</Text>
           </Entypo>
           {/* FIX STYLING ON THIS AREA  ALSO ADD DB DATA */}
           <View style={styles.followContainer}>

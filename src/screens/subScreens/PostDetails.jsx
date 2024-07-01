@@ -109,7 +109,7 @@ const styles = StyleSheet.create({
     borderRadius: 25,
   },
   backIcon: {
-    marginTop: 50,
+    marginTop: 40,
     marginLeft: 20,
   },
   titlesWrapper: {
@@ -209,7 +209,8 @@ const styles = StyleSheet.create({
   },
   Comments: {
     borderRadius: 25,
-    backgroundColor: colors.darkGray,
+    backgroundColor: colors.white,
+    borderWidth: 1,
     height: 300,
   }
 });

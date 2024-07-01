@@ -20,7 +20,7 @@ const NotificationsScreen = () => {
                 <Entypo name='chevron-left' size={28} />
                 <Text style={styles.title}>Notifications</Text>
             </TouchableOpacity>
-            <Text style={styles.infoTitle}>Send me notification when</Text>
+            <Text style={styles.infoTitle}>Send me notification when;</Text>
             <View>
                 <List.Item
                     title="Someone replies to my comment"

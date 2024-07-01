@@ -66,9 +66,9 @@ const HomeScreen = ({ navigation }) => {
               <View style={styles.activityInnerWrapper}>
                 <Text style={styles.activityTitle}>Categories</Text>
               </View>
-              <View style={styles.activityInnerWrapper}>
+              <TouchableOpacity style={styles.activityInnerWrapper} onPress={() => navigation.navigate("Start")}>
                 <Text style={styles.activityAll}>See All &gt;</Text>
-              </View>
+              </TouchableOpacity>
             </View>
             <View style={styles.activityCategories}>
               {/* Activity component called here */}
