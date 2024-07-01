@@ -49,20 +49,21 @@ import NotificationsScreen from "./src/screens/subScreens/NotificationsScreen";
 import PrivacyScreen from "./src/screens/subScreens/PrivacyScreen";
 import LanguageScreen from "./src/screens/subScreens/LanguageScreen";
 import StartPage from "./src/screens/subScreens/StartPage";
+import RegisterScreen from "./src/screens/subScreens/RegisterScreen";
 
 const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
 const Drawer = createDrawerNavigator();
 
 
-function Sidebar () {
+function Sidebar() {
   return (
-      <Drawer.Navigator initialRouteName="Home">
-          <Drawer.Screen name='Home' component={HomeScreen}/>
-          <Drawer.Screen name='Settings' component={SettingsScreen}/>
-      </Drawer.Navigator>
+    <Drawer.Navigator initialRouteName="Home">
+      <Drawer.Screen name='Home' component={HomeScreen} />
+      <Drawer.Screen name='Settings' component={SettingsScreen} />
+    </Drawer.Navigator>
   );
-}; 
+};
 
 const TabNavigator = () => {
   return (
@@ -206,7 +207,7 @@ const App = () => {
           options={styles.header}
         />
 
-        <Stack.Screen 
+        <Stack.Screen
           name="Language"
           component={LanguageScreen}
           options={styles.header}
@@ -218,9 +219,15 @@ const App = () => {
           options={styles.header}
         />
 
-        <Stack.Screen 
-          name= "Start"
+        <Stack.Screen
+          name="Start"
           component={StartPage}
+          options={styles.header}
+        />
+
+        <Stack.Screen
+          name="Register"
+          component={RegisterScreen}
           options={styles.header}
         />
 

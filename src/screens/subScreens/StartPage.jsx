@@ -4,15 +4,17 @@ import { View, Text, StyleSheet } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import colors from '../../assets/colors/colors';
-
+import { useNavigation } from "@react-navigation/core";
 
 const StartPage = () => {
+    const navigation = useNavigation();
+
     return (
         <SafeAreaView style={styles.container}>
             <View style={styles.list}>
                 <Image source={require('../../assets/images/ux-re.png')} style={styles.image} />
                 <Text style={styles.infoText}>Share your travels with{"\n"} people around the world!</Text>
-                <TouchableOpacity style={styles.button} onPress={() => ''}>
+                <TouchableOpacity style={styles.button} onPress={() => navigation.navigate("Register")}>
                     <Text>Get Started</Text>
                 </TouchableOpacity>
             </View>
