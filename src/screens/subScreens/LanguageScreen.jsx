@@ -4,8 +4,10 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import { Entypo } from '@expo/vector-icons';
 import { TouchableOpacity } from "react-native-gesture-handler";
 import colors from "../../assets/colors/colors";
+import { useNavigation } from "@react-navigation/core";
 
 const LanguageScreen = () => {
+    const navigation = useNavigation();
     const handleButtonPress = () => {
         console.warn("Confirm button pressed");
     }
@@ -13,7 +15,7 @@ const LanguageScreen = () => {
     return (
         <SafeAreaView style={styles.container}>
             <View style={styles.header}>
-                <Entypo name='chevron-left' size={28} />
+                <Entypo name='chevron-left' size={28} onPress={() => navigation.goBack()}/>
                 <Text style={styles.title}>Language</Text>
             </View>
             <TouchableOpacity style={styles.button} onPress={handleButtonPress}>

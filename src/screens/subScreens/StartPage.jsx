@@ -14,7 +14,7 @@ const StartPage = () => {
             <View style={styles.list}>
                 <Image source={require('../../assets/images/ux-re.png')} style={styles.image} />
                 <Text style={styles.infoText}>Share your travels with{"\n"} people around the world!</Text>
-                <TouchableOpacity style={styles.button} onPress={() => navigation.navigate("Register")}>
+                <TouchableOpacity style={styles.button} onPress={() => navigation.navigate("Login")}>
                     <Text>Get Started</Text>
                 </TouchableOpacity>
             </View>
