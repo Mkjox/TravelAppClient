@@ -1,69 +1,121 @@
 import React, { useState } from "react";
-import { View, Text, StyleSheet, Switch } from 'react-native';
+import { View, Text, StyleSheet, Switch, Alert } from 'react-native';
 import { TouchableOpacity } from "react-native-gesture-handler";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { Entypo } from '@expo/vector-icons';
 import { List } from "react-native-paper";
 import colors from "../../assets/colors/colors";
+import { useNavigation } from "@react-navigation/core";
 
 const NotificationsScreen = () => {
-    // DON'T FORGET TO CHANGE THESE
-    const [isEnabled, setIsEnabled] = useState(false);
-    const toggleSwitch = () => setIsEnabled(previousState => !previousState);
-    const handleConfirmPress = () => {
-        console.log('Confirm button pressed');
-    }
+    const navigation = useNavigation();
+    const [repliesNotification, setRepliesNotification] = useState(false);
+    const [commentsNotification, setCommentsNotification] = useState(false);
+    const [likesContentNotification, setLikesContentNotification] = useState(false);
+    const [likesCommentNotification, setLikesCommentNotification] = useState(false);
+    const [loginNotification, setLoginNotification] = useState(true);
+
+    const handleConfirm = async () => {
+        const data = {
+            repliesNotification,
+            commentsNotification,
+            likesContentNotification,
+            likesCommentNotification,
+            loginNotification
+        };
+
+        try {
+            const response = await fetch('', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(data)
+            });
+
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+
+            const result = await response.json();
+            Alert.alert('Success', 'Notification settings updated successfully!');
+            console.log(result);
+        }
+        catch (error) {
+            Alert.alert('Error', 'There was a problem updating your notification settings.');
+            console.error('Error:', error);
+        }
+    };
 
     return (
         <SafeAreaView style={styles.container}>
             <TouchableOpacity style={styles.titleWrapper}>
-                <Entypo name='chevron-left' size={28} />
+                <Entypo name='chevron-left' size={28} onPress={() => navigation.goBack()} />
                 <Text style={styles.title}>Notifications</Text>
             </TouchableOpacity>
             <Text style={styles.infoTitle}>Send me notification when;</Text>
             <View>
-                <List.Item
-                    title="Someone replies to my comment"
-                    titleStyle={styles.options}
-                    right={props => <Switch
-                        trackColor={{ false: '#767577', true: '#81b0ff' }}
-                        thumbColor={isEnabled ? '#f5dd4b' : '#f4f3f4'}
-                        onValueChange={toggleSwitch}
-                        value={isEnabled}
-                    />}
-                />
-                <List.Item
-                    title="Someone comments on my post"
-                    titleStyle={styles.options}
-                    right={props => <Switch
-                        trackColor={{ false: '#767577', true: '#81b0ff' }}
-                        thumbColor={isEnabled ? '#f5dd4b' : '#f4f3f4'}
-                        onValueChange={toggleSwitch}
-                        value={isEnabled}
-                    />}
-                />
-                <List.Item
-                    title="Someone likes my content"
-                    titleStyle={styles.options}
-                    right={props => <Switch
-                        trackColor={{ false: '#767577', true: '#81b0ff' }}
-                        thumbColor={isEnabled ? '#f5dd4b' : '#f4f3f4'}
-                        onValueChange={toggleSwitch}
-                        value={isEnabled}
-                    />}
-                />
-                <List.Item
-                    title="Someone likes my comment"
-                    titleStyle={styles.options}
-                    right={props => <Switch
-                        trackColor={{ false: '#767577', true: '#81b0ff' }}
-                        thumbColor={isEnabled ? '#f5dd4b' : '#f4f3f4'}
-                        onValueChange={toggleSwitch}
-                        value={isEnabled}
-                    />}
-                />
+                <View style={styles.switchContainer}>
+                    <Text style={styles.switchLabel}>someone replies to my comment</Text>
+                    <Switch
+                        value={repliesNotification}
+                        onValueChange={setRepliesNotification}
+                        trackColor={{ false: '#E5E5E5', true: '#2DCCA7' }}
+                        thumbColor={repliesNotification ? '#ffffff' : '#f4f3f4'}
+                        ios_backgroundColor='#E5E5E5'
+                        style={styles.switch}
+                    />
+                </View>
 
-                <TouchableOpacity style={styles.confirmButton} onPress={handleConfirmPress}>
+                <View style={styles.switchContainer}>
+                    <Text style={styles.switchLabel}>someone comments on my post</Text>
+                    <Switch
+                        value={commentsNotification}
+                        onValueChange={setCommentsNotification}
+                        trackColor={{ false: '#E5E5E5', true: '#2DCCA7' }}
+                        thumbColor={commentsNotification ? '#ffffff' : '#f4f3f4'}
+                        ios_backgroundColor='#E5E5E5'
+                        style={styles.switch}
+                    />
+                </View>
+
+                <View style={styles.switchContainer}>
+                    <Text style={styles.switchLabel}>someone likes my content</Text>
+                    <Switch
+                        value={likesContentNotification}
+                        onValueChange={setLikesContentNotification}
+                        trackColor={{ false: '#E5E5E5', true: '#2DCCA7' }}
+                        thumbColor={likesContentNotification ? '#ffffff' : '#f4f3f4'}
+                        ios_backgroundColor='#E5E5E5'
+                        style={styles.switch}
+                    />
+                </View>
+
+                <View style={styles.switchContainer}>
+                    <Text style={styles.switchLabel}>someone likes my comment</Text>
+                    <Switch
+                        value={likesCommentNotification}
+                        onValueChange={setLikesCommentNotification}
+                        trackColor={{ false: '#E5E5E5', true: '#2DCCA7' }}
+                        thumbColor={likesCommentNotification ? '#ffffff' : '#f4f3f4'}
+                        ios_backgroundColor='#E5E5E5'
+                        style={styles.switch}
+                    />
+                </View>
+
+                <View style={styles.switchContainer}>
+                    <Text style={styles.switchLabel}>someone tries to login to my account</Text>
+                    <Switch
+                        value={loginNotification}
+                        onValueChange={setLoginNotification}
+                        trackColor={{ false: '#E5E5E5', true: '#2DCCA7' }}
+                        thumbColor={loginNotification ? '#ffffff' : '#f4f3f4'}
+                        ios_backgroundColor='#E5E5E5'
+                        style={styles.switch}
+                    />
+                </View>
+
+                <TouchableOpacity style={styles.confirmButton} onPress={handleConfirm}>
                     <Text style={styles.confirmButtonText}>
                         Confirm
                     </Text>
@@ -92,8 +144,20 @@ const styles = StyleSheet.create({
         marginTop: 15,
         fontFamily: 'Poppins_400Regular'
     },
-    options: {
-        fontFamily: 'Poppins_300Light'
+    switchContainer: {
+        width: '95%',
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'space-between',
+        marginBottom: 15,
+        marginLeft: 15,
+
+    },
+    switchLabel: {
+        fontFamily: 'Poppins_400Regular'
+    },
+    switch: {
+        width: 100
     },
     confirmButton: {
         backgroundColor: colors.teallight,

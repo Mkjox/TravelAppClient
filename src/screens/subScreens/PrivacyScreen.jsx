@@ -2,23 +2,20 @@ import React, { useState } from "react";
 import { View, Text, StyleSheet, TouchableOpacity, Switch, Alert } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { Entypo } from '@expo/vector-icons';
-import { List } from "react-native-paper";
 import colors from "../../assets/colors/colors";
+import { useNavigation } from "@react-navigation/core";
 
 const PrivacyScreen = () => {
+    const navigation = useNavigation();
     const [repliesNotification, setRepliesNotification] = useState(false);
     const [commentsNotification, setCommentsNotification] = useState(false);
     const [likesContentNotification, setLikesContentNotification] = useState(false);
-    const [likesCommentNotification, setLikesCommentNotification] = useState(false);
-    const [loginNotification, setLoginNotification] = useState(false);
 
     const handleConfirm = async () => {
         const data = {
             repliesNotification,
             commentsNotification,
             likesContentNotification,
-            likesCommentNotification,
-            loginNotification
         };
 
         try {
@@ -47,17 +44,17 @@ const PrivacyScreen = () => {
     return (
         <SafeAreaView style={styles.container}>
             <TouchableOpacity style={styles.titleWrapper}>
-                <Entypo name='chevron-left' size={28} />
+                <Entypo name='chevron-left' size={28} onPress={() => navigation.goBack()}/>
                 <Text style={styles.title}>Privacy</Text>
             </TouchableOpacity>
             <View style={styles.listWrapper}>
 
                 <View style={styles.switchContainer}>
-                    <Text style={styles.switchLabel}>someone replies to my comment</Text>
-                    <Switch 
+                    <Text style={styles.switchLabel}>make my post count private</Text>
+                    <Switch
                         value={repliesNotification}
                         onValueChange={setRepliesNotification}
-                        trackColor={{false: '#E5E5E5', true: '#2DCCA7'}}
+                        trackColor={{ false: '#E5E5E5', true: '#2DCCA7' }}
                         thumbColor={repliesNotification ? '#ffffff' : '#f4f3f4'}
                         ios_backgroundColor='#E5E5E5'
                         style={styles.switch}
@@ -65,11 +62,11 @@ const PrivacyScreen = () => {
                 </View>
 
                 <View style={styles.switchContainer}>
-                    <Text style={styles.switchLabel}>someone comments on my post</Text>
-                    <Switch 
+                    <Text style={styles.switchLabel}>make my comment count private</Text>
+                    <Switch
                         value={commentsNotification}
                         onValueChange={setCommentsNotification}
-                        trackColor={{false: '#E5E5E5', true: '#2DCCA7'}}
+                        trackColor={{ false: '#E5E5E5', true: '#2DCCA7' }}
                         thumbColor={commentsNotification ? '#ffffff' : '#f4f3f4'}
                         ios_backgroundColor='#E5E5E5'
                         style={styles.switch}
@@ -77,36 +74,12 @@ const PrivacyScreen = () => {
                 </View>
 
                 <View style={styles.switchContainer}>
-                    <Text style={styles.switchLabel}>someone likes my content</Text>
-                    <Switch 
+                    <Text style={styles.switchLabel}>make my profile private</Text>
+                    <Switch
                         value={likesContentNotification}
                         onValueChange={setLikesContentNotification}
-                        trackColor={{false: '#E5E5E5', true: '#2DCCA7'}}
+                        trackColor={{ false: '#E5E5E5', true: '#2DCCA7' }}
                         thumbColor={likesContentNotification ? '#ffffff' : '#f4f3f4'}
-                        ios_backgroundColor='#E5E5E5'
-                        style={styles.switch}
-                    />
-                </View>
-
-                <View style={styles.switchContainer}>
-                    <Text style={styles.switchLabel}>someone likes my comment</Text>
-                    <Switch 
-                        value={likesCommentNotification}
-                        onValueChange={setLikesCommentNotification}
-                        trackColor={{false: '#E5E5E5', true: '#2DCCA7'}}
-                        thumbColor={likesCommentNotification ? '#ffffff' : '#f4f3f4'}
-                        ios_backgroundColor='#E5E5E5'
-                        style={styles.switch}
-                    />
-                </View>
-
-                <View style={styles.switchContainer}>
-                    <Text style={styles.switchLabel}>someone tries to login to my account</Text>
-                    <Switch 
-                        value={loginNotification}
-                        onValueChange={setLoginNotification}
-                        trackColor={{false: '#E5E5E5', true: '#2DCCA7'}}
-                        thumbColor={loginNotification ? '#ffffff' : '#f4f3f4'}
                         ios_backgroundColor='#E5E5E5'
                         style={styles.switch}
                     />
@@ -139,20 +112,20 @@ const styles = StyleSheet.create({
     listWrapper: {
         marginTop: 15
     },
-
     switchContainer: {
         width: '95%',
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-    marginBottom: 15,
-    marginLeft: 15
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'space-between',
+        marginBottom: 15,
+        marginLeft: 15,
+        
     },
     switchLabel: {
-
+        fontFamily: 'Poppins_400Regular'
     },
     switch: {
-        fontFamily: 'Poppins_300Light'
+        width: 100
     },
     confirmButton: {
         backgroundColor: colors.teallight,
