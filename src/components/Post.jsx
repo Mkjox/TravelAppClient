@@ -96,7 +96,7 @@ const styles = StyleSheet.create({
     postItemTitle: {
         fontSize: 16,
         color: colors.black,
-        fontFamily: 'Poppins_400Regular',
+        fontFamily: 'Poppins_500Medium',
     },
     postPlace: {
         marginVertical: 5,

@@ -94,7 +94,7 @@ const RegisterScreen = () => {
                 </TouchableOpacity>
 
                 <TouchableOpacity onPress={() => navigation.navigate("Login")}>
-                    <Text style={styles.information}>Already have an account? {<Text style={{ color: colors.blue }}>Sign in</Text>}</Text>
+                    <Text style={styles.information}>Already have an account? {<Text style={styles.signInText}>Sign in</Text>}</Text>
                 </TouchableOpacity>
             </View>
         </SafeAreaView>
@@ -147,7 +147,13 @@ const styles = StyleSheet.create({
     information: {
         bottom: -180,
         alignSelf: 'center',
-        fontFamily: 'Poppins_400Regular'
+        color: '#7D7D7D',
+        fontFamily: 'Poppins_400Regular',
+        fontSize: 14
+    },
+    signInText: {
+        color: colors.blue,
+        fontWeight: 'bold'
     }
 });
 

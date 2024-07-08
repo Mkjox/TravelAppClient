@@ -80,7 +80,7 @@ const LoginScreen = () => {
             </TouchableOpacity>
 
             <Text style={styles.signUpText}>
-                Don't have an account? {<Text style={styles.signUpLink} onPress={navigation.navigate('Register')}>Sign Up</Text>}
+                Don't have an account? {<Text style={styles.signUpLink} onPress={() => navigation.navigate('Register')}>Sign Up</Text>}
             </Text>
         </SafeAreaView>
     );
@@ -116,7 +116,10 @@ const styles = StyleSheet.create({
         color: '#007BFF',
         alignSelf: 'center',
         marginBottom: 20,
-        marginTop: 15
+        marginTop: 15,
+        fontFamily: 'Poppins_400Regular',
+        fontSize: 14,
+        fontWeight: 'semibold'
     },
     button: {
         width: 300,
