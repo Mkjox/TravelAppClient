@@ -178,14 +178,6 @@ const styles = StyleSheet.create({
   likedItemLocation: {
     marginVertical: 5,
   },
-  likedItemLocationWrapper: {
-    flexDirection: "row",
-    alignItems: "center",
-    marginBottom: 10,
-    fontWeight: "400",
-    fontSize: 14,
-    color: colors.black,
-  },
   arrowUp: {
     position: 'absolute',
     borderRadius: 60,

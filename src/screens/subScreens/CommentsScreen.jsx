@@ -25,7 +25,7 @@ const CommentsSreen = () => {
         <SafeAreaView style={styles.container}>
             <View style={styles.header}>
                 <Entypo name='chevron-left' size={24} onPress={() => navigation.goBack()}>
-                    <Text style={styles.headerText}>Comment Page</Text>
+                    <Text style={styles.headerText}>Comments</Text>
                 </Entypo>
             </View>
 
