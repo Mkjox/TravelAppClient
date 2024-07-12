@@ -51,7 +51,7 @@ const HomeScreen = ({ navigation }) => {
               name="menu"
               size={32}
               style={styles.menuButton}
-              onPress={() => navigation.toggleDrawer}
+              onPress={() => navigation.openDrawer()}
             />
             {/* Don't forget to add post parameters for this */}
             <Searchbar style={styles.searchBar}

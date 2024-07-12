@@ -38,7 +38,7 @@ const LikedScreen = () => {
     <SafeAreaView style={{ flex: 1 }}>
       <View style={styles.container}>
         <View style={styles.menuWrapper}>
-          <Feather name="menu" size={32} style={styles.menuButton} />
+          <Feather name="menu" size={32} style={styles.menuButton} onPress={() => navigation.openDrawer()}/>
           <Searchbar style={styles.searchBar}
             placeholder="Search"
             onChangeText={setSearchQuery}
@@ -108,7 +108,7 @@ const styles = StyleSheet.create({
     marginTop: 10
   },
   searchBar: {
-    width: 280,
+    width: 350,
     marginHorizontal: 5,
     backgroundColor: '#EEEEEE'
   },

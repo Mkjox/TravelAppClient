@@ -8,12 +8,7 @@ import "react-native-gesture-handler";
 import HomeScreen from "./src/screens/HomeScreen";
 import LikedScreen from "./src/screens/LikedScreen";
 import { createStackNavigator } from "@react-navigation/stack";
-import {
-  DrawerItem,
-  createDrawerNavigator,
-  DrawerContentScrollView,
-  DrawerItemList,
-} from "@react-navigation/drawer";
+import { createDrawerNavigator } from '@react-navigation/drawer';
 import Appbar from "./src/components/Appbar";
 import PostDetails from "./src/screens/subScreens/PostDetails";
 import SettingsScreen from "./src/screens/SettingsScreen";
@@ -56,15 +51,6 @@ const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
 const Drawer = createDrawerNavigator();
 
-
-function Sidebar() {
-  return (
-    <Drawer.Navigator initialRouteName="Home">
-      <Drawer.Screen name='Home' component={HomeScreen} />
-      <Drawer.Screen name='Settings' component={SettingsScreen} />
-    </Drawer.Navigator>
-  );
-};
 
 const TabNavigator = () => {
   return (
@@ -111,7 +97,122 @@ const TabNavigator = () => {
   );
 };
 
+function DrawerNavigator() {
+  return (
+    <Drawer.Navigator>
+      <Drawer.Screen name="Home" component={StackNavigator} options={{ drawerType: 'back', headerShown: false }} />
+      <Drawer.Screen name="Appbar" component={Appbar} options={{ drawerType: 'back', headerShown: false }} />
+    </Drawer.Navigator>
+  );
+}
 
+function StackNavigator() {
+  return (
+    <Stack.Navigator>
+      <Stack.Screen
+        name="TabNavigator"
+        component={TabNavigator}
+        options={styles.header}
+      />
+
+      <Stack.Screen
+        name="PostDetails"
+        component={PostDetails}
+        options={styles.header}
+      />
+
+      <Stack.Screen
+        name="Appbar"
+        component={Appbar}
+        options={styles.header}
+      />
+
+      <Stack.Screen
+        name="Settings"
+        component={SettingsScreen}
+        options={styles.header}
+      />
+
+      <Stack.Screen
+        name="Donate"
+        component={DonateScreen}
+        options={styles.header}
+      />
+
+      <Stack.Screen
+        name="Post"
+        component={Post}
+        options={styles.header} />
+
+      <Stack.Screen
+        name="Explore"
+        component={Explore}
+        options={styles.header}
+      />
+
+      <Stack.Screen
+        name="AddPost"
+        component={AddPostScreen}
+        options={styles.header}
+      />
+
+      <Stack.Screen
+        name="SharedPosts"
+        component={SharedPostsScreen}
+        options={styles.header}
+      />
+
+      <Stack.Screen
+        name="Comments"
+        component={CommentsSreen}
+        options={styles.header}
+      />
+
+      <Stack.Screen
+        name="CustomizeProfile"
+        component={CustomizeProfileScreen}
+        options={styles.header}
+      />
+
+      <Stack.Screen
+        name="Notifications"
+        component={NotificationsScreen}
+        options={styles.header}
+      />
+
+      <Stack.Screen
+        name="Language"
+        component={LanguageScreen}
+        options={styles.header}
+      />
+
+      <Stack.Screen
+        name="Privacy"
+        component={PrivacyScreen}
+        options={styles.header}
+      />
+
+      <Stack.Screen
+        name="Start"
+        component={StartPage}
+        options={styles.header}
+      />
+
+      <Stack.Screen
+        name="Register"
+        component={RegisterScreen}
+        options={styles.header}
+      />
+
+      <Stack.Screen
+        name="Login"
+        component={LoginScreen}
+        options={styles.header}
+      />
+
+    </Stack.Navigator>
+  );
+}
 
 const App = () => {
   let [fontsLoaded] = useFonts({
@@ -136,109 +237,7 @@ const App = () => {
   });
   return (
     <NavigationContainer>
-      <Stack.Navigator>
-        <Stack.Screen
-          name="TabNavigator"
-          component={TabNavigator}
-          options={styles.header}
-        />
-
-        <Stack.Screen
-          name="PostDetails"
-          component={PostDetails}
-          options={styles.header}
-        />
-
-        <Stack.Screen
-          name="Appbar"
-          component={Appbar}
-          options={styles.header}
-        />
-
-        <Stack.Screen
-          name="Settings"
-          component={SettingsScreen}
-          options={styles.header}
-        />
-
-        <Stack.Screen
-          name="Donate"
-          component={DonateScreen}
-          options={styles.header}
-        />
-
-        <Stack.Screen
-          name="Post"
-          component={Post}
-          options={styles.header} />
-
-        <Stack.Screen
-          name="Explore"
-          component={Explore}
-          options={styles.header}
-        />
-
-        <Stack.Screen
-          name="AddPost"
-          component={AddPostScreen}
-          options={styles.header}
-        />
-
-        <Stack.Screen
-          name="SharedPosts"
-          component={SharedPostsScreen}
-          options={styles.header}
-        />
-
-        <Stack.Screen
-          name="Comments"
-          component={CommentsSreen}
-          options={styles.header}
-        />
-
-        <Stack.Screen
-          name="CustomizeProfile"
-          component={CustomizeProfileScreen}
-          options={styles.header}
-        />
-
-        <Stack.Screen
-          name="Notifications"
-          component={NotificationsScreen}
-          options={styles.header}
-        />
-
-        <Stack.Screen
-          name="Language"
-          component={LanguageScreen}
-          options={styles.header}
-        />
-
-        <Stack.Screen
-          name="Privacy"
-          component={PrivacyScreen}
-          options={styles.header}
-        />
-
-        <Stack.Screen
-          name="Start"
-          component={StartPage}
-          options={styles.header}
-        />
-
-        <Stack.Screen
-          name="Register"
-          component={RegisterScreen}
-          options={styles.header}
-        />
-
-        <Stack.Screen
-          name="Login"
-          component={LoginScreen}
-          options={styles.header}
-        />
-
-      </Stack.Navigator>
+      <DrawerNavigator />
     </NavigationContainer>
   );
 };
