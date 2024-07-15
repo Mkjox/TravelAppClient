@@ -9,7 +9,7 @@ import HomeScreen from "./src/screens/HomeScreen";
 import LikedScreen from "./src/screens/LikedScreen";
 import { createStackNavigator } from "@react-navigation/stack";
 import { createDrawerNavigator } from '@react-navigation/drawer';
-import Appbar from "./src/components/Appbar";
+import AppSettings from "./src/components/AppSettings";
 import PostDetails from "./src/screens/subScreens/PostDetails";
 import SettingsScreen from "./src/screens/SettingsScreen";
 import DonateScreen from "./src/screens/subScreens/DonateScreen";
@@ -101,7 +101,7 @@ function DrawerNavigator() {
   return (
     <Drawer.Navigator>
       <Drawer.Screen name="Home" component={StackNavigator} options={{ drawerType: 'back', headerShown: false }} />
-      <Drawer.Screen name="Appbar" component={Appbar} options={{ drawerType: 'back', headerShown: false }} />
+      <Drawer.Screen name="AppSettings" component={AppSettings} options={{ drawerType: 'back', headerShown: false }} />
     </Drawer.Navigator>
   );
 }
@@ -122,8 +122,8 @@ function StackNavigator() {
       />
 
       <Stack.Screen
-        name="Appbar"
-        component={Appbar}
+        name="AppSettings"
+        component={AppSettings}
         options={styles.header}
       />
 

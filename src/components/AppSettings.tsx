@@ -1,24 +1,22 @@
 import * as React from "react";
 import { StackNavigationProp } from "@react-navigation/stack";
-import { Platform, View, StyleSheet, TextComponent } from "react-native";
+import { Platform, View, StyleSheet, TextComponent, ScrollView } from "react-native";
 import { Appbar, List, RadioButton, useTheme } from "react-native-paper";
 import { Switch } from "react-native-gesture-handler";
+import { useNavigation } from "@react-navigation/core";
 // import ScreenWrapper from "./ScreenWrapper";
-
-type Props = {
-  navigation: StackNavigationProp<{}>;
-};
 
 type AppbarModes = "small" | "medium" | "large" | "center-aligned";
 const MORE_ICON = Platform.OS === "ios" ? "dots-horizontal" : "dots.vertical";
 
-const AppBar = ({ navigation }: Props) => {
+const AppSettings = () => {
   const [showLeftIcon, setShowLeftIcon] = React.useState(true);
   const [showExactTheme, setShowExactTheme] = React.useState(false);
   const [showSearchIcon, setShowSearchIcon] = React.useState(true);
   const [showMoreIcon, setShowMoreIcon] = React.useState(true);
   const [appbarMode, setAppbarMode] =
     React.useState<AppbarModes>("center-aligned");
+  const navigation = useNavigation();
 
   const { isV3 } = useTheme();
 
@@ -75,11 +73,7 @@ const AppBar = ({ navigation }: Props) => {
   );
 
   return (
-    <>
-      {/*<ScreenWrapper
-        style={styles.container}
-        contentContainerStyle={styles.contentContainer}
-      >*/}
+    <View style={styles.container}>
       {isV3 ? (
         <List.Section title="Default options">
           {renderDefaultOptions()}
@@ -114,10 +108,9 @@ const AppBar = ({ navigation }: Props) => {
           </RadioButton.Group>
         </List.Section>
       )}
-      {/*</ScreenWrapper>*/}
       <Appbar style={styles.bottom} theme={{ mode: showExactTheme ? 'exact' : 'adaptive' }} children={undefined}>
       </Appbar>
-    </>
+    </View>
   );
 };
 
@@ -144,4 +137,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export default Appbar;
+export default AppSettings;
