@@ -15,7 +15,7 @@ const StartPage = () => {
                 <Image source={require('../../assets/images/ux-re.png')} style={styles.image} />
                 <Text style={styles.infoText}>Share your travels with{"\n"} people around the world!</Text>
                 <TouchableOpacity style={styles.button} onPress={() => navigation.navigate("Login")}>
-                    <Text>Get Started</Text>
+                    <Text style={styles.buttonText}>Get Started</Text>
                 </TouchableOpacity>
             </View>
         </SafeAreaView>
@@ -52,15 +52,11 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         borderRadius: 10,
         backgroundColor: '#4DB6AC',
-        shadowColor: colors.black,
-        shadowOffset: {
-            width: 0,
-            height: 2
-        },
-        shadowOpacity: 0.25,
-        shadowRadius: 3.84,
         bottom: -250,
         elevation: 5
+    },
+    buttonText: {
+        color: colors.white
     }
 });
 

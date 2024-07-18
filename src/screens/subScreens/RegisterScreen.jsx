@@ -139,7 +139,8 @@ const styles = StyleSheet.create({
         padding: 20,
         bottom: -170,
         backgroundColor: colors.teallight,
-        alignItems: 'center'
+        alignItems: 'center',
+        elevation: 5
     },
     buttonText: {
         color: colors.white

@@ -72,7 +72,8 @@ const styles = StyleSheet.create({
         marginBottom: 10,
     },
     postInnerWrapper: {
-        marginBottom: 7,
+        marginHorizontal: 2,
+        marginVertical: 5
     },
     postItemsWrapper: {
         paddingTop: 10,
