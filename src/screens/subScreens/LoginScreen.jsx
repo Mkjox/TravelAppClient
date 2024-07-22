@@ -79,9 +79,11 @@ const LoginScreen = () => {
                 </Text>
             </TouchableOpacity>
 
+            <TouchableOpacity onPress={() => navigation.navigate('Register')}>
             <Text style={styles.signUpText}>
-                Don't have an account? {<Text style={styles.signUpLink} onPress={() => navigation.navigate('Register')}>Sign Up</Text>}
+                Don't have an account? {<Text style={styles.signUpLink}>Sign Up</Text>}
             </Text>
+            </TouchableOpacity>
         </SafeAreaView>
     );
 }
@@ -102,14 +104,14 @@ const styles = StyleSheet.create({
     },
     textInput: {
         marginHorizontal: 10,
-        marginTop: 15,
+        marginTop: 20,
         alignSelf: 'center',
         color: colors.teallight,
         width: 300,
         backgroundColor: colors.white,
-        height: 65,
+        height: 55,
         textAlign: 'center',
-        borderRadius: 25,
+        borderRadius: 15,
         fontFamily: 'Poppins_400Regular'
     },
     forgotPassword: {
@@ -126,7 +128,7 @@ const styles = StyleSheet.create({
         margin: 10,
         alignSelf: 'center',
         borderRadius: 15,
-        padding: 20,
+        padding: 18,
         bottom: -170,
         backgroundColor: colors.teallight,
         alignItems: 'center',
@@ -135,6 +137,8 @@ const styles = StyleSheet.create({
     buttonText: {
         color: '#FFFFFF',
         fontWeight: 'bold',
+        fontSize: 17,
+        fontFamily: 'Poppins_400Regular'
     },
     signUpText: {
         fontSize: 14,

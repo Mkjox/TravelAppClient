@@ -14,7 +14,7 @@ const StartPage = () => {
             <View style={styles.list}>
                 <Image source={require('../../assets/images/ux-re.png')} style={styles.image} />
                 <Text style={styles.infoText}>Share your travels with{"\n"} people around the world!</Text>
-                <TouchableOpacity style={styles.button} onPress={() => navigation.navigate("Login")}>
+                <TouchableOpacity style={styles.button} onPress={() => navigation.navigate("Register")}>
                     <Text style={styles.buttonText}>Get Started</Text>
                 </TouchableOpacity>
             </View>
@@ -47,8 +47,8 @@ const styles = StyleSheet.create({
     button: {
         alignSelf: 'center',
         borderColor: colors.black,
-        padding: 20,
-        width: 250,
+        padding: 18,
+        width: 300,
         alignItems: 'center',
         borderRadius: 10,
         backgroundColor: '#4DB6AC',
@@ -56,7 +56,10 @@ const styles = StyleSheet.create({
         elevation: 5
     },
     buttonText: {
-        color: colors.white
+        color: colors.white,
+        fontSize: 17,
+        fontFamily: 'Poppins_400Regular',
+        fontWeight: 'bold',
     }
 });
 

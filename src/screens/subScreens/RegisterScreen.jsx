@@ -113,7 +113,7 @@ const styles = StyleSheet.create({
     headerTextMain: {
         fontFamily: 'Poppins_700Bold',
         alignSelf: 'center',
-        marginVertical: 15,
+        marginVertical: 25,
         fontSize: 24
     },
     headerTextSecondary: {
@@ -121,14 +121,14 @@ const styles = StyleSheet.create({
     },
     textInput: {
         marginHorizontal: 10,
-        marginTop: 15,
+        marginTop: 25,
         alignSelf: 'center',
         color: colors.teallight,
         width: 300,
         backgroundColor: colors.white,
-        height: 65,
+        height: 55,
         textAlign: 'center',
-        borderRadius: 25,
+        borderRadius: 15,
         fontFamily: 'Poppins_400Regular'
     },
     button: {
@@ -136,14 +136,17 @@ const styles = StyleSheet.create({
         margin: 10,
         alignSelf: 'center',
         borderRadius: 15,
-        padding: 20,
+        padding: 15,
         bottom: -170,
         backgroundColor: colors.teallight,
         alignItems: 'center',
         elevation: 5
     },
     buttonText: {
-        color: colors.white
+        color: colors.white,
+        fontSize: 17,
+        fontFamily: 'Poppins_400Regular',
+        fontWeight: 'bold'
     },
     information: {
         bottom: -180,

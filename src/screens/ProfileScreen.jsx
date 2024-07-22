@@ -24,48 +24,58 @@ const ProfileScreen = () => {
     <SafeAreaView style={{ flex: 1 }}>
       <ScrollView style={styles.container}>
         <View style={styles.profileTopWrapper}>
-          <Avatar.Image size={70} style={styles.avatar} />
-          <Text style={styles.headerText}>Welcome USER</Text>
-          <Text style={[styles.headerText, { marginBottom: 5 }]}>@</Text>
+
+          <View style={styles.information}>
+            <Avatar.Image size={70} style={styles.avatar} />
+            <View style={styles.informationInnerWrapper}>
+              <Text style={styles.headerText}>Welcome USER</Text>
+              <Text style={[styles.headerText, { marginBottom: 5 }]}>@</Text>
+            </View>
+          </View>
+
           <Entypo name="location-pin" size={18} color={'#F5F5F5'} style={styles.profileDetails}>
             <Text style={styles.profileDetailsText}> Location</Text>
           </Entypo>
+
           <Entypo name="phone" size={18} color={'#F5F5F5'} style={styles.profileDetails}>
             <Text style={styles.profileDetailsText}> Phone Number</Text>
           </Entypo>
+
           <Entypo name="mail" size={18} color={'#F5F5F5'} style={styles.profileDetails}>
             <Text style={styles.profileDetailsText}> Email</Text>
           </Entypo>
+
           {/* FIX STYLING ON THIS AREA  ALSO ADD DB DATA */}
-          <View style={styles.followContainer}>
-            <View style={styles.followerDetails}>
-              <Text style={styles.followerDetailsText}>0</Text>
-              <Text style={styles.followerDetailsText}>Followers</Text>
+          <View style={styles.detailsContainer}>
+            <View style={styles.detailsWrapper}>
+              <Text style={styles.detailsText}>0</Text>
+              <Caption style={styles.detailsText}>Followers</Caption>
             </View>
             <View style={styles.followingDetails}>
-              <Text style={styles.followingDetailsText}>0</Text>
-              <Text style={styles.followingDetailsText}>Following</Text>
+              <Text style={styles.detailsText}>0</Text>
+              <Caption style={styles.detailsText}>Following</Caption>
+            </View>
+          </View>
+
+          <View style={styles.detailsContainer}>
+            <View style={styles.countContainer}>
+              <Text style={styles.detailsText}>4</Text>
+              <Caption style={styles.detailsText}>Post Count</Caption>
+            </View>
+            <View style={styles.countContainer}>
+              <Text style={styles.detailsText}>5</Text>
+              <Caption style={styles.detailsText}>Comment Count</Caption>
             </View>
           </View>
         </View>
-        {/* ENTER DB DATA HERE */}
-        <View style={styles.countWrapper}>
-          <View style={styles.countContainer}>
-            <Text>4</Text>
-            <Caption style={{ fontSize: 14 }}>Post Count</Caption>
-          </View>
-          <View style={styles.countContainer}>
-            <Text>5</Text>
-            <Caption>Comment Count</Caption>
-          </View>
-        </View>
+
         <View style={styles.options}>
           <TouchableOpacity onPress={() => navigation.navigate("SharedPosts")}>
             <FontAwesome name="heart" style={styles.optionItem} size={17}>
               <Text style={styles.optionItemText}> Shared Posts</Text>
             </FontAwesome>
           </TouchableOpacity>
-          
+
           <TouchableOpacity onPress={() => navigation.navigate("Comments")}>
             <FontAwesome name="comment" style={styles.optionItem} size={17}>
               <Text style={styles.optionItemText}> Comments</Text>
@@ -73,21 +83,21 @@ const ProfileScreen = () => {
           </TouchableOpacity>
 
           <TouchableOpacity onPress={() => navigation.navigate("CustomizeProfile")}>
-          <FontAwesome name="pencil" style={styles.optionItem} size={17}>
-            <Text style={styles.optionItemText}> Customize Profile</Text>
-          </FontAwesome>
+            <FontAwesome name="pencil" style={styles.optionItem} size={17}>
+              <Text style={styles.optionItemText}> Customize Profile</Text>
+            </FontAwesome>
           </TouchableOpacity>
 
           <TouchableOpacity>
-          <FontAwesome name="share" style={styles.optionItem} size={17}>
-            <Text style={styles.optionItemText}> Recommend the app to your friend</Text>
-          </FontAwesome>
+            <FontAwesome name="share" style={styles.optionItem} size={17}>
+              <Text style={styles.optionItemText}> Recommend the app to your friend</Text>
+            </FontAwesome>
           </TouchableOpacity>
 
           <TouchableOpacity onPress={() => navigation.navigate("Settings")}>
-          <FontAwesome name="gear" style={styles.optionItem} size={17}>
-            <Text style={styles.optionItemText}> Settings</Text>
-          </FontAwesome>
+            <FontAwesome name="gear" style={styles.optionItem} size={17}>
+              <Text style={styles.optionItemText}> Settings</Text>
+            </FontAwesome>
           </TouchableOpacity>
         </View>
       </ScrollView>
@@ -103,15 +113,21 @@ const styles = StyleSheet.create({
     backgroundColor: colors.teallight,
     borderBottomEndRadius: 20,
     borderBottomLeftRadius: 20,
-    height: 370,
+    height: 430,
     shadowOpacity: 30,
   },
   avatar: {
     marginTop: 25,
     marginBottom: 10,
-    alignSelf: 'center'
+    alignSelf: 'left',
+    marginLeft: 35
   },
   information: {
+    flexDirection: 'row',
+  },
+  informationInnerWrapper: {
+    marginHorizontal: 15,
+    marginTop: 35
   },
   headerText: {
     fontFamily: 'Poppins_500Medium',
@@ -126,17 +142,17 @@ const styles = StyleSheet.create({
   profileDetailsText: {
     fontFamily: 'Poppins_300Light',
   },
-  followContainer: {
+  detailsContainer: {
     marginTop: 10,
     flexDirection: 'row',
     marginHorizontal: 10,
     alignContent: "space-between",
     alignSelf: 'center'
   },
-  followerDetails: {
+  detailsWrapper: {
     marginRight: 50
   },
-  followerDetailsText: {
+  detailsText: {
     fontFamily: 'Poppins_300Light',
     fontSize: 14,
     color: colors.white,
@@ -145,27 +161,15 @@ const styles = StyleSheet.create({
   followingDetails: {
     marginLeft: 50
   },
-  followingDetailsText: {
-    fontFamily: 'Poppins_300Light',
-    fontSize: 14,
-    color: colors.white,
-    alignSelf: 'center'
-  },
-  countWrapper: {
-    alignItems: 'center',
-    alignSelf: 'center',
-    marginVertical: 10,
-    height: 60,
-    marginBottom: 15,
-    flexDirection: 'row'
-  },
   countContainer: {
-    marginHorizontal: 50,
-    alignItems: 'center'
+    marginHorizontal: 40,
+    alignItems: 'center',
+    marginRight: 25
   },
   options: {
     flexDirection: 'column',
-    marginLeft: 40
+    marginLeft: 40,
+    marginTop: 25
   },
   optionItem: {
     marginVertical: 10,

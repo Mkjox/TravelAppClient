@@ -5,6 +5,8 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import { useNavigation } from "@react-navigation/core";
 import { Entypo } from '@expo/vector-icons';
 import { Avatar, Button } from "react-native-paper";
+import DropDownPicker from "react-native-dropdown-picker";
+import { TouchableOpacity } from "react-native-gesture-handler";
 
 const CustomizeProfileScreen = () => {
     const navigation = useNavigation();
@@ -13,7 +15,13 @@ const CustomizeProfileScreen = () => {
     // USE DATEPICKER
     const [dateofbirth, setDateOfBirth] = useState('');
     const [email, setEmail] = useState('');
-    const [gender, setGender] = useState('');
+    const [open, setOpen] = useState(false);
+    const [value, setValue] = useState(null);
+    const [items, setItems] = useState([
+        { label: 'Male', value: 'male' },
+        { label: 'Female', value: 'female' },
+        { label: 'Other', value: 'other' }
+    ])
 
     const handlePress = () => {
         if (!fullName || !nickname || !dateofbirth || !email || !gender) {
@@ -103,16 +111,24 @@ const CustomizeProfileScreen = () => {
 
                     <View style={styles.inputWrapper}>
                         <Text style={styles.inputText}>Gender</Text>
-                        <TextInput
-                            style={styles.input}
-                            value={gender}
-                            onChangeText={setGender}
+                        <DropDownPicker
+                            open={open}
+                            value={value}
+                            items={items}
+                            setOpen={setOpen}
+                            setValue={setValue}
+                            setItems={setItems}
+                            placeholder=""
+                            style={styles.dropdown}
+                            dropDownContainerStyle={styles.dropDownContainer}
                         />
                     </View>
 
+                    <TouchableOpacity onPress={handlePress}>
                     <View style={styles.button}>
-                        <Button title="Submit" mode="elevated" onPress={handlePress} buttonColor={colors.teallight} textColor={colors.white}>Update</Button>
+                        <Text style={styles.buttonText}>Update</Text>
                     </View>
+                    </TouchableOpacity>
                 </View>
             </View>
         </SafeAreaView>
@@ -146,27 +162,64 @@ const styles = StyleSheet.create({
         color: '#615F5F'
     },
     input: {
-        width: 250,
-        height: 50,
+        width: 300,
+        height: 55,
         backgroundColor: colors.white,
         borderRadius: 10,
+        borderWidth: 0.3,
+        borderColor: '#ccc',
         shadowColor: colors.black,
         shadowOffset: {
             width: 2,
             height: 2
         },
-        elevation: 5,
+        elevation: 10,
+    },
+    dropdown: {
+        backgroundColor: colors.white,
+        borderRadius: 10,
+        borderWidth: 0.3,
+        borderColor: '#ccc',
+        paddingHorizontal: 10,
+        height: 55,
+        justifyContent: 'center',
+        width: 300,
+        shadowColor: colors.black,
+        shadowOffset: {
+            width: 2,
+            height: 2
+        },
+        elevation: 10,
+    },
+    dropDownContainer: {
+        backgroundColor: '#fff',
+        borderWidth: 0.3,
+        borderColor: '#ccc',
+        borderRadius: 10,
+        width: 300
     },
     button: {
-        width: 150,
-        bottom: -150,
+        width: 300,
+        bottom: -130,
+        padding: 18,
         shadowColor: colors.black,
         shadowOffset: {
             width: 2,
             height: 2
         },
         elevation: 5,
-    }
+        margin: 10,
+        alignSelf: 'center',
+        borderRadius: 15,
+        backgroundColor: colors.teallight,
+        alignItems: 'center',
+    },
+    buttonText: {
+        color: '#FFFFFF',
+        fontWeight: 'bold',
+        fontSize: 17,
+        fontFamily: 'Poppins_400Regular'
+    },
 });
 
 export default CustomizeProfileScreen;
