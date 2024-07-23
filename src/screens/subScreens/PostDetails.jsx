@@ -35,27 +35,20 @@ const PostDetails = ({ route, navigation }) => {
           >
             <Entypo name="chevron-left" size={32} color={colors.white} />
           </TouchableOpacity>
+        </ImageBackground>
+
+
+        <View style={styles.informationWrapper}>
           <View style={styles.titlesWrapper}>
             <Text style={styles.itemTitle}>{item.title}</Text>
             <View style={styles.locationWrapper}>
-              <MaterialIcons name="place" size={24} color="white" />
+              <MaterialIcons name="place" size={20} color="black" />
               <Text style={styles.locationText}>{item.place}</Text>
             </View>
           </View>
-        </ImageBackground>
-        <View style={styles.descriptionWrapper}>
-          <TouchableOpacity onPress={toggleHeart} style={styles.heart}>
-            <Entypo name={heart} size={32} color={colors.orange} />
-          </TouchableOpacity>
-          <View style={styles.descriptionTextWrapper}>
-            <Text style={styles.descriptionTitle}>Description</Text>
-            <Text style={styles.descriptionText}>{item.body}</Text>
-          </View>
-          {/*  Can add another languages later and make this more dynamic  */}
-
           <View style={styles.infoWrapper}>
             <View style={styles.infoItem}>
-              <Text style={styles.infoTitle}>Price</Text>
+              <Text style={styles.infoTitle}>Suggested Budget</Text>
               <View style={styles.infoTextWrapper}>
                 <Text style={styles.infoText}>{item.price}</Text>
                 <Text style={styles.infoSubText}>/per</Text>
@@ -66,7 +59,7 @@ const PostDetails = ({ route, navigation }) => {
               <Text style={styles.infoTitle}>Rating</Text>
               <View style={styles.infoTextWrapper}>
                 <Text style={styles.infoText}>{item.rating}</Text>
-                <Text style={styles.infoSubText}>/per</Text>
+                <Text style={styles.infoSubText}>/5</Text>
               </View>
             </View>
 
@@ -77,11 +70,28 @@ const PostDetails = ({ route, navigation }) => {
                 <Text style={styles.infoSubText}>/ hour</Text>
               </View>
             </View>
+
+            <View>
+              <Text style={styles.categoryText}>Category</Text>
+              <Text style={styles.category}>{item.category}</Text>
+            </View>
           </View>
-          <View style={styles.CommentsWrapper}>
-            <View style={styles.CommentsInnerWrapper}>
-              <Text style={styles.CommentsTitle}>Comments</Text>
-              <View style={styles.Comments} />
+          <TouchableOpacity onPress={toggleHeart} style={styles.heart}>
+            <Entypo name={heart} size={32} color={colors.orange} />
+          </TouchableOpacity>
+        </View>
+        <View style={styles.detailsWrapper}>
+          <View style={styles.detailsTextWrapper}>
+            <Text style={styles.detailsTitle}>Details</Text>
+            <Text style={styles.detailsText}>{item.body}</Text>
+          </View>
+          {/*  Can add another languages later and make this more dynamic  */}
+
+
+          <View style={styles.commentsWrapper}>
+            <View style={styles.commentsInnerWrapper}>
+              <Text style={styles.commentsTitle}>Comments</Text>
+              <View style={styles.comments} />
             </View>
           </View>
         </View>
@@ -102,10 +112,20 @@ const styles = StyleSheet.create({
     height: height * 0.499,
     justifyContent: "space-between",
   },
-  descriptionWrapper: {
+  informationWrapper: {
+    height: 300,
+    width: '85%',
+    alignSelf: 'center',
+    borderRadius: 15,
+    borderWidth: 0.4,
+    top: -100,
+    backgroundColor: colors.white,
+    elevation: 5
+  },
+  detailsWrapper: {
     flex: 1,
     backgroundColor: colors.white,
-    marginTop: -20,
+    marginTop: -100,
     borderRadius: 25,
   },
   backIcon: {
@@ -113,13 +133,14 @@ const styles = StyleSheet.create({
     marginLeft: 20,
   },
   titlesWrapper: {
-    marginHorizontal: 20,
-    marginBottom: 40,
+    marginHorizontal: 25,
+    marginBottom: 10,
+    marginTop: 20
   },
   itemTitle: {
-    fontFamily: 'Poppins_300Light',
-    fontSize: 20,
-    color: colors.white,
+    fontFamily: 'Poppins_500Medium',
+    fontSize: 17,
+    color: colors.black,
   },
   locationWrapper: {
     flexDirection: "row",
@@ -127,9 +148,9 @@ const styles = StyleSheet.create({
     marginTop: 5,
   },
   locationText: {
-    fontFamily: 'Poppins_400Regular',
-    fontSize: 16,
-    color: colors.white,
+    fontFamily: 'Poppins_500Medium',
+    fontSize: 14,
+    color: colors.black,
   },
   heart: {
     position: "absolute",
@@ -138,6 +159,7 @@ const styles = StyleSheet.create({
     width: 64,
     height: 64,
     backgroundColor: colors.white,
+    borderWidth: 0.2,
     borderRadius: 64,
     justifyContent: "center",
     alignItems: "center",
@@ -150,32 +172,34 @@ const styles = StyleSheet.create({
     shadowRadius: 3.84,
     elevation: 5,
   },
-  descriptionTextWrapper: {
+  detailsTextWrapper: {
     marginTop: 30,
     marginHorizontal: 20
   },
-  descriptionTitle: {
-    fontWeight: "400",
+  detailsTitle: {
+    fontWeight: "700",
     fontSize: 20,
     color: colors.black,
-    fontFamily: 'Poppins_300Light_Italic'
+    fontFamily: 'Poppins_500Medium',
+    fontStyle: 'italic',
   },
-  descriptionText: {
+  detailsText: {
     marginTop: 20,
     color: colors.black,
     height: 'auto',
     marginBottom: 20,
-    textAlign: 'center',
+    textAlign: 'justify',
     fontFamily: 'Poppins_400Regular',
   },
   infoWrapper: {
-    flexDirection: "row",
-    marginHorizontal: 20,
+    flexDirection: "column",
+    marginHorizontal: 25,
     justifyContent: "space-between",
+    width: '80%',
   },
   infoTitle: {
-    fontSize: 24,
-    color: colors.orange,
+    fontSize: 15,
+    color: colors.black,
   },
   infoTextWrapper: {
     flexDirection: 'row',
@@ -184,30 +208,42 @@ const styles = StyleSheet.create({
   },
   infoText: {
     fontWeight: '400',
-    fontSize: 24,
-    color: colors.orange,
+    fontSize: 13,
+    color: colors.black,
     fontFamily: 'Poppins_400Regular'
   },
   infoSubText: {
     fontWeight: "400",
-    fontSize: 14,
+    fontSize: 12,
     color: colors.darkGray,
     fontFamily: 'Poppins_400Regular'
   },
-  CommentsWrapper: {
+  categoryText: {
+    marginVertical: 5,
+    marginBottom: 8
+  },
+  category: {
+    borderWidth: 0.5,
+    width: '20%',
+    borderRadius: 10,
+    alignItems: 'center',
+    color: colors.blue,
+    textAlign: 'center',
+    borderColor: colors.blue
+  },
+  commentsWrapper: {
     marginTop: 20,
     marginHorizontal: 20,
     fontFamily: 'Poppins_400Regular'
   },
-  CommentsInnerWrapper: {
+  commentsInnerWrapper: {
 
   },
-  CommentsTitle: {
+  commentsTitle: {
     fontSize: 20,
     fontFamily: 'Poppins_300Light_Italic'
-    
   },
-  Comments: {
+  comments: {
     borderRadius: 25,
     backgroundColor: colors.white,
     borderWidth: 1,
