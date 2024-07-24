@@ -4,16 +4,26 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { useNavigation } from "@react-navigation/core";
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import colors from '../../assets/colors/colors';
+import AuthService from '../../assets/data/AuthService';
 
 const RegisterScreen = () => {
     const navigation = useNavigation();
-    const [fullName, setFullName] = useState('');
+    const [username, setUsername] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
+    const [error, setError] = useState('');
 
     const handleRegister = () => {
-        if (!fullName || !email || !password || !confirmPassword) {
+        AuthService.register(username, password, email)
+            .then(response => {
+                navigation.navigate('Login');
+            })
+            .catch(error => {
+                setError('Registration Failed');
+            })
+
+        if (!username || !email || !password || !confirmPassword) {
             Alert.alert('Error', 'Please fill all fields');
             return;
         }
@@ -22,35 +32,6 @@ const RegisterScreen = () => {
             Alert.alert('Error', 'Passwords do not match');
             return;
         }
-
-        // const apiUrl = '';
-
-        const data = {
-            fullName, 
-            email,
-            password
-        };
-
-        fetch(apiUrl, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(data),
-        })
-        .then((response) => response.json())
-        .then((result) => {
-            if (result.success) {
-                Alert.alert('Success', 'Registration is successful');
-            }
-            else {
-                Alert.alert('Error', result.message || 'Registration failed');
-            }
-        })
-        .catch((error) => {
-            Alert.alert('Error', 'An error occured');
-            console.error(error);
-        });
     };
 
 
@@ -65,8 +46,8 @@ const RegisterScreen = () => {
                 <TextInput
                     style={styles.textInput}
                     placeholder='Enter your full name'
-                    value={fullName}
-                    onChangeText={setFullName}
+                    value={username}
+                    onChangeText={setUsername}
                 />
                 <TextInput
                     style={styles.textInput}
@@ -88,6 +69,8 @@ const RegisterScreen = () => {
                     value={confirmPassword}
                     onChangeText={setConfirmPassword}
                 />
+
+                {error ? <Text>{error}</Text> : null}
 
                 <TouchableOpacity style={styles.button} onPress={handleRegister}>
                     <Text style={styles.buttonText}>Register</Text>

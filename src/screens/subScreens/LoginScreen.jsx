@@ -1,46 +1,23 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import { View, Text, StyleSheet, TextInput, TouchableOpacity } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useNavigation } from "@react-navigation/core";
 import colors from '../../assets/colors/colors';
+import AuthService from '../../assets/data/AuthService';
 
 const LoginScreen = () => {
     const navigation = useNavigation();
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const { error, setError } = useState('');
 
     const handleLogin = () => {
-        if (!email || !password) {
-            Alert.alert('Error', 'Please fill all fields');
-            return;
-        }
-
-        // const apiUrl = '';
-
-        const data = {
-            email,
-            password
-        };
-
-        fetch(apiUrl, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(data),
-        })
-            .then((response) => response.json())
-            .then((result) => {
-                if (result.success) {
-                    Alert.alert('Success', 'Registration is successful');
-                }
-                else {
-                    Alert.alert('Error', result.message || 'Registration failed');
-                }
+        AuthService.login(email, password)
+            .then(response => {
+                { () => navigation.navigate('Home') }
             })
-            .catch((error) => {
-                Alert.alert('Error', 'An error occured');
-                console.error(error);
+            .catch(error => {
+                setError('Invalid email or password');
             });
     };
 
@@ -65,6 +42,8 @@ const LoginScreen = () => {
                     onChangeText={setPassword}
                 />
 
+                {error ? <Text>{error}</Text> : null}
+
                 {/* Add navigation to the forgot password page */}
                 <TouchableOpacity onPress={() => ''}>
                     <Text style={styles.forgotPassword}>
@@ -80,9 +59,9 @@ const LoginScreen = () => {
             </TouchableOpacity>
 
             <TouchableOpacity onPress={() => navigation.navigate('Register')}>
-            <Text style={styles.signUpText}>
-                Don't have an account? {<Text style={styles.signUpLink}>Sign Up</Text>}
-            </Text>
+                <Text style={styles.signUpText}>
+                    Don't have an account? {<Text style={styles.signUpLink}>Sign Up</Text>}
+                </Text>
             </TouchableOpacity>
         </SafeAreaView>
     );
