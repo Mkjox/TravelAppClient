@@ -14,75 +14,76 @@ const RegisterScreen = () => {
     const [confirmPassword, setConfirmPassword] = useState('');
     const [error, setError] = useState('');
 
-    const handleRegister = () => {
-        AuthService.register(username, password, email)
-            .then(response => {
-                navigation.navigate('Login');
-            })
-            .catch(error => {
-                setError('Registration Failed');
-            })
-
-        if (!username || !email || !password || !confirmPassword) {
-            Alert.alert('Error', 'Please fill all fields');
-            return;
+    const handleRegister = async () => {
+        try {
+            await AuthService.register(username, password, email);
+            navigation.navigate("Login");
         }
-
-        if (password !== confirmPassword) {
-            Alert.alert('Error', 'Passwords do not match');
-            return;
+        catch (err) {
+            setError(err.Message);
         }
-    };
+    }
+
+    if (!username || !email || !password || !confirmPassword) {
+        Alert.alert('Error', 'Please fill all fields');
+        return;
+    }
+
+    if (password !== confirmPassword) {
+        Alert.alert('Error', 'Passwords do not match');
+        return;
+    }
+};
 
 
-    return (
-        <SafeAreaView style={styles.container}>
-            <View>
-                <View style={styles.header}>
-                    <Text style={styles.headerTextMain}>Welcome Onboard!</Text>
-                    <Text style={styles.headerTextSecondary}>Let's help you find new traveling routes.</Text>
-                </View>
-
-                <TextInput
-                    style={styles.textInput}
-                    placeholder='Enter your full name'
-                    value={username}
-                    onChangeText={setUsername}
-                />
-                <TextInput
-                    style={styles.textInput}
-                    placeholder='Enter your email'
-                    value={email}
-                    onChangeText={setEmail}
-                />
-                <TextInput
-                    style={styles.textInput}
-                    placeholder='Enter your password'
-                    secureTextEntry
-                    value={password}
-                    onChangeText={setPassword}
-                />
-                <TextInput
-                    style={styles.textInput}
-                    placeholder='Confirm password'
-                    secureTextEntry
-                    value={confirmPassword}
-                    onChangeText={setConfirmPassword}
-                />
-
-                {error ? <Text>{error}</Text> : null}
-
-                <TouchableOpacity style={styles.button} onPress={handleRegister}>
-                    <Text style={styles.buttonText}>Register</Text>
-                </TouchableOpacity>
-
-                <TouchableOpacity onPress={() => navigation.navigate("Login")}>
-                    <Text style={styles.information}>Already have an account? {<Text style={styles.signInText}>Sign in</Text>}</Text>
-                </TouchableOpacity>
+return (
+    <SafeAreaView style={styles.container}>
+        <View>
+            <View style={styles.header}>
+                <Text style={styles.headerTextMain}>Welcome Onboard!</Text>
+                <Text style={styles.headerTextSecondary}>Let's help you find new traveling routes.</Text>
             </View>
-        </SafeAreaView>
-    )
-}
+
+            <TextInput
+                style={styles.textInput}
+                placeholder='Enter your full name'
+                value={username}
+                onChangeText={setUsername}
+            />
+            <TextInput
+                style={styles.textInput}
+                placeholder='Enter your email'
+                value={email}
+                onChangeText={setEmail}
+            />
+            <TextInput
+                style={styles.textInput}
+                placeholder='Enter your password'
+                secureTextEntry
+                value={password}
+                onChangeText={setPassword}
+            />
+            <TextInput
+                style={styles.textInput}
+                placeholder='Confirm password'
+                secureTextEntry
+                value={confirmPassword}
+                onChangeText={setConfirmPassword}
+            />
+
+            {error ? <Text style={styles.errorText}>{error}</Text> : null}
+
+            <TouchableOpacity style={styles.button} onPress={handleRegister}>
+                <Text style={styles.buttonText}>Register</Text>
+            </TouchableOpacity>
+
+            <TouchableOpacity onPress={() => navigation.navigate("Login")}>
+                <Text style={styles.information}>Already have an account? {<Text style={styles.signInText}>Sign in</Text>}</Text>
+            </TouchableOpacity>
+        </View>
+    </SafeAreaView>
+)
+
 
 const styles = StyleSheet.create({
     container: {

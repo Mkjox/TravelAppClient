@@ -4,98 +4,100 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { Entypo } from '@expo/vector-icons';
 import colors from '../../assets/colors/colors';
 import { ScrollView } from 'react-native-gesture-handler';
+import PostService from '../../assets/data/PostService';
 
 const AddPostScreen = ({ navigation }) => {
-    const [inputs, setInputs] = useState({
-        title: '',
-        description: '',
-        place: '',
-        price: '',
-        rating: '',
-        duration: ''
-    });
-    const handleInputChange = (name, value) => {
-        setInputs({
-            ...inputs,
-            [name]: value
-        });
-    };
+    const [title, setTitle] = useState('');
+    const [description, setDescription] = useState('');
+    const [budget, setBudget] = useState('');
+    const [rating, setRating] = useState('');
+    const [duration, setDuration] = useState('');
+    const { error, setError } = useState('');
 
-    const handleSubmit = () => {
-
+    const handleAddPost = async () => {
+        try {
+            await PostService.addPost(photo, title, content, balance, rating, duration);
+            navigation.navigate('Home');
+        }
+        catch (err) {
+            setError(err.Message);
+        }
     };
 
     return (
-            <ScrollView style={{flex: 1}}>
-                <View style={styles.container}>
-                    <View style={styles.header}>
-                        <TouchableOpacity onPress={() => navigation.goBack()}>
-                            <Entypo name='chevron-left' size={32} color={colors.black} />
-                        </TouchableOpacity>
-                        <Text style={styles.title}>Add Post</Text>
-                    </View>
-
-                    <View style={styles.image}>
-                        <Text style={{ textAlign: 'center' }}>
-                            This is where image picker goes
-                        </Text>
-                    </View>
-
-                    <View style={styles.inputWrapper}>
-                        <Text style={styles.inputText}>Post Title</Text>
-                        <TextInput style={styles.input}
-                            onChangeText={text => handleInputChange('title', text)}
-                            value={inputs.title}
-                        />
-                    </View>
-
-                    <View style={styles.inputWrapper}>
-                        <Text style={styles.inputText}>Post Description</Text>
-                        <TextInput style={[styles.input, { height: 200 }]}
-                            onChangeText={text => handleInputChange('description', text)}
-                            value={inputs.description}
-                        />
-                    </View>
-
-                    <View style={styles.inputWrapper}>
-                        <Text style={styles.inputText}>Place</Text>
-                        <TextInput style={styles.maps}
-                            onChangeText={text => handleInputChange('place', text)}
-                            value={inputs.place}
-                        />
-                    </View>
-
-                    <View style={styles.inputWrapper}>
-                        <Text style={styles.inputText}>Suggested budget</Text>
-                        <TextInput style={styles.input}
-                            onChangeText={text => handleInputChange('price', text)}
-                            value={inputs.price}
-                            inputMode='numeric'
-                        />
-                    </View>
-
-                    <View style={styles.inputWrapper}>
-                        <Text style={styles.inputText}>Rating out of five</Text>
-                        <TextInput style={styles.input}
-                            onChangeText={text => handleInputChange('rating', text)}
-                            value={inputs.rating}
-                            inputMode='numeric'
-                        />
-                    </View>
-
-                    <View style={styles.inputWrapper}>
-                        <Text style={styles.inputText}>How long does the trip take</Text>
-                        <TextInput style={styles.input}
-                            onChangeText={text => handleInputChange('duration', text)}
-                            value={inputs.duration}
-                            inputMode='numeric'
-                        />
-                    </View>
-                    <View style={styles.button}>
-                        <Button onPress={handleSubmit} title='Submit' color={colors.teallight} />
-                    </View>
+        <ScrollView style={{ flex: 1 }}>
+            <View style={styles.container}>
+                <View style={styles.header}>
+                    <TouchableOpacity onPress={() => navigation.goBack()}>
+                        <Entypo name='chevron-left' size={32} color={colors.black} />
+                    </TouchableOpacity>
+                    <Text style={styles.title}>Add Post</Text>
                 </View>
-            </ScrollView>
+
+                <View style={styles.image}>
+                    <Text style={{ textAlign: 'center' }}>
+                        This is where image picker goes
+                    </Text>
+                </View>
+
+                <View style={styles.inputWrapper}>
+                    <Text style={styles.inputText}>Post Title</Text>
+                    <TextInput style={styles.input}
+                        onChangeText={setTitle}
+                        value={title}
+                    />
+                </View>
+
+                <View style={styles.inputWrapper}>
+                    <Text style={styles.inputText}>Post Description</Text>
+                    <TextInput style={[styles.input, { height: 200 }]}
+                        onChangeText={setDescription}
+                        value={description}
+                    />
+                </View>
+
+                <View style={styles.inputWrapper}>
+                    <Text style={styles.inputText}>Place</Text>
+                    <TextInput style={styles.maps}
+                        onChangeText={setPlace}
+                        value={place}
+                    />
+                </View>
+
+                <View style={styles.inputWrapper}>
+                    <Text style={styles.inputText}>Suggested budget</Text>
+                    <TextInput style={styles.input}
+                        onChangeText={setBudget}
+                        value={budget}
+                        inputMode='numeric'
+                    />
+                </View>
+
+                <View style={styles.inputWrapper}>
+                    <Text style={styles.inputText}>Rating out of five</Text>
+                    <TextInput style={styles.input}
+                        onChangeText={setRating}
+                        value={rating}
+                        inputMode='numeric'
+                    />
+                </View>
+
+                <View style={styles.inputWrapper}>
+                    <Text style={styles.inputText}>How long does the trip take</Text>
+                    <TextInput style={styles.input}
+                        onChangeText={setDuration}
+                        value={duration}
+                        inputMode='numeric'
+                    />
+                </View>
+
+                {error ? <Text style={styles.errorText}>{error}</Text> : null}
+
+                <View style={styles.button}>
+                    <Button onPress={handleSubmit} title='Submit' color={colors.teallight} />
+                </View>
+            </View>
+        </ScrollView>
     );
 };
 

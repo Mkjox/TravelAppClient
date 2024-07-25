@@ -11,14 +11,14 @@ const LoginScreen = () => {
     const [password, setPassword] = useState('');
     const { error, setError } = useState('');
 
-    const handleLogin = () => {
-        AuthService.login(email, password)
-            .then(response => {
-                { () => navigation.navigate('Home') }
-            })
-            .catch(error => {
-                setError('Invalid email or password');
-            });
+    const handleLogin = async () => {
+        try {
+            AuthService.login(email, password)
+            navigation.navigate('Home')
+        }
+        catch (err) {
+            setError(err.Message);
+        }
     };
 
 
@@ -42,7 +42,7 @@ const LoginScreen = () => {
                     onChangeText={setPassword}
                 />
 
-                {error ? <Text>{error}</Text> : null}
+                {error ? <Text style={styles.errorText}>{error}</Text> : null}
 
                 {/* Add navigation to the forgot password page */}
                 <TouchableOpacity onPress={() => ''}>
@@ -60,7 +60,7 @@ const LoginScreen = () => {
 
             <TouchableOpacity onPress={() => navigation.navigate('Register')}>
                 <Text style={styles.signUpText}>
-                    Don't have an account? {<Text style={styles.signUpLink}>Sign Up</Text>}
+                    Don't you have an account? {<Text style={styles.signUpLink}>Sign Up</Text>}
                 </Text>
             </TouchableOpacity>
         </SafeAreaView>
