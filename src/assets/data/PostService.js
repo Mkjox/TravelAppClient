@@ -5,12 +5,13 @@ const API_URL = '';
 const addPost = async (photo, title, content, balance, rating, duration) => {
     try {
         const response = await axios.post(`${API_URL}`, {
-            photo,
+            thumbnail,
             title,
             content,
             balance,
             rating,
-            duration
+            duration,
+            category
         });
         return response.data;
     }
