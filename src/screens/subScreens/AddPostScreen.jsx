@@ -5,18 +5,32 @@ import { Entypo } from '@expo/vector-icons';
 import colors from '../../assets/colors/colors';
 import { ScrollView } from 'react-native-gesture-handler';
 import PostService from '../../assets/data/PostService';
+import DropDownPicker from 'react-native-dropdown-picker';
 
 const AddPostScreen = ({ navigation }) => {
     const [title, setTitle] = useState('');
     const [description, setDescription] = useState('');
+    const [place, setPlace] = useState('');
     const [budget, setBudget] = useState('');
     const [rating, setRating] = useState('');
     const [duration, setDuration] = useState('');
+    const [category, setCategory] = useState('');
     const { error, setError } = useState('');
+    const [open, setOpen] = useState('');
+    const [value, setValue] = useState('');
+    const [items, setItems] = useState([
+        { label: 'Hiking', value: 'hike' },
+        { label: 'Bicycle', value: 'bicycle' },
+        { label: 'Drive', value: 'drive' },
+        { label: 'Kayak', value: 'kayak' },
+        { label: 'Ski', value: 'ski' },
+        { label: 'Water Ski', value: 'water_ski' },
+        { label: 'Swim', value: 'swim' },
+    ]);
 
     const handleAddPost = async () => {
         try {
-            await PostService.addPost(photo, title, content, balance, rating, duration);
+            await PostService.addPost(photo, title, content, balance, rating, duration, category);
             navigation.navigate('Home');
         }
         catch (err) {
@@ -91,10 +105,25 @@ const AddPostScreen = ({ navigation }) => {
                     />
                 </View>
 
+                <View style={styles.inputWrapper}>
+                    <Text style={styles.inputText}>Category</Text>
+                    <DropDownPicker
+                        open={open}
+                        value={value}
+                        items={items}
+                        setOpen={setOpen}
+                        setValue={setValue}
+                        setItems={setItems}
+                        placeholder=""
+                        style={styles.dropdown}
+                        dropDownContainerStyle={styles.dropdownContainer}
+                    />
+                </View>
+
                 {error ? <Text style={styles.errorText}>{error}</Text> : null}
 
                 <View style={styles.button}>
-                    <Button onPress={handleSubmit} title='Submit' color={colors.teallight} />
+                    <Button onPress={handleAddPost} title='Submit' color={colors.teallight} />
                 </View>
             </View>
         </ScrollView>
@@ -108,7 +137,7 @@ var styles = StyleSheet.create({
     },
     header: {
         marginTop: 25,
-        marginLeft: 20,
+        marginLeft: 15,
         position: 'relative',
         flexDirection: 'row'
     },
@@ -150,6 +179,32 @@ var styles = StyleSheet.create({
         height: 300,
         width: 300,
         borderRadius: 15
+    },
+    dropdown: {
+        backgroundColor: colors.white,
+        borderRadius: 10,
+        borderWidth: 0.3,
+        borderColor: '#ccc',
+        paddingHorizontal: 10,
+        height: 55,
+        justifyContent: 'center',
+        alignSelf: 'center',
+        width: 300,
+        marginTop: 15,
+        shadowColor: colors.black,
+        shadowOffset: {
+            width: 2,
+            height: 2
+        },
+        elevation: 10,
+    },
+    dropdownContainer: {
+        backgroundColor: '#fff',
+        borderWidth: 0.3,
+        borderColor: '#ccc',
+        borderRadius: 10,
+        width: 300,
+        alignSelf: 'center'
     },
     button: {
         width: 300,
