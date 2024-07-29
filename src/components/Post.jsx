@@ -6,8 +6,9 @@ import { MaterialIcons } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/core";
 import LikedData from "../assets/data/likedData";
 import { Entypo } from '@expo/vector-icons';
+import LikeService from "../assets/data/services/LikeService";
 
-function Post() {
+function Post({ post, userId }) {
     const [data, setData] = useState([]);
     const navigation = useNavigation();
     const [heart, setHeart] = useState("heart-outlined");
@@ -23,6 +24,26 @@ function Post() {
             console.error("Error fetching data:", error);
         }
     }, []);
+
+    const handleLike = async () => {
+        try {
+            await LikeService.likePost(userId, post.id);
+            alert('Post liked!');
+        }
+        catch (error) {
+            alert(error);
+        }
+    };
+
+    const handleUnlike = async () => {
+        try {
+            await LikeService.unlikePost(userId, post.id);
+            alert('Post unliked!');
+        }
+        catch (error) {
+            alert(error);
+        }
+    };
 
     return (
         <View style={styles.postWrapper}>
