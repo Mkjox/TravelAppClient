@@ -21,7 +21,7 @@ const CustomizeProfileScreen = () => {
         { label: 'Male', value: 'male' },
         { label: 'Female', value: 'female' },
         { label: 'Other', value: 'other' }
-    ])
+    ]);
 
     const handlePress = () => {
         if (!fullName || !nickname || !dateofbirth || !email || !gender) {
@@ -120,7 +120,7 @@ const CustomizeProfileScreen = () => {
                             setItems={setItems}
                             placeholder=""
                             style={styles.dropdown}
-                            dropDownContainerStyle={styles.dropDownContainer}
+                            dropDownContainerStyle={styles.dropdownContainer}
                         />
                     </View>
 
@@ -191,7 +191,7 @@ const styles = StyleSheet.create({
         },
         elevation: 10,
     },
-    dropDownContainer: {
+    dropdownContainer: {
         backgroundColor: '#fff',
         borderWidth: 0.3,
         borderColor: '#ccc',

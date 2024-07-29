@@ -85,7 +85,8 @@ const PostDetails = ({ route, navigation }) => {
             <Text style={styles.detailsTitle}>Details</Text>
             <Text style={styles.detailsText}>{item.body}</Text>
           </View>
-          {/*  Can add another languages later and make this more dynamic  */}
+          
+          {/* ADD COMMENT */}
 
 
           <View style={styles.commentsWrapper}>
@@ -120,7 +121,8 @@ const styles = StyleSheet.create({
     borderWidth: 0.4,
     top: -100,
     backgroundColor: colors.white,
-    elevation: 5
+    elevation: 5,
+    marginBottom: 10
   },
   detailsWrapper: {
     flex: 1,
@@ -224,12 +226,13 @@ const styles = StyleSheet.create({
   },
   category: {
     borderWidth: 0.5,
-    width: '20%',
+    minWidth: '20%',
+    maxWidth: '30%',
     borderRadius: 10,
     alignItems: 'center',
     color: colors.blue,
     textAlign: 'center',
-    borderColor: colors.blue
+    borderColor: colors.blue,
   },
   commentsWrapper: {
     marginTop: 20,

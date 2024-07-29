@@ -4,7 +4,7 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { Entypo } from '@expo/vector-icons';
 import colors from '../../assets/colors/colors';
 import { ScrollView } from 'react-native-gesture-handler';
-import PostService from '../../assets/data/PostService';
+import PostService from '../../assets/data/services/PostService';
 import DropDownPicker from 'react-native-dropdown-picker';
 
 const AddPostScreen = ({ navigation }) => {

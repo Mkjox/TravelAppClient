@@ -5,11 +5,7 @@
 // MaterialIcons kayaking
 import * as React from 'react';
 import { View, TouchableOpacity, StyleSheet, Text } from 'react-native';
-import { MaterialCommunityIcons } from '@expo/vector-icons';
 import colors from "../assets/colors/colors";
-import { SafeAreaView } from "react-native-safe-area-context";
-import { ScrollView } from 'react-native-gesture-handler';
-import { useNavigation } from '@react-navigation/core';
 
 
 function Activity() {

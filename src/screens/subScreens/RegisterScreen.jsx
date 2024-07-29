@@ -4,7 +4,7 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { useNavigation } from "@react-navigation/core";
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import colors from '../../assets/colors/colors';
-import AuthService from '../../assets/data/AuthService';
+import AuthService from '../../assets/data/services/AuthService';
 
 const RegisterScreen = () => {
     const navigation = useNavigation();

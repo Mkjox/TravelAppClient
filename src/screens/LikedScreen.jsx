@@ -19,10 +19,10 @@ const LikedScreen = () => {
   const [data, setData] = useState([]);
   const navigation = useNavigation();
   const [searchQuery, setSearchQuery] = useState('');
-  const [heart, setHeart] = useState("heart");
+  const [heart, setHeart] = useState("heart-outlined");
 
   const toggleHeart = () => {
-    setHeart(heart === "heart" ? "heart-outlined" : "heart");
+    setHeart(heart === "heart-outlined" ? "heart" : "heart-outlined");
   };
 
   useEffect(() => {

@@ -3,7 +3,7 @@ import { View, Text, StyleSheet, TextInput, TouchableOpacity } from 'react-nativ
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useNavigation } from "@react-navigation/core";
 import colors from '../../assets/colors/colors';
-import AuthService from '../../assets/data/AuthService';
+import AuthService from '../../assets/data/services/AuthService';
 
 const LoginScreen = () => {
     const navigation = useNavigation();
