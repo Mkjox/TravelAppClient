@@ -26,6 +26,7 @@ import RegisterScreen from "../screens/subScreens/RegisterScreen";
 import LoginScreen from "../screens/subScreens/LoginScreen";
 import colors from "../assets/colors/colors";
 import CustomTabBar from "../components/CustomTabBar";
+import UserProfileScreen from '../screens/subScreens/UserProfileScreen';
 
 const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
@@ -171,6 +172,12 @@ function StackNavigator() {
                 name="Login"
                 component={LoginScreen}
                 options={{ headerShown: false }}
+            />
+
+            <Stack.Screen 
+                name="UserProfile"
+                component={UserProfileScreen}
+                options={{headerShown: false}}
             />
         </Stack.Navigator>
     );
