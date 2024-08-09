@@ -1,10 +1,10 @@
 import axios from 'axios';
 
-const API_URL = '';
+const API_URL = 'https://localhost:7117/Like';
 
 const likePost = async (userId, postId) => {
     try {
-        const response = await axios.post(`${API_URL}/like`, { userId, postId });
+        const response = await axios.post(`${API_URL}/likePost`, { userId, postId });
         return response.data;
     }
     catch (error) {
@@ -14,7 +14,7 @@ const likePost = async (userId, postId) => {
 
 const unlikePost = async (userId, postId) => {
     try {
-        const response = await axios.post(`${API_URL}/unlike`, { userId, postId });
+        const response = await axios.post(`${API_URL}/unlikePost`, { userId, postId });
         return response.data;
     }
     catch (error) {
@@ -22,7 +22,29 @@ const unlikePost = async (userId, postId) => {
     }
 };
 
+const likeComment = async (userId, commentId) => {
+    try {
+        const response = await axios.post(`${API_URL}/likeComment`, {userId,commentId});
+        return response.data;
+    }
+    catch(error) {
+        throw error.response.data;
+    }
+};
+
+const unlikeComment = async (userId, commentId) => {
+    try {
+        const response = await axios.post(`${API_URL}/unlikeComment`, {userId,commentId});
+        return response.data;
+    }
+    catch(error) {
+        throw error.response.data;
+    }
+};
+
 export default {
     likePost,
-    unlikePost
+    unlikePost,
+    likeComment,
+    unlikeComment
 };
