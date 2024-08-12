@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { View, Text, FlatList, TouchableOpacity, StyleSheet, ImageBackground } from "react-native";
+import { View, Text, FlatList, TouchableOpacity, StyleSheet, ImageBackground, Alert } from "react-native";
 import colors from "../assets/colors/colors";
 import { Card } from "react-native-paper";
 import { MaterialIcons } from "@expo/vector-icons";
@@ -12,6 +12,7 @@ function Post({ post, userId }) {
     const [data, setData] = useState([]);
     const navigation = useNavigation();
     const [heart, setHeart] = useState("heart-outlined");
+    const [isLiked, setIsLiked] = useState(false);
 
     const toggleHeart = () => {
         setHeart(heart === "heart-outlined" ? "heart" : "heart-outlined");
@@ -25,23 +26,47 @@ function Post({ post, userId }) {
         }
     }, []);
 
-    const handleLike = async () => {
+    useEffect(() => {
+        const checkIfLiked = async () => {
+            try {
+                const liked = await isPostLiked(postId, userId);
+                setIsLiked(liked);
+            }
+            catch (error) {
+                Alert.alert('Error', 'Could not check liked status');
+            }
+        };
+        checkIfLiked();
+    }, [postId, userId]);
+
+    const isPostLiked = async (postId, userId) => {
         try {
-            await LikeService.likePost(userId, post.id);
-            alert('Post liked!');
+            const response = await axios.get(`${API_URL}/IsLiked`, {
+                params: { postId, userId }
+            });
+            return response.data.isLiked;
         }
         catch (error) {
-            alert(error);
+            console.error('Error checking if post is liked:', error);
+            return false;
         }
     };
 
-    const handleUnlike = async () => {
+    const handleLike = async () => {
         try {
-            await LikeService.unlikePost(userId, post.id);
-            alert('Post unliked!');
+            if (isLiked) {
+                await axios.delete(`${API_URL}/Like`, {
+                    data: { postId, userId }
+                });
+                setIsLiked(false);
+            }
+            else {
+                await axios.post(`${API_URL}/Like`, { postId, userId });
+                setIsLiked(true);
+            }
         }
         catch (error) {
-            alert(error);
+            Alert.alert('Error', 'There has been an error while liking the post.');
         }
     };
 
@@ -60,8 +85,11 @@ function Post({ post, userId }) {
                                 }
                             >
                                 <ImageBackground src={item.image} style={styles.postItemImage}>
-                                    <TouchableOpacity onPress={toggleHeart} style={styles.heart}>
-                                        <Entypo name={heart} size={28} color={colors.orange} />
+                                    <TouchableOpacity onPress={handleLike} style={styles.heart}>
+                                        <Entypo
+                                            name={toggleHeart}
+                                            size={28}
+                                            color={colors.orange} />
                                     </TouchableOpacity>
                                 </ImageBackground>
                                 <Card.Content style={styles.postText}>
