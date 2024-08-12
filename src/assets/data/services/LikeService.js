@@ -42,9 +42,33 @@ const unlikeComment = async (userId, commentId) => {
     }
 };
 
+const isPostLiked = async (postId, userId) => {
+    try {
+        const response = await axios.get(`${API_URL}/IsLiked/${postId}/${userId}`);
+        return response.data.IsLiked;
+    }
+    catch (error) 
+    {
+        console.error('Encountered an error while checking if post is liked', error);
+        throw error;
+    }
+};
+
+const isCommentLiked = async(commentId, userId) => {
+    try {
+        const response = await axios.get(`${API_URL}/IsLiked/${commentId}/${userId}`);
+        return response.data.IsLiked;
+    }
+    catch (error) {
+        throw error.response.data;
+    }
+};
+
 export default {
     likePost,
     unlikePost,
     likeComment,
-    unlikeComment
+    unlikeComment,
+    isPostLiked,
+    isCommentLiked
 };

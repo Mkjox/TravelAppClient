@@ -5,7 +5,7 @@ const API_URL = 'https://localhost:7117/Comment';
 // need CreatedByName into it
 // IT NEEDS UNDO DELETE
 
-const addComment = async (text, postId) => {
+const addComment = async (comment, postId) => {
     try {
         const response = await axios.post(`${API_URL}/AddComment`, {
             comment,
@@ -18,7 +18,7 @@ const addComment = async (text, postId) => {
     }
 }
 
-const updateComment = async (text, postId) => {
+const updateComment = async (comment, postId) => {
     try {
         const response = await axios.put(`${API_URL}/UpdateComment`, {
             comment,
