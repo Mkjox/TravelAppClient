@@ -4,7 +4,7 @@ const API_URL = 'https://localhost:7117/Post';
 
 const addPost = async (thumbnail, title, content, balance, rating, duration) => {
     try {
-        const response = await axios.post(`${API_URL}/Add`, {
+        const response = await axios.post(`${API_URL}/Post/Add`, {
             thumbnail,
             title,
             content,
@@ -22,7 +22,7 @@ const addPost = async (thumbnail, title, content, balance, rating, duration) => 
 
 const updatePost = async (title, content, thumbnail, balance, rating, duration) => {
     try {
-        const response = await axios.post(`${API_URL}/Update`, {
+        const response = await axios.post(`${API_URL}/Post/Update`, {
             title,
             content,
             thumbnail,
@@ -39,7 +39,7 @@ const updatePost = async (title, content, thumbnail, balance, rating, duration) 
 
 const deletePost = async (postId) => {
     try {
-        const response = await axios.delete(`${API_URL}/Delete/${postId}`);
+        const response = await axios.delete(`${API_URL}/Post/Delete/${postId}`);
         return response.data;
     }
     catch (error) {
@@ -49,7 +49,7 @@ const deletePost = async (postId) => {
 
 const hardDeletePost = async (postId) => {
     try {
-        const response = await axios.delete(`${API_URL}/HardDelete/${postId}`);
+        const response = await axios.delete(`${API_URL}/Post/HardDelete/${postId}`);
         return response.data;
     }
     catch (error) {
@@ -59,7 +59,7 @@ const hardDeletePost = async (postId) => {
 
 const undoDeletePost = async (postId) => {
     try {
-        const response = await axios.post(`${API_URL}/UndoDelete/${postId}`);
+        const response = await axios.post(`${API_URL}/Post/UndoDelete/${postId}`);
         return response.data;
     }
     catch (error) {
@@ -69,7 +69,7 @@ const undoDeletePost = async (postId) => {
 
 const getPost = async (postId) => {
     try {
-        const response = await axios.get(`${API_URL}/GetPost/${postId}`);
+        const response = await axios.get(`${API_URL}/Post/GetPost/${postId}`);
         return response.data;
     }
     catch (error) {
@@ -79,7 +79,7 @@ const getPost = async (postId) => {
 
 const getAllPosts = async () => {
     try {
-        const response = await axios.get(`${API_URL}/GetAllPosts`);
+        const response = await axios.get(`${API_URL}/Post/GetAllPosts`);
         return response.data;
     }
     catch (error) {
@@ -89,7 +89,7 @@ const getAllPosts = async () => {
 
 const getAllPostsByNonDeleted = async () => {
     try {
-        const response = await axios.get(`${API_URL}/GetAllByNonDeleted`);
+        const response = await axios.get(`${API_URL}/Post/GetAllByNonDeleted`);
         return response.data;
     }
     catch (error) {
@@ -99,7 +99,7 @@ const getAllPostsByNonDeleted = async () => {
 
 const getAllPostsByNonDeletedAndActive = async () => {
     try {
-        const response = await axios.get(`${API_URL}/GetAllByNonDeletedAndActive`);
+        const response = await axios.get(`${API_URL}/Post/GetAllByNonDeletedAndActive`);
         return response.data;
     }
     catch (error) {
@@ -109,7 +109,7 @@ const getAllPostsByNonDeletedAndActive = async () => {
 
 const getAllPostsByDeleted = async () => {
     try {
-        const response = await axios.get(`${API_URL}/GetAllDeleted`);
+        const response = await axios.get(`${API_URL}/Post/GetAllDeleted`);
         return response.data;
     }
     catch (error) {
