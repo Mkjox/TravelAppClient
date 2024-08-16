@@ -24,10 +24,12 @@ const RegisterScreen = () => {
         }
     }
 
-    if (!username || !email || !password || !confirmPassword) {
-        Alert.alert('Error', 'Please fill all fields');
-        return;
-    }
+
+    //FIX THIS
+    // if (!username || !email || !password || !confirmPassword) {
+    //     Alert.alert('Error', 'Please fill all fields');
+    //     return;
+    // }
 
     if (password !== confirmPassword) {
         Alert.alert('Error', 'Passwords do not match');
