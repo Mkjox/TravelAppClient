@@ -6,8 +6,11 @@ import colors from '../../assets/colors/colors';
 import { ScrollView } from 'react-native-gesture-handler';
 import PostService from '../../assets/data/services/PostService';
 import DropDownPicker from 'react-native-dropdown-picker';
+import { useAuth } from '../../assets/data/services/AuthProvider';
+import axios from 'axios';
 
 const AddPostScreen = ({ navigation }) => {
+    const { user } = useAuth();
     const [title, setTitle] = useState('');
     const [description, setDescription] = useState('');
     const [place, setPlace] = useState('');
@@ -30,11 +33,21 @@ const AddPostScreen = ({ navigation }) => {
 
     const handleAddPost = async () => {
         try {
-            await PostService.addPost(photo, title, content, balance, rating, duration, category);
+            const response = await axios.post(`${API_URL}/Post/Add`, {
+                photo, 
+                title, 
+                content, 
+                balance, 
+                rating, 
+                duration, 
+                category,
+                createdByName: user.username
+            });
+            console.log('Post added:', response.data);
             navigation.navigate('Home');
         }
-        catch (err) {
-            setError(err.Message);
+        catch (error) {
+            setError('Error adding post:', error);
         }
     };
 

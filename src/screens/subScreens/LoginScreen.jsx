@@ -9,15 +9,15 @@ const LoginScreen = () => {
     const navigation = useNavigation();
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const { error, setError } = useState('');
+    const [error, setError] = useState('');
 
     const handleLogin = async () => {
         try {
-            AuthService.login(email, password)
-            navigation.navigate('Home')
+            const user = await AuthService.login(username, password);
+            console.log('User authenticated:', user);
         }
-        catch (err) {
-            setError(err.Message);
+        catch (error) {
+            setError('Login failed. Please check your credentials and try again.');
         }
     };
 
