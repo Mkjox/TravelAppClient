@@ -45,7 +45,7 @@ const LoginScreen = () => {
                 {error ? <Text style={styles.errorText}>{error}</Text> : null}
 
                 {/* Add navigation to the forgot password page */}
-                <TouchableOpacity onPress={() => ''}>
+                <TouchableOpacity onPress={() => navigation.navigate("ResetPassword")}>
                     <Text style={styles.forgotPassword}>
                         Forgot Password?
                     </Text>
@@ -121,7 +121,7 @@ const styles = StyleSheet.create({
     },
     signUpText: {
         fontSize: 14,
-        color: '#7D7D7D',
+        color: colors.lightGray,
         bottom: -180,
     },
     signUpLink: {

@@ -27,6 +27,7 @@ import LoginScreen from "../screens/subScreens/LoginScreen";
 import colors from "../assets/colors/colors";
 import CustomTabBar from "../components/CustomTabBar";
 import UserProfileScreen from '../screens/subScreens/UserProfileScreen';
+import ResetPasswordScreen from '../screens/subScreens/ResetPasswordScreen';
 
 const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
@@ -177,6 +178,12 @@ function StackNavigator() {
             <Stack.Screen 
                 name="UserProfile"
                 component={UserProfileScreen}
+                options={{headerShown: false}}
+            />
+
+            <Stack.Screen 
+                name='ResetPassword'
+                component={ResetPasswordScreen}
                 options={{headerShown: false}}
             />
         </Stack.Navigator>
