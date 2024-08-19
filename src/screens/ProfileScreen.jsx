@@ -67,6 +67,10 @@ const ProfileScreen = () => {
               <Caption style={styles.detailsText}>Comment Count</Caption>
             </View>
           </View>
+
+          <TouchableOpacity onPress={() => navigation.navigate('UserProfile')} style={{alignSelf:'center', marginTop: 15,borderRadius: 10,borderWidth:0.5, height:30,alignItems: 'center'}}>
+            <Text>Go to User Profile Screen</Text>
+          </TouchableOpacity>
         </View>
 
         <View style={styles.options}>
@@ -153,7 +157,7 @@ const styles = StyleSheet.create({
     marginRight: 50
   },
   detailsText: {
-    fontFamily: 'Poppins_300Light',
+    fontFamily: 'Poppins_400Regular',
     fontSize: 14,
     color: colors.white,
     alignSelf: 'center'

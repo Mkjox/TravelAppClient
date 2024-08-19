@@ -99,8 +99,8 @@ const styles = StyleSheet.create({
         marginBottom: 20,
         marginTop: 15,
         fontFamily: 'Poppins_400Regular',
-        fontSize: 14,
-        fontWeight: 'semibold'
+        fontSize: 16,
+        fontWeight: 'bold'
     },
     button: {
         width: 300,

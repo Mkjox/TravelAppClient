@@ -8,7 +8,7 @@ import LikedData from "../assets/data/likedData";
 import { Entypo } from '@expo/vector-icons';
 import LikeService from "../assets/data/services/LikeService";
 
-function Post({ post, userId }) {
+function Post({ postId, userId }) {
     const [data, setData] = useState([]);
     const navigation = useNavigation();
     const [heart, setHeart] = useState("heart-outlined");

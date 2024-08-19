@@ -8,6 +8,7 @@ import PostService from '../../assets/data/services/PostService';
 import DropDownPicker from 'react-native-dropdown-picker';
 import { useAuth } from '../../assets/data/services/AuthProvider';
 import axios from 'axios';
+import ProtectedRoute from '../../assets/data/services/ProtectedRoute';
 
 const AddPostScreen = ({ navigation }) => {
     const { user } = useAuth();
@@ -34,7 +35,7 @@ const AddPostScreen = ({ navigation }) => {
     const handleAddPost = async () => {
         try {
             const response = await axios.post(`${API_URL}/Post/Add`, {
-                photo, 
+                thumbnail, 
                 title, 
                 content, 
                 balance, 
@@ -53,6 +54,7 @@ const AddPostScreen = ({ navigation }) => {
 
     return (
         <ScrollView style={{ flex: 1 }}>
+        <ProtectedRoute roles={['User']} />
             <View style={styles.container}>
                 <View style={styles.header}>
                     <TouchableOpacity onPress={() => navigation.goBack()}>

@@ -16,8 +16,8 @@ const height = Dimensions.get("window").height;
 
 const PostDetails = ({ route, navigation }) => {
   const { item } = route.params;
-
   const [heart, setHeart] = useState("heart-outlined");
+
   const toggleHeart = () => {
     setHeart(heart === "heart-outlined" ? "heart" : "heart-outlined");
   };
