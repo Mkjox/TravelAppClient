@@ -3,7 +3,10 @@ import { View, Text, StyleSheet, TextInput, TouchableOpacity } from 'react-nativ
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useNavigation } from "@react-navigation/core";
 import colors from '../../assets/colors/colors';
-import AuthService from '../../assets/data/services/AuthService';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import axios from 'axios';
+
+const API_URL = 'https://localhost:7117';
 
 const LoginScreen = () => {
     const navigation = useNavigation();
@@ -13,11 +16,32 @@ const LoginScreen = () => {
 
     const handleLogin = async () => {
         try {
-            const user = await AuthService.login(username, password);
-            console.log('User authenticated:', user);
+            const credentials = { email, password };
+            const response = await axios.post(`${API_URL}/api/account/login`, credentials);
+
+            await AsyncStorage.setItem('authToken', response.data.token);
+            await fetchAndStoreUserInfo(response.data.token);
         }
         catch (error) {
+            console.error('Login failed:', error);
             setError('Login failed. Please check your credentials and try again.');
+        }
+    };
+
+    const fetchAndStoreUserInfo = async (token) => {
+        try {
+            const response = await axios.get(`${API_URL}/api/account/current-user`, {
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
+            });
+
+            await AsyncStorage.setItem('userInfo', JSON.stringify(response.data));
+            console.log('User information stored successfully:', response.data);
+        }
+        catch (error) {
+            console.error('Failed to fetch user info:', error);
+            throw error;
         }
     };
 
@@ -42,8 +66,6 @@ const LoginScreen = () => {
                     onChangeText={setPassword}
                 />
 
-                {error ? <Text style={styles.errorText}>{error}</Text> : null}
-
                 {/* Add navigation to the forgot password page */}
                 <TouchableOpacity onPress={() => navigation.navigate("ResetPassword")}>
                     <Text style={styles.forgotPassword}>
@@ -57,6 +79,7 @@ const LoginScreen = () => {
                     Login
                 </Text>
             </TouchableOpacity>
+            {error ? <Text style={styles.errorText}>{error}</Text> : null}
 
             <TouchableOpacity onPress={() => navigation.navigate('Register')}>
                 <Text style={styles.signUpText}>

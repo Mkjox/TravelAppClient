@@ -4,7 +4,10 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { useNavigation } from "@react-navigation/core";
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import colors from '../../assets/colors/colors';
-import AuthService from '../../assets/data/services/AuthService';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import axios from 'axios';
+
+const API_URL = 'https://localhost:7117';
 
 const RegisterScreen = () => {
     const navigation = useNavigation();
@@ -16,13 +19,38 @@ const RegisterScreen = () => {
 
     const handleRegister = async () => {
         try {
-            await AuthService.register(username, password, email);
-            navigation.navigate("Login");
+            const registrationData = {
+                username, password, email
+            };
+
+            const response = await axios.post(`${API_URL}/api/account/register`, registrationData);
+
+            await AsyncStorage.setItem('authToken', response.data.token);
+
+            await fetchAndStoreUserInfo(response.data.token);
         }
-        catch (err) {
-            setError(err.Message);
+        catch (error) {
+            console.error('Registration failed:', error);
+            setError('Registration failed. Please check your information and try again.');
         }
     }
+
+    const fetchAndStoreUserInfo = async (token) => {
+        try {
+            const response = await axios.get(`${API_URL}/api/account/current-user`, {
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
+            });
+
+            await AsyncStorage.setItem('userInfo', JSON.stringify(response.data));
+            console.log('User information stored successfully:', response.data);
+        }
+        catch (error) {
+            console.error('Failed to fetch user info:', error);
+            throw error;
+        }
+    };
 
 
     //FIX THIS
@@ -71,11 +99,11 @@ const RegisterScreen = () => {
                     onChangeText={setConfirmPassword}
                 />
 
-                {error ? <Text style={styles.errorText}>{error}</Text> : null}
-
                 <TouchableOpacity style={styles.button} onPress={handleRegister}>
                     <Text style={styles.buttonText}>Register</Text>
                 </TouchableOpacity>
+
+                {error ? <Text style={styles.errorText}>{error}</Text> : null}
 
                 <TouchableOpacity onPress={() => navigation.navigate("Login")}>
                     <Text style={styles.information}>Already have an account? {<Text style={styles.signInText}>Sign in</Text>}</Text>
@@ -85,65 +113,65 @@ const RegisterScreen = () => {
     )
 };
 
-    const styles = StyleSheet.create({
-        container: {
-            flex: 1,
-            backgroundColor: '#EEEEEE'
-        },
-        header: {
-            alignSelf: 'center',
-            marginTop: 100
-        },
-        headerTextMain: {
-            fontFamily: 'Poppins_700Bold',
-            alignSelf: 'center',
-            marginVertical: 25,
-            fontSize: 24
-        },
-        headerTextSecondary: {
-            fontFamily: 'Poppins_400Regular'
-        },
-        textInput: {
-            marginHorizontal: 10,
-            marginTop: 25,
-            alignSelf: 'center',
-            color: colors.teallight,
-            width: 300,
-            backgroundColor: colors.white,
-            height: 55,
-            textAlign: 'center',
-            borderRadius: 15,
-            fontFamily: 'Poppins_400Regular'
-        },
-        button: {
-            width: 300,
-            margin: 10,
-            alignSelf: 'center',
-            borderRadius: 15,
-            padding: 15,
-            bottom: -170,
-            backgroundColor: colors.teallight,
-            alignItems: 'center',
-            elevation: 5
-        },
-        buttonText: {
-            color: colors.white,
-            fontSize: 17,
-            fontFamily: 'Poppins_400Regular',
-            fontWeight: 'bold'
-        },
-        information: {
-            bottom: -180,
-            alignSelf: 'center',
-            color: '#7D7D7D',
-            fontFamily: 'Poppins_400Regular',
-            fontSize: 14
-        },
-        signInText: {
-            color: colors.blue,
-            fontWeight: 'bold'
-        }
-    });
+const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        backgroundColor: '#EEEEEE'
+    },
+    header: {
+        alignSelf: 'center',
+        marginTop: 100
+    },
+    headerTextMain: {
+        fontFamily: 'Poppins_700Bold',
+        alignSelf: 'center',
+        marginVertical: 25,
+        fontSize: 24
+    },
+    headerTextSecondary: {
+        fontFamily: 'Poppins_400Regular'
+    },
+    textInput: {
+        marginHorizontal: 10,
+        marginTop: 25,
+        alignSelf: 'center',
+        color: colors.teallight,
+        width: 300,
+        backgroundColor: colors.white,
+        height: 55,
+        textAlign: 'center',
+        borderRadius: 15,
+        fontFamily: 'Poppins_400Regular'
+    },
+    button: {
+        width: 300,
+        margin: 10,
+        alignSelf: 'center',
+        borderRadius: 15,
+        padding: 15,
+        bottom: -170,
+        backgroundColor: colors.teallight,
+        alignItems: 'center',
+        elevation: 5
+    },
+    buttonText: {
+        color: colors.white,
+        fontSize: 17,
+        fontFamily: 'Poppins_400Regular',
+        fontWeight: 'bold'
+    },
+    information: {
+        bottom: -180,
+        alignSelf: 'center',
+        color: '#7D7D7D',
+        fontFamily: 'Poppins_400Regular',
+        fontSize: 14
+    },
+    signInText: {
+        color: colors.blue,
+        fontWeight: 'bold'
+    }
+});
 
 
-    export default RegisterScreen;
+export default RegisterScreen;
