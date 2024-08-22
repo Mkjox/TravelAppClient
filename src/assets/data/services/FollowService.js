@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const API_URL = 'https://localhost:7117/Follow/';
+const API_URL = 'https://localhost:7117/api/Follow/';
 
 const followUser = async (followerId, followeeId) => {
     try {

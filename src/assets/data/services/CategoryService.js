@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const API_URL = "https://localhost:7117/Category";
+const API_URL = "https://localhost:7117/api";
 
 const addCategory = async (Name, Description, IsActive) => {
     try {
