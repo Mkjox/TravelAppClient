@@ -1,10 +1,10 @@
 import axios from "axios";
 
-const API_URL = "https://localhost:7117/api";
+const API_URL = "https://localhost:7117/api/category";
 
 const addCategory = async (Name, Description, IsActive) => {
     try {
-        const response = await axios.post(`${API_URL}/Category/Add`, { Name, Description, IsActive });
+        const response = await axios.post(`${API_URL}/Add`, { Name, Description, IsActive });
         return response.data;
     }
     catch (error) {
@@ -14,7 +14,7 @@ const addCategory = async (Name, Description, IsActive) => {
 
 const updateCategory = async (Name, Description, IsActive, IsDeleted) => {
     try {
-        const response = await axios.post(`${API_URL}/Category/Update`, { Name, Description, IsActive, IsDeleted });
+        const response = await axios.post(`${API_URL}/Update`, { Name, Description, IsActive, IsDeleted });
         return response.data;
     }
     catch (error) {
@@ -24,7 +24,7 @@ const updateCategory = async (Name, Description, IsActive, IsDeleted) => {
 
 const deleteCategory = async (categoryId) => {
     try {
-        const response = await axios.delete(`${API_URL}/Category/DeleteCategory/${categoryId}`);
+        const response = await axios.delete(`${API_URL}/DeleteCategory/${categoryId}`);
         return response.data;
     }
     catch (error) {
@@ -34,7 +34,7 @@ const deleteCategory = async (categoryId) => {
 
 const hardDelete = async (categoryId) => {
     try {
-        const response = await axios.delete(`${API_URL}/Category/HardDeleteCategory/${categoryId}`);
+        const response = await axios.delete(`${API_URL}/HardDeleteCategory/${categoryId}`);
         return response.data;
     }
     catch (error) {
@@ -44,7 +44,7 @@ const hardDelete = async (categoryId) => {
 
 const undoDelete = async (categoryId, modifiedByName) => {
     try {
-        const response = await axios.post(`${API_URL}/Category/UndoDelete/${categoryId}`, { modifiedByName });
+        const response = await axios.post(`${API_URL}/UndoDelete/${categoryId}`, { modifiedByName });
         return response.data;
     }
     catch (error) {
@@ -54,7 +54,7 @@ const undoDelete = async (categoryId, modifiedByName) => {
 
 const getCategories = async (categoryId) => {
     try {
-        const response = await axios.get(`${API_URL}/Category/GetCategoryById/${categoryId}`);
+        const response = await axios.get(`${API_URL}/GetCategoryById/${categoryId}`);
         return response.data;
     }
     catch (error) {
@@ -64,7 +64,7 @@ const getCategories = async (categoryId) => {
 
 const getAllCategories = async () => {
     try {
-        const response = await axios.get(`${API_URL}/Category/GetAllCategories`);
+        const response = await axios.get(`${API_URL}/GetAllCategories`);
         return response.data;
     }
     catch (error) {
@@ -74,7 +74,7 @@ const getAllCategories = async () => {
 
 const getAllByDeleted = async () => {
     try {
-        const response = await axios.get(`${API_URL}/Categories/GetAllByDeleted`);
+        const response = await axios.get(`${API_URL}/GetAllByDeleted`);
         return response.data;
     }
     catch (error) {
@@ -84,7 +84,7 @@ const getAllByDeleted = async () => {
 
 const getAllByNonDeleted = async () => {
     try {
-        const response = await axios.get(`${API_URL}/Categories/GetAllByNonDeleted`);
+        const response = await axios.get(`${API_URL}/GetAllByNonDeleted`);
         return response.data;
     }
     catch (error) {
@@ -94,7 +94,7 @@ const getAllByNonDeleted = async () => {
 
 const getAllByNonDeletedAndActive = async () => {
     try {
-        const response = await axios.get(`${API_URL}/Categories/GetAllByNonDeletedAndActive`);
+        const response = await axios.get(`${API_URL}/GetAllByNonDeletedAndActive`);
         return response.data;
     }
     catch (error) {
@@ -104,7 +104,7 @@ const getAllByNonDeletedAndActive = async () => {
 
 const countCategories = async () => {
     try {
-        const response = await axios.post(`${API_URL}/Categories/CountCategories`);
+        const response = await axios.post(`${API_URL}/CountCategories`);
         return response.data;
     }
     catch (error) {
@@ -114,7 +114,7 @@ const countCategories = async () => {
 
 const countByNonDeletedCategories = async () => {
     try {
-        const response = await axios.post(`${API_URL}/Categories/CountByNonDeletedCategories`);
+        const response = await axios.post(`${API_URL}/CountByNonDeletedCategories`);
         return response.data;
     }
     catch (error) {

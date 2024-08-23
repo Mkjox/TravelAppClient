@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const API_URL = 'https://localhost:7117/api/Role';
+const API_URL = 'https://localhost:7117/api/role';
 
 export const assignRole = async (userId, roleName) => {
     try {

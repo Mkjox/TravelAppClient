@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const API_URL = 'https://localhost:7117/api/Like';
+const API_URL = 'https://localhost:7117/api/like';
 
 const likePost = async (userId, postId) => {
     try {
