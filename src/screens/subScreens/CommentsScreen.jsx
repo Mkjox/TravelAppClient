@@ -62,7 +62,8 @@ const styles = StyleSheet.create({
         marginLeft: 15,
     },
     headerText: {
-        fontFamily: 'Poppins_400Regular'
+        fontFamily: 'Poppins_400Regular',
+        fontSize: 22
     },
     commentWrapper: {
         width: '90%',

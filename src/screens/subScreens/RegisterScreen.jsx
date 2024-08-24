@@ -23,7 +23,7 @@ const RegisterScreen = () => {
                 username, password, email
             };
 
-            const response = await axios.post(`${API_URL}/api/account/register`, registrationData);
+            const response = await axios.post(`${API_URL}/api/auth/register`, registrationData);
 
             await AsyncStorage.setItem('authToken', response.data.token);
 
@@ -37,7 +37,7 @@ const RegisterScreen = () => {
 
     const fetchAndStoreUserInfo = async (token) => {
         try {
-            const response = await axios.get(`${API_URL}/api/account/current-user`, {
+            const response = await axios.get(`${API_URL}/api/auth/current-user`, {
                 headers: {
                     Authorization: `Bearer ${token}`
                 }

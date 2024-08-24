@@ -70,9 +70,9 @@ const styles = StyleSheet.create({
         },
         shadowOpacity: 0.25,
         shadowRadius: 3.84,
-        width: 250,
+        width: 280,
         alignSelf: 'center',
-        marginVertical: 5,
+        marginVertical: 7,
     },
     buttonText: {
         color: colors.black,
@@ -95,7 +95,7 @@ const styles = StyleSheet.create({
         shadowRadius: 3.84,
         width: 150,
         alignSelf: 'center',
-        bottom: -410
+        bottom: -540
     },
     confirmButtonText: {
         color: '#fff',

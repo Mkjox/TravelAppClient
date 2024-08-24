@@ -225,7 +225,7 @@ const styles = StyleSheet.create({
     marginBottom: 8
   },
   category: {
-    borderWidth: 0.5,
+    borderWidth: 1,
     minWidth: '20%',
     maxWidth: '30%',
     borderRadius: 10,

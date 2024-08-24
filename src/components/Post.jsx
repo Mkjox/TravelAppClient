@@ -14,9 +14,9 @@ function Post({ postId, userId }) {
     const [heart, setHeart] = useState("heart-outlined");
     const [isLiked, setIsLiked] = useState(false);
 
-    const toggleHeart = () => {
-        setHeart(heart === "heart-outlined" ? "heart" : "heart-outlined");
-    };
+    // const toggleHeart = () => {
+    //     setHeart(heart === "heart-outlined" ? "heart" : "heart-outlined");
+    // };
 
     useEffect(() => {
         try {
@@ -26,49 +26,49 @@ function Post({ postId, userId }) {
         }
     }, []);
 
-    useEffect(() => {
-        const checkIfLiked = async () => {
-            try {
-                const liked = await isPostLiked(postId, userId);
-                setIsLiked(liked);
-            }
-            catch (error) {
-                Alert.alert('Error', 'Could not check liked status');
-            }
-        };
-        checkIfLiked();
-    }, [postId, userId]);
+    // useEffect(() => {
+    //     const checkIfLiked = async () => {
+    //         try {
+    //             const liked = await isPostLiked(postId, userId);
+    //             setIsLiked(liked);
+    //         }
+    //         catch (error) {
+    //             Alert.alert('Error', 'Could not check liked status');
+    //         }
+    //     };
+    //     checkIfLiked();
+    // }, [postId, userId]);
 
-    const isPostLiked = async (postId, userId) => {
-        try {
-            const response = await axios.get(`${API_URL}/IsLiked`, {
-                params: { postId, userId }
-            });
-            return response.data.isLiked;
-        }
-        catch (error) {
-            console.error('Error checking if post is liked:', error);
-            return false;
-        }
-    };
+    // const isPostLiked = async (postId, userId) => {
+    //     try {
+    //         const response = await axios.get(`${API_URL}/IsLiked`, {
+    //             params: { postId, userId }
+    //         });
+    //         return response.data.isLiked;
+    //     }
+    //     catch (error) {
+    //         console.error('Error checking if post is liked:', error);
+    //         return false;
+    //     }
+    // };
 
-    const handleLike = async () => {
-        try {
-            if (isLiked) {
-                await axios.delete(`${API_URL}/Like`, {
-                    data: { postId, userId }
-                });
-                setIsLiked(false);
-            }
-            else {
-                await axios.post(`${API_URL}/Like`, { postId, userId });
-                setIsLiked(true);
-            }
-        }
-        catch (error) {
-            Alert.alert('Error', 'There has been an error while liking the post.');
-        }
-    };
+    // const handleLike = async () => {
+    //     try {
+    //         if (isLiked) {
+    //             await axios.delete(`${API_URL}/Like`, {
+    //                 data: { postId, userId }
+    //             });
+    //             setIsLiked(false);
+    //         }
+    //         else {
+    //             await axios.post(`${API_URL}/Like`, { postId, userId });
+    //             setIsLiked(true);
+    //         }
+    //     }
+    //     catch (error) {
+    //         Alert.alert('Error', 'There has been an error while liking the post.');
+    //     }
+    // };
 
     return (
         <View style={styles.postWrapper}>
@@ -85,9 +85,10 @@ function Post({ postId, userId }) {
                                 }
                             >
                                 <ImageBackground src={item.image} style={styles.postItemImage}>
-                                    <TouchableOpacity onPress={handleLike} style={styles.heart}>
+                                    <TouchableOpacity /* onPress={handleLike} */ style={styles.heart}>
                                         <Entypo
-                                            name={toggleHeart}
+                                            /* name={toggleHeart} */
+                                            name='heart-outlined'
                                             size={28}
                                             color={colors.orange} />
                                     </TouchableOpacity>

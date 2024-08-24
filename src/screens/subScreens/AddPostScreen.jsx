@@ -9,9 +9,11 @@ import DropDownPicker from 'react-native-dropdown-picker';
 import { useAuth } from '../../assets/data/services/AuthProvider';
 import axios from 'axios';
 import ProtectedRoute from '../../assets/data/services/ProtectedRoute';
+import * as ImagePicker from 'expo-image-picker';
+// import ImageViewer from '../../components/ImageViewer';
 
 const AddPostScreen = ({ navigation }) => {
-    const { user } = useAuth();
+    // const { user } = useAuth();
     const [title, setTitle] = useState('');
     const [description, setDescription] = useState('');
     const [place, setPlace] = useState('');
@@ -31,16 +33,17 @@ const AddPostScreen = ({ navigation }) => {
         { label: 'Water Ski', value: 'water_ski' },
         { label: 'Swim', value: 'swim' },
     ]);
+    const [selectedImage, setSelectedImage] = useState(null);
 
     const handleAddPost = async () => {
         try {
             const response = await axios.post(`${API_URL}/Post/Add`, {
-                thumbnail, 
-                title, 
-                content, 
-                balance, 
-                rating, 
-                duration, 
+                thumbnail,
+                title,
+                content,
+                balance,
+                rating,
+                duration,
                 category,
                 createdByName: user.username
             });
@@ -52,9 +55,23 @@ const AddPostScreen = ({ navigation }) => {
         }
     };
 
+    // const pickImageAsync = async () => {
+    //     let result = await ImagePicker.launchImageLibraryAsync({
+    //         allowsEditing: true,
+    //         quality: 1
+    //     });
+
+    //     if (!result.canceled) {
+    //         setSelectedImage(result.assets[0].uri);
+    //     }
+    //     else {
+    //         alert('You did not select any image.');
+    //     }
+    // }
+
     return (
         <ScrollView style={{ flex: 1 }}>
-        <ProtectedRoute roles={['User']} />
+            {/* <ProtectedRoute roles={['User']} /> */}
             <View style={styles.container}>
                 <View style={styles.header}>
                     <TouchableOpacity onPress={() => navigation.goBack()}>
@@ -63,11 +80,12 @@ const AddPostScreen = ({ navigation }) => {
                     <Text style={styles.title}>Add Post</Text>
                 </View>
 
-                <View style={styles.image}>
-                    <Text style={{ textAlign: 'center' }}>
-                        This is where image picker goes
-                    </Text>
-                </View>
+                {/* <View style={styles.image}>
+                    <ImageViewer 
+                        placeholderImageSource={PlaceholderImage}
+                        selectedImage={selectedImage}
+                    />
+                </View> */}
 
                 <View style={styles.inputWrapper}>
                     <Text style={styles.inputText}>Post Title</Text>

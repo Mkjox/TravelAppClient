@@ -24,7 +24,7 @@ const SharedPostsScreen = () => {
     return (
         <SafeAreaView style={styles.container}>
             <View style={styles.header}>
-                <Entypo name='chevron-left' size={20} onPress={() => navigation.goBack()}>
+                <Entypo name='chevron-left' size={24} onPress={() => navigation.goBack()}>
                     <Text style={styles.headerText}>Shared Posts</Text>
                 </Entypo>
             </View>
@@ -71,7 +71,8 @@ const styles = StyleSheet.create({
         marginLeft: 15,
     },
     headerText: {
-        fontFamily: 'Poppins_400Regular'
+        fontFamily: 'Poppins_400Regular',
+        fontSize: 22
     },
     sharedWrapper: {
         marginHorizontal: 5,

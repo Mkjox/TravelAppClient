@@ -48,27 +48,35 @@ const ProfileScreen = () => {
           {/* FIX STYLING ON THIS AREA  ALSO ADD DB DATA */}
           <View style={styles.detailsContainer}>
             <View style={styles.detailsWrapper}>
-              <Text style={styles.detailsText}>0</Text>
-              <Caption style={styles.detailsText}>Followers</Caption>
+              <TouchableOpacity onPress={() => navigation.navigate('Follow')}>
+                <Text style={styles.detailsText}>0</Text>
+                <Caption style={styles.detailsText}>Followers</Caption>
+              </TouchableOpacity>
             </View>
             <View style={styles.followingDetails}>
-              <Text style={styles.detailsText}>0</Text>
-              <Caption style={styles.detailsText}>Following</Caption>
+              <TouchableOpacity onPress={() => navigation.navigate('Follow')}>
+                <Text style={styles.detailsText}>0</Text>
+                <Caption style={styles.detailsText}>Following</Caption>
+              </TouchableOpacity>
             </View>
           </View>
 
           <View style={styles.detailsContainer}>
             <View style={styles.countContainer}>
-              <Text style={styles.detailsText}>4</Text>
-              <Caption style={styles.detailsText}>Post Count</Caption>
+              <TouchableOpacity onPress={() => navigation.navigate('SharedPosts')}>
+                <Text style={styles.detailsText}>4</Text>
+                <Caption style={styles.detailsText}>Post Count</Caption>
+              </TouchableOpacity>
             </View>
             <View style={styles.countContainer}>
-              <Text style={styles.detailsText}>5</Text>
-              <Caption style={styles.detailsText}>Comment Count</Caption>
+              <TouchableOpacity onPress={() => navigation.navigate('Comments')}>
+                <Text style={styles.detailsText}>5</Text>
+                <Caption style={styles.detailsText}>Comment Count</Caption>
+              </TouchableOpacity>
             </View>
           </View>
 
-          <TouchableOpacity onPress={() => navigation.navigate('UserProfile')} style={{alignSelf:'center', marginTop: 15,borderRadius: 10,borderWidth:0.5, height:30,alignItems: 'center'}}>
+          <TouchableOpacity onPress={() => navigation.navigate('UserProfile')} style={{ alignSelf: 'center', marginTop: 15, borderRadius: 10, borderWidth: 0.5, height: 30, alignItems: 'center' }}>
             <Text>Go to User Profile Screen</Text>
           </TouchableOpacity>
         </View>
