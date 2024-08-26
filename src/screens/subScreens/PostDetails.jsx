@@ -33,7 +33,7 @@ const PostDetails = ({ route, navigation }) => {
             style={styles.backIcon}
             onPress={() => navigation.goBack()}
           >
-            <Entypo name="chevron-left" size={32} color={colors.white} />
+            <Entypo name="chevron-left" size={32} color={colors.white} style={styles.backButton} />
           </TouchableOpacity>
         </ImageBackground>
 
@@ -85,7 +85,7 @@ const PostDetails = ({ route, navigation }) => {
             <Text style={styles.detailsTitle}>Details</Text>
             <Text style={styles.detailsText}>{item.body}</Text>
           </View>
-          
+
           {/* ADD COMMENT */}
 
 
@@ -107,7 +107,9 @@ const styles = StyleSheet.create({
     backgroundColor: colors.white,
     // justifyContent: 'center',
     // alignItems: 'center',
-    height: 1100
+
+    // I know giving the height by hand is wrong but for now it kinda needs to stay like that
+    height: 1200
   },
   backgroundImage: {
     height: height * 0.499,

@@ -142,19 +142,19 @@ const styles = StyleSheet.create({
         alignSelf: 'center',
         fontSize: 16,
         marginTop: 15,
-        fontFamily: 'Poppins_400Regular'
+        fontFamily: 'Poppins_400Regular',
+        marginBottom: 10
     },
     switchContainer: {
         width: '95%',
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'space-between',
-        marginBottom: 15,
+        marginBottom: 10,
         marginLeft: 15,
-
     },
     switchLabel: {
-        fontFamily: 'Poppins_400Regular'
+        fontFamily: 'Poppins_400Regular_Italic',
     },
     switch: {
         width: 100
@@ -174,7 +174,7 @@ const styles = StyleSheet.create({
         shadowRadius: 3.84,
         width: 150,
         alignSelf: 'center',
-        bottom: -275
+        bottom: -400
     },
     confirmButtonText: {
         color: '#fff',

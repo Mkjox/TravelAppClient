@@ -153,10 +153,9 @@ const styles = StyleSheet.create({
         marginVertical: 5,
         color: colors.black,
         fontFamily: 'Poppins_400Regular',
-
     },
     postContent: {
-        fontFamily: 'Poppins_300Light',
+        fontFamily: 'Poppins_400Regular',
     },
     postItemImage: {
         height: 200,

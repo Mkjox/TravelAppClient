@@ -117,12 +117,12 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'space-between',
-        marginBottom: 15,
+        marginBottom: 10,
         marginLeft: 15,
         
     },
     switchLabel: {
-        fontFamily: 'Poppins_400Regular'
+        fontFamily: 'Poppins_400Regular_Italic'
     },
     switch: {
         width: 100
@@ -142,7 +142,7 @@ const styles = StyleSheet.create({
         shadowRadius: 3.84,
         width: 150,
         alignSelf: 'center',
-        bottom: -350
+        bottom: -550
     },
     confirmButtonText: {
         color: '#fff',

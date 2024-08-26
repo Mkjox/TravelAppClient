@@ -54,8 +54,9 @@ const styles = StyleSheet.create({
         flexDirection: 'row'
     },
     title: {
-        marginTop: 5,
-        fontFamily: 'Poppins_400Regular'
+        fontFamily: 'Poppins_400Regular',
+        fontSize: 18,
+        marginBottom: 10
     },
     button: {
         backgroundColor: colors.white,
@@ -95,7 +96,7 @@ const styles = StyleSheet.create({
         shadowRadius: 3.84,
         width: 150,
         alignSelf: 'center',
-        bottom: -540
+        bottom: -520
     },
     confirmButtonText: {
         color: '#fff',
