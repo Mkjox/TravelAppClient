@@ -6,8 +6,7 @@ import { TouchableOpacity } from 'react-native-gesture-handler';
 import colors from '../../assets/colors/colors';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import axios from 'axios';
-
-const API_URL = 'https://localhost:7117';
+import AuthService from '../../assets/data/services/AuthService';
 
 const RegisterScreen = () => {
     const navigation = useNavigation();
@@ -19,45 +18,17 @@ const RegisterScreen = () => {
 
     const handleRegister = async () => {
         try {
-            const registrationData = {
-                username, password, email
-            };
-
-            const response = await axios.post(`${API_URL}/api/auth/register`, registrationData);
-
-            await AsyncStorage.setItem('authToken', response.data.token);
-
-            await fetchAndStoreUserInfo(response.data.token);
+            if (!username || !email || !password || !confirmPassword) {
+                Alert.alert('Error', 'Please fill all fields');
+                return;
+            }
+            await AuthService.register(username, password, email);
+            navigation.navigate('Home');
         }
         catch (error) {
-            console.error('Registration failed:', error);
-            setError('Registration failed. Please check your information and try again.');
-        }
-    }
-
-    const fetchAndStoreUserInfo = async (token) => {
-        try {
-            const response = await axios.get(`${API_URL}/api/auth/current-user`, {
-                headers: {
-                    Authorization: `Bearer ${token}`
-                }
-            });
-
-            await AsyncStorage.setItem('userInfo', JSON.stringify(response.data));
-            console.log('User information stored successfully:', response.data);
-        }
-        catch (error) {
-            console.error('Failed to fetch user info:', error);
-            throw error;
+            setError(error.message);
         }
     };
-
-
-    //FIX THIS
-    // if (!username || !email || !password || !confirmPassword) {
-    //     Alert.alert('Error', 'Please fill all fields');
-    //     return;
-    // }
 
     if (password !== confirmPassword) {
         Alert.alert('Error', 'Passwords do not match');

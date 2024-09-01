@@ -1,74 +1,89 @@
 import React, { useState, useEffect } from "react";
-import { View, Text, FlatList, TouchableOpacity, StyleSheet, ImageBackground, Alert } from "react-native";
+import { View, Text, FlatList, TouchableOpacity, StyleSheet, ImageBackground, Alert, ActivityIndicator } from "react-native";
 import colors from "../assets/colors/colors";
 import { Card } from "react-native-paper";
 import { MaterialIcons } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/core";
-import LikedData from "../assets/data/likedData";
 import { Entypo } from '@expo/vector-icons';
-import LikeService from "../assets/data/services/LikeService";
+import isPostliked from "../assets/data/services/LikeService";
+import axios from 'axios';
+import PostService from '../assets/data/services/PostService.js';
 
 function Post({ postId, userId }) {
     const [data, setData] = useState([]);
-    const navigation = useNavigation();
-    const [heart, setHeart] = useState("heart-outlined");
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
     const [isLiked, setIsLiked] = useState(false);
-
-    // const toggleHeart = () => {
-    //     setHeart(heart === "heart-outlined" ? "heart" : "heart-outlined");
-    // };
+    const navigation = useNavigation();
 
     useEffect(() => {
-        try {
-            setData(LikedData);
-        } catch (error) {
-            console.error("Error fetching data:", error);
-        }
+        const fetchPosts = async () => {
+            try {
+                const posts = await PostService.getAllPostsByNonDeletedAndActive();
+                setData(posts);
+            }
+            catch (error) {
+                setError("Error fetching posts");
+                console.error("Error fetching data:", error);
+            }
+            finally {
+                setLoading(false);
+            }
+        };
+        fetchPosts();
     }, []);
 
-    // useEffect(() => {
-    //     const checkIfLiked = async () => {
-    //         try {
-    //             const liked = await isPostLiked(postId, userId);
-    //             setIsLiked(liked);
-    //         }
-    //         catch (error) {
-    //             Alert.alert('Error', 'Could not check liked status');
-    //         }
-    //     };
-    //     checkIfLiked();
-    // }, [postId, userId]);
+    useEffect(() => {
+        const checkIfLiked = async () => {
+            try {
+                const liked = await isPostLiked(postId, userId);
+                setIsLiked(liked);
+            }
+            catch (error) {
+                Alert.alert('Error', 'Could not check liked status');
+            }
+        };
+        checkIfLiked();
+    }, [postId, userId]);
 
-    // const isPostLiked = async (postId, userId) => {
-    //     try {
-    //         const response = await axios.get(`${API_URL}/IsLiked`, {
-    //             params: { postId, userId }
-    //         });
-    //         return response.data.isLiked;
-    //     }
-    //     catch (error) {
-    //         console.error('Error checking if post is liked:', error);
-    //         return false;
-    //     }
-    // };
+    const isPostLiked = async (postId, userId) => {
+        try {
+            const response = await axios.get(`${API_URL}/IsLiked`, {
+                params: { postId, userId }
+            });
+            return response.data.isLiked;
+        }
+        catch (error) {
+            console.error('Error checking if post is liked:', error);
+            return false;
+        }
+    };
 
-    // const handleLike = async () => {
-    //     try {
-    //         if (isLiked) {
-    //             await axios.delete(`${API_URL}/Like`, {
-    //                 data: { postId, userId }
-    //             });
-    //             setIsLiked(false);
-    //         }
-    //         else {
-    //             await axios.post(`${API_URL}/Like`, { postId, userId });
-    //             setIsLiked(true);
-    //         }
-    //     }
-    //     catch (error) {
-    //         Alert.alert('Error', 'There has been an error while liking the post.');
-    //     }
-    // };
+    const handleLike = async (itemId) => {
+        try {
+            if (isLiked) {
+                await axios.delete(`${API_URL}/Like`, {
+                    data: { postId, userId }
+                });
+                setIsLiked(false);
+            }
+            else {
+                await axios.post(`${API_URL}/Like`, { postId: itemId, userId });
+                setIsLiked(true);
+            }
+        }
+        catch (error) {
+            Alert.alert('Error', 'There has been an error while liking the post.');
+        }
+    };
+
+    if (loading) {
+        return <ActivityIndicator size="large" color={colors.orange} />;
+    };
+
+    if (error) {
+        return <Text style={styles.errorText}>{error}</Text>
+    }
 
     return (
         <View style={styles.postWrapper}>
@@ -84,11 +99,10 @@ function Post({ postId, userId }) {
                                     navigation.navigate("PostDetails", { item: item })
                                 }
                             >
-                                <ImageBackground src={item.image} style={styles.postItemImage}>
-                                    <TouchableOpacity /* onPress={handleLike} */ style={styles.heart}>
+                                <ImageBackground source={{ uri: item.image }} style={styles.postItemImage}>
+                                    <TouchableOpacity onPress={() => handleLike(item.id)} style={styles.heart}>
                                         <Entypo
-                                            /* name={toggleHeart} */
-                                            name='heart-outlined'
+                                            name={isLiked ? "heart" : "heart-outlined"}
                                             size={28}
                                             color={colors.orange} />
                                     </TouchableOpacity>
@@ -180,6 +194,10 @@ const styles = StyleSheet.create({
         shadowOpacity: 0.25,
         shadowRadius: 3.84,
         elevation: 5
+    },
+    errorText: {
+        color: colors.red,
+        textAlign: 'center'
     }
 });
 

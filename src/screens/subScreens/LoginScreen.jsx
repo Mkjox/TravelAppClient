@@ -5,8 +5,7 @@ import { useNavigation } from "@react-navigation/core";
 import colors from '../../assets/colors/colors';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import axios from 'axios';
-
-const API_URL = 'https://localhost:7117';
+import AuthService from '../../assets/data/services/AuthService';
 
 const LoginScreen = () => {
     const navigation = useNavigation();
@@ -16,35 +15,13 @@ const LoginScreen = () => {
 
     const handleLogin = async () => {
         try {
-            const credentials = { email, password };
-            const response = await axios.post(`${API_URL}/api/account/login`, credentials);
-
-            await AsyncStorage.setItem('authToken', response.data.token);
-            await fetchAndStoreUserInfo(response.data.token);
+            await AuthService.login(email,password);
+            navigation.navigate('Home');
         }
         catch (error) {
-            console.error('Login failed:', error);
-            setError('Login failed. Please check your credentials and try again.');
+            setError(error.message);
         }
     };
-
-    const fetchAndStoreUserInfo = async (token) => {
-        try {
-            const response = await axios.get(`${API_URL}/api/account/current-user`, {
-                headers: {
-                    Authorization: `Bearer ${token}`
-                }
-            });
-
-            await AsyncStorage.setItem('userInfo', JSON.stringify(response.data));
-            console.log('User information stored successfully:', response.data);
-        }
-        catch (error) {
-            console.error('Failed to fetch user info:', error);
-            throw error;
-        }
-    };
-
 
     return (
         <SafeAreaView style={styles.container}>

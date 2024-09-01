@@ -13,6 +13,7 @@ const colors = {
     cherry: '#e91e63',
     lightGray: '#7D7D7D',
     darkBlue: '#007BFF',
+    red: '#FF0000'
 };
 
 export default colors;

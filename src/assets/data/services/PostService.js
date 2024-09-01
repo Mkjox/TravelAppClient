@@ -2,7 +2,7 @@ import axios from 'axios';
 
 const API_URL = 'https://localhost:7117/api/post';
 
-const addPost = async (thumbnail, title, content, balance, rating, duration) => {
+const addPost = async (thumbnail, title, content, balance, rating, duration, location) => {
     try {
         const response = await axios.post(`${API_URL}/Add`, {
             thumbnail,
@@ -11,7 +11,8 @@ const addPost = async (thumbnail, title, content, balance, rating, duration) => 
             balance,
             rating,
             duration,
-            category
+            category,
+            location
         });
         return response.data;
     }
@@ -20,7 +21,7 @@ const addPost = async (thumbnail, title, content, balance, rating, duration) => 
     }
 };
 
-const updatePost = async (title, content, thumbnail, balance, rating, duration) => {
+const updatePost = async (title, content, thumbnail, balance, rating, duration, category, location) => {
     try {
         const response = await axios.post(`${API_URL}/Update`, {
             title,
@@ -28,7 +29,9 @@ const updatePost = async (title, content, thumbnail, balance, rating, duration) 
             thumbnail,
             balance,
             rating,
-            duration
+            duration,
+            category,
+            location
         });
         return response.data;
     }
