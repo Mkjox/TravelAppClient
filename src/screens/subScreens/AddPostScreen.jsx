@@ -6,9 +6,8 @@ import colors from '../../assets/colors/colors';
 import { ScrollView } from 'react-native-gesture-handler';
 import PostService from '../../assets/data/services/PostService';
 import DropDownPicker from 'react-native-dropdown-picker';
-import { useAuth } from '../../assets/data/services/AuthProvider';
 import axios from 'axios';
-import ProtectedRoute from '../../assets/data/services/ProtectedRoute';
+// import ProtectedRoute from '../../assets/data/services/ProtectedRoute';
 import * as ImagePicker from 'expo-image-picker';
 // import ImageViewer from '../../components/ImageViewer';
 
@@ -37,17 +36,20 @@ const AddPostScreen = ({ navigation }) => {
 
     const handleAddPost = async () => {
         try {
-            const response = await axios.post(`${API_URL}/Post/Add`, {
-                thumbnail,
-                title,
-                content,
-                balance,
-                rating,
-                duration,
-                category,
-                createdByName: user.username
-            });
+            const response = await PostService.addPost(thumbnail, title, content, balance, rating, duration, category)
+            // const response = await axios.post(`${API_URL}/Post/Add`, {
+            //     thumbnail,
+            //     title,
+            //     content,
+            //     balance,
+            //     rating,
+            //     duration,
+            //     category,
+            //     createdByName: user.username
+            // });
             console.log('Post added:', response.data);
+
+            //Add modal to confirm
             navigation.navigate('Home');
         }
         catch (error) {

@@ -1,13 +1,33 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Image } from 'react-native';
 import { View, Text, StyleSheet } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import colors from '../../assets/colors/colors';
 import { useNavigation } from "@react-navigation/core";
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import AuthService from '../../assets/data/services/AuthService';
 
 const StartPage = () => {
     const navigation = useNavigation();
+
+    useEffect(() => {
+        const checkUserSignedIn = async () => {
+            try {
+                const token = await AsyncStorage.getItem('authToken');
+                if (token) {
+                    const userInfo = await AuthService.fetchAndStorageUserInfo(token);
+                    if (userInfo) {
+                        navigation.navigate('Home');
+                    }
+                }
+            }
+            catch (error) {
+                alert('Error checking user sign-in status:', error);
+            }
+        };
+        checkUserSignedIn();
+    }, []);
 
     return (
         <SafeAreaView style={styles.container}>

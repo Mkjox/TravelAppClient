@@ -5,9 +5,8 @@ import { Card } from "react-native-paper";
 import { MaterialIcons } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/core";
 import { Entypo } from '@expo/vector-icons';
-import isPostliked from "../assets/data/services/LikeService";
-import axios from 'axios';
 import PostService from '../assets/data/services/PostService.js';
+import LikeService from "../assets/data/services/LikeService";
 
 function Post({ postId, userId }) {
     const [data, setData] = useState([]);
@@ -48,9 +47,7 @@ function Post({ postId, userId }) {
 
     const isPostLiked = async (postId, userId) => {
         try {
-            const response = await axios.get(`${API_URL}/IsLiked`, {
-                params: { postId, userId }
-            });
+            const response = await LikeService.isPostLiked(postId, userId);
             return response.data.isLiked;
         }
         catch (error) {
@@ -62,13 +59,11 @@ function Post({ postId, userId }) {
     const handleLike = async (itemId) => {
         try {
             if (isLiked) {
-                await axios.delete(`${API_URL}/Like`, {
-                    data: { postId, userId }
-                });
+                await LikeService.unlikePost(userId, postId)
                 setIsLiked(false);
             }
             else {
-                await axios.post(`${API_URL}/Like`, { postId: itemId, userId });
+                await LikeService.likePost(userId, postId);
                 setIsLiked(true);
             }
         }
