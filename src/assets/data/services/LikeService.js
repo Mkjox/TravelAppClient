@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const API_URL = 'https://localhost:7117/api/like';
+const API_URL = 'https://192.168.1.110:7117/api/like';
 
 const LikeService = {
     likePost: async (userId, postId) => {
@@ -45,7 +45,8 @@ const LikeService = {
 
     isPostLiked: async (postId, userId) => {
         try {
-            const response = await axios.get(`${API_URL}/IsLiked/${postId}/${userId}`);
+            const response = await axios.get(`${API_URL}/IsLikedPost/${postId}/${userId}`);
+            console.log(response.data);
             return response.data.IsLiked;
         }
         catch (error) {
@@ -56,7 +57,7 @@ const LikeService = {
 
     isCommentLiked: async (commentId, userId) => {
         try {
-            const response = await axios.get(`${API_URL}/IsLiked/${commentId}/${userId}`);
+            const response = await axios.get(`${API_URL}/IsLikedComment/${commentId}/${userId}`);
             return response.data.IsLiked;
         }
         catch (error) {

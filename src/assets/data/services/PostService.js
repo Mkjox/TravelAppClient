@@ -1,18 +1,18 @@
 import axios from 'axios';
 
-const API_URL = 'https://localhost:7117/api/post';
+const API_URL = 'https://192.168.1.110:7117/api/post';
 
 const PostService = {
-    addPost: async (thumbnail, title, content, balance, rating, duration, location) => {
+    addPost: async (title, content, thumbnail, balance, rating, duration, categoryId, location) => {
         try {
             const response = await axios.post(`${API_URL}/Add`, {
-                thumbnail,
                 title,
                 content,
+                thumbnail,
                 balance,
                 rating,
                 duration,
-                category,
+                categoryId,
                 location
             });
             return response.data;
@@ -22,7 +22,7 @@ const PostService = {
         }
     },
 
-    updatePost: async (title, content, thumbnail, balance, rating, duration, category, location) => {
+    updatePost: async (title, content, thumbnail, balance, rating, duration, categoryId, location) => {
         try {
             const response = await axios.post(`${API_URL}/Update`, {
                 title,
@@ -31,7 +31,7 @@ const PostService = {
                 balance,
                 rating,
                 duration,
-                category,
+                categoryId,
                 location
             });
             return response.data;
@@ -104,6 +104,7 @@ const PostService = {
     getAllPostsByNonDeletedAndActive: async () => {
         try {
             const response = await axios.get(`${API_URL}/GetAllByNonDeletedAndActive`);
+            console.log(response.data);
             return response.data;
         }
         catch (error) {
