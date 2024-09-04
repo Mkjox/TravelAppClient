@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const API_URL = 'https://192.168.1.110:7117/api/post';
+const API_URL = 'https://localhost:7117/api/post';
 
 const PostService = {
     addPost: async (title, content, thumbnail, balance, rating, duration, categoryId, location) => {
@@ -104,8 +104,7 @@ const PostService = {
     getAllPostsByNonDeletedAndActive: async () => {
         try {
             const response = await axios.get(`${API_URL}/GetAllByNonDeletedAndActive`);
-            console.log(response.data);
-            return response.data;
+            return response;
         }
         catch (error) {
             throw error.response.data;

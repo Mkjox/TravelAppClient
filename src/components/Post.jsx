@@ -18,12 +18,18 @@ function Post({ postId, userId }) {
     useEffect(() => {
         const fetchPosts = async () => {
             try {
-                const posts = await PostService.getAllPostsByNonDeletedAndActive();
-                setData(posts);
+                const response = await PostService.getAllPostsByNonDeletedAndActive();
+                if (response && response.data) {
+                    setData(response.data);
+                }
+                else {
+                    console.error("Unexpected response structure:", response);
+                    setError("Unexpected response structure");
+                }
             }
             catch (error) {
                 setError("Error fetching posts");
-                console.error("Error fetching data:", error);
+                console.log("Error fetching data:", error.response ? error.response.data : error.message);
             }
             finally {
                 setLoading(false);
@@ -32,43 +38,46 @@ function Post({ postId, userId }) {
         fetchPosts();
     }, []);
 
-    useEffect(() => {
-        const checkIfLiked = async () => {
-            try {
-                const liked = await isPostLiked(postId, userId);
-                setIsLiked(liked);
-            }
-            catch (error) {
-                Alert.alert('Error', 'Could not check liked status');
-            }
-        };
-        checkIfLiked();
-    }, [postId, userId]);
+    // const isPostLiked = async (postId, userId) => {
+    //     try {
+    //         const response = await LikeService.isPostLiked(postId, userId);
+    //         return response.data.isLiked;
+    //     }
+    //     catch (error) {
+    //         console.error('Error checking if post is liked:', error);
+    //         return false;
+    //     }
+    // };
 
-    const isPostLiked = async (postId, userId) => {
-        try {
-            const response = await LikeService.isPostLiked(postId, userId);
-            return response.data.isLiked;
-        }
-        catch (error) {
-            console.error('Error checking if post is liked:', error);
-            return false;
-        }
-    };
+    // useEffect(() => {
+    //     const checkIfLiked = async () => {
+    //         try {
+    //             const liked = await LikeService.isPostLiked(postId, userId);
+    //             setIsLiked(liked);
+    //             console.log(error.liked.data);
+    //         }
+    //         catch (error) {
+    //             // Alert.alert('Error', 'Could not check liked status');
+    //             console.log(error.data);
+    //         }
+    //     };
+    //     checkIfLiked();
+    // }, [postId, userId]);
 
-    const handleLike = async (itemId) => {
+    const handleLike = async (postId) => {
         try {
             if (isLiked) {
-                await LikeService.unlikePost(userId, postId)
+                await LikeService.unlikePost(postId, userId)
                 setIsLiked(false);
             }
             else {
-                await LikeService.likePost(userId, postId);
+                await LikeService.likePost(postId, userId);
                 setIsLiked(true);
             }
         }
         catch (error) {
             Alert.alert('Error', 'There has been an error while liking the post.');
+            console.error('Error liking/unliking post:', error.response ? error.response.data : error.message);
         }
     };
 
