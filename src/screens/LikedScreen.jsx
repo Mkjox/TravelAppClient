@@ -6,6 +6,7 @@ import {
   TouchableOpacity,
   ImageBackground,
   Text,
+  ActivityIndicator
 } from "react-native";
 import Feather from "@expo/vector-icons/Feather";
 import { MaterialIcons, Entypo } from "@expo/vector-icons";
@@ -14,31 +15,44 @@ import LikedData from "../assets/data/likedData.json";
 import colors from "../assets/colors/colors";
 import { useNavigation } from "@react-navigation/core";
 import { Card, Searchbar } from "react-native-paper";
+import PostService from "../assets/data/services/PostService";
+import axios from "axios";
 
 const LikedScreen = () => {
   const [data, setData] = useState([]);
-  const navigation = useNavigation();
   const [searchQuery, setSearchQuery] = useState('');
   const [heart, setHeart] = useState("heart-outlined");
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
+  const navigation = useNavigation();
 
   const toggleHeart = () => {
     setHeart(heart === "heart-outlined" ? "heart" : "heart-outlined");
   };
 
   useEffect(() => {
-    try {
-      setData(LikedData);
-    }
-    catch (error) {
-      console.error("Error fetching data:", error)
-    }
+    getPost();
   }, []);
+
+  async function getPost() {
+    var result = await axios.get("http://10.0.2.2:5001/api/post/GetAllByNonDeleted");
+    console.log(result.data)
+    setData(result.data.posts);
+  };
+
+  if (loading) {
+    return <ActivityIndicator size="large" color={colors.orange} />;
+  };
+
+  if (error) {
+    return <Text style={styles.errorText}>{error}</Text>
+  }
 
   return (
     <SafeAreaView style={{ flex: 1 }}>
       <View style={styles.container}>
         <View style={styles.menuWrapper}>
-          <Feather name="menu" size={32} style={styles.menuButton} onPress={() => navigation.openDrawer()}/>
+          <Feather name="menu" size={32} style={styles.menuButton} onPress={() => navigation.openDrawer()} />
           <Searchbar style={styles.searchBar}
             placeholder="Search"
             onChangeText={setSearchQuery}
@@ -58,7 +72,7 @@ const LikedScreen = () => {
             renderItem={({ item }) => (
               <TouchableOpacity onPress={() => navigation.navigate("PostDetails", { item: item })}>
                 <Card style={styles.likedItemWrapper}>
-                  <ImageBackground src={item.image} style={styles.likedItemImage}>
+                  <ImageBackground src={'https://picsum.photos/700'} style={styles.likedItemImage}>
                     <TouchableOpacity style={styles.moreButton}>
                       <Entypo name='dots-three-vertical' size={18} colors={colors.white} />
                     </TouchableOpacity>
@@ -70,9 +84,9 @@ const LikedScreen = () => {
                     <Text style={styles.likedItemTitle}>{item.title}</Text>
                     <Text style={styles.likedItemLocation}>
                       <MaterialIcons name='place' size={15} color={colors.black} />
-                      {item.place}
+                      {item.location}
                     </Text>
-                    <Text>{item.body}</Text>
+                    <Text>{item.content}</Text>
                   </Card.Content>
                 </Card>
               </TouchableOpacity>
@@ -120,7 +134,7 @@ const styles = StyleSheet.create({
   },
   likedWrapper: {
     marginHorizontal: 5,
-    marginBottom: 10,
+    marginBottom: 100,
     borderRadius: 20,
     paddingTop: 7,
   },
