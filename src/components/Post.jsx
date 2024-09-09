@@ -7,8 +7,9 @@ import { useNavigation } from "@react-navigation/core";
 import { Entypo } from '@expo/vector-icons';
 import PostService from '../assets/data/services/PostService.js';
 import LikeService from "../assets/data/services/LikeService";
+import LikedData from '../assets/data/likedData.json';
 
-function Post({ postId, userId }) {
+function Post() {
     const [data, setData] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
@@ -16,27 +17,14 @@ function Post({ postId, userId }) {
     const navigation = useNavigation();
 
     useEffect(() => {
-        const fetchPosts = async () => {
-            try {
-                const response = await PostService.getAllPostsByNonDeletedAndActive();
-                if (response && response.data) {
-                    setData(response.data);
-                }
-                else {
-                    console.error("Unexpected response structure:", response);
-                    setError("Unexpected response structure");
-                }
-            }
-            catch (error) {
-                setError("Error fetching posts");
-                console.log("Error fetching data:", error.response ? error.response.data : error.message);
-            }
-            finally {
-                setLoading(false);
-            }
-        };
-        fetchPosts();
+        getPosts();
     }, []);
+
+    async function getPosts() {
+        var result = await PostService.getAllPostsByNonDeletedAndActive();
+        setData(result.data.posts);
+        setLoading(false);
+    }
 
     // const isPostLiked = async (postId, userId) => {
     //     try {
@@ -64,22 +52,22 @@ function Post({ postId, userId }) {
     //     checkIfLiked();
     // }, [postId, userId]);
 
-    const handleLike = async (postId) => {
-        try {
-            if (isLiked) {
-                await LikeService.unlikePost(postId, userId)
-                setIsLiked(false);
-            }
-            else {
-                await LikeService.likePost(postId, userId);
-                setIsLiked(true);
-            }
-        }
-        catch (error) {
-            Alert.alert('Error', 'There has been an error while liking the post.');
-            console.error('Error liking/unliking post:', error.response ? error.response.data : error.message);
-        }
-    };
+    // const handleLike = async (postId) => {
+    //     try {
+    //         if (isLiked) {
+    //             await LikeService.unlikePost(postId, userId)
+    //             setIsLiked(false);
+    //         }
+    //         else {
+    //             await LikeService.likePost(postId, userId);
+    //             setIsLiked(true);
+    //         }
+    //     }
+    //     catch (error) {
+    //         Alert.alert('Error', 'There has been an error while liking the post.');
+    //         console.error('Error liking/unliking post:', error.response ? error.response.data : error.message);
+    //     }
+    // };
 
     if (loading) {
         return <ActivityIndicator size="large" color={colors.orange} />;
@@ -103,7 +91,7 @@ function Post({ postId, userId }) {
                                     navigation.navigate("PostDetails", { item: item })
                                 }
                             >
-                                <ImageBackground source={{ uri: item.image }} style={styles.postItemImage}>
+                                <ImageBackground src={'https://picsum.photos/700'} style={styles.postItemImage}>
                                     <TouchableOpacity onPress={() => handleLike(item.id)} style={styles.heart}>
                                         <Entypo
                                             name={isLiked ? "heart" : "heart-outlined"}
@@ -119,9 +107,9 @@ function Post({ postId, userId }) {
                                             size={15}
                                             color={colors.darkGray}
                                         />
-                                        {item.place}
+                                        {item.location}
                                     </Text>
-                                    <Text style={styles.postContent}>{item.body}</Text>
+                                    <Text style={styles.postContent}>{item.content}</Text>
                                 </Card.Content>
                             </Card>
                         </TouchableOpacity>

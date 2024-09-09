@@ -22,17 +22,9 @@ import colors from "../assets/colors/colors";
 
 
 const HomeScreen = ({ navigation }) => {
-  const [data, setData] = useState([]);
   const [refreshing, setRefreshing] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
 
-  useEffect(() => {
-    try {
-      setData(LikedData);
-    } catch (error) {
-      console.error("Error fetching data:", error);
-    }
-  }, []);
 
   const onRefresh = useCallback(() => {
     setRefreshing(true);

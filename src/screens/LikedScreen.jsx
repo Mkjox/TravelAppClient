@@ -22,7 +22,7 @@ const LikedScreen = () => {
   const [data, setData] = useState([]);
   const [searchQuery, setSearchQuery] = useState('');
   const [heart, setHeart] = useState("heart-outlined");
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const navigation = useNavigation();
 
@@ -35,9 +35,9 @@ const LikedScreen = () => {
   }, []);
 
   async function getPost() {
-    var result = await axios.get("http://10.0.2.2:5001/api/post/GetAllByNonDeleted");
-    console.log(result.data)
+    var result = await PostService.getAllPosts();
     setData(result.data.posts);
+    setLoading(false);
   };
 
   if (loading) {
