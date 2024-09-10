@@ -12,6 +12,11 @@ const LoginScreen = () => {
     const [error, setError] = useState('');
 
     const handleLogin = async () => {
+        if (!email || !password) {
+            setError('Email and password are required');
+            return;
+        }
+
         try {
             await AuthService.login(email,password);
             navigation.navigate('Home');

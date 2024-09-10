@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const API_URL = 'https://localhost:7117/api/comment';
+const API_URL = 'http://10.0.2.2:5001/api/comment';
 
 // need CreatedByName into it
 // IT NEEDS UNDO DELETE

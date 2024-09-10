@@ -1,139 +1,127 @@
 import axios from "axios";
 
-const API_URL = "https://localhost:7117/api/category";
+const API_URL = "http://10.0.2.2:5001/api/category";
 
-const addCategory = async (Name, Description, IsActive) => {
-    try {
-        const response = await axios.post(`${API_URL}/Add`, { Name, Description, IsActive });
-        return response.data;
-    }
-    catch (error) {
-        return error.response.data;
-    }
+const CategoryService = {
+    addCategory: async (Name, Description, IsActive) => {
+        try {
+            const response = await axios.post(`${API_URL}/Add`, { Name, Description, IsActive });
+            return response.data;
+        }
+        catch (error) {
+            return error.response.data;
+        }
+    },
+
+    updateCategory: async (Name, Description, IsActive, IsDeleted) => {
+        try {
+            const response = await axios.post(`${API_URL}/Update`, { Name, Description, IsActive, IsDeleted });
+            return response.data;
+        }
+        catch (error) {
+            return error.response.data;
+        }
+    },
+
+    deleteCategory: async (categoryId) => {
+        try {
+            const response = await axios.delete(`${API_URL}/DeleteCategory/${categoryId}`);
+            return response.data;
+        }
+        catch (error) {
+            return error.response.data;
+        }
+    },
+
+    hardDelete: async (categoryId) => {
+        try {
+            const response = await axios.delete(`${API_URL}/HardDeleteCategory/${categoryId}`);
+            return response.data;
+        }
+        catch (error) {
+            return error.response.data;
+        }
+    },
+
+    undoDelete: async (categoryId, modifiedByName) => {
+        try {
+            const response = await axios.post(`${API_URL}/UndoDelete/${categoryId}`, { modifiedByName });
+            return response.data;
+        }
+        catch (error) {
+            return error.response.data;
+        }
+    },
+
+    getCategories: async (categoryId) => {
+        try {
+            const response = await axios.get(`${API_URL}/GetCategoryById/${categoryId}`);
+            return response;
+        }
+        catch (error) {
+            return error.response;
+        }
+    },
+
+    getAllCategories: async () => {
+        try {
+            const response = await axios.get(`${API_URL}/GetAllCategories`);
+            return response;
+        }
+        catch (error) {
+            return error.response;
+        }
+    },
+
+    getAllByDeleted: async () => {
+        try {
+            const response = await axios.get(`${API_URL}/GetAllByDeleted`);
+            return response;
+        }
+        catch (error) {
+            return error.response;
+        }
+    },
+
+    getAllByNonDeleted: async () => {
+        try {
+            const response = await axios.get(`${API_URL}/GetAllByNonDeleted`);
+            return response;
+        }
+        catch (error) {
+            return error.response;
+        }
+    },
+
+    getAllByNonDeletedAndActive: async () => {
+        try {
+            const response = await axios.get(`${API_URL}/GetAllByNonDeletedAndActive`);
+            return response;
+        }
+        catch (error) {
+            return error.response;
+        }
+    },
+
+    countCategories: async () => {
+        try {
+            const response = await axios.post(`${API_URL}/CountCategories`);
+            return response;
+        }
+        catch (error) {
+            return error.response;
+        }
+    },
+
+    countByNonDeletedCategories: async () => {
+        try {
+            const response = await axios.post(`${API_URL}/CountByNonDeletedCategories`);
+            return response;
+        }
+        catch (error) {
+            return error.response;
+        }
+    },
 };
 
-const updateCategory = async (Name, Description, IsActive, IsDeleted) => {
-    try {
-        const response = await axios.post(`${API_URL}/Update`, { Name, Description, IsActive, IsDeleted });
-        return response.data;
-    }
-    catch (error) {
-        return error.response.data;
-    }
-};
-
-const deleteCategory = async (categoryId) => {
-    try {
-        const response = await axios.delete(`${API_URL}/DeleteCategory/${categoryId}`);
-        return response.data;
-    }
-    catch (error) {
-        return error.response.data;
-    }
-}
-
-const hardDelete = async (categoryId) => {
-    try {
-        const response = await axios.delete(`${API_URL}/HardDeleteCategory/${categoryId}`);
-        return response.data;
-    }
-    catch (error) {
-        return error.response.data;
-    }
-}
-
-const undoDelete = async (categoryId, modifiedByName) => {
-    try {
-        const response = await axios.post(`${API_URL}/UndoDelete/${categoryId}`, { modifiedByName });
-        return response.data;
-    }
-    catch (error) {
-        return error.response.data;
-    }
-}
-
-const getCategories = async (categoryId) => {
-    try {
-        const response = await axios.get(`${API_URL}/GetCategoryById/${categoryId}`);
-        return response.data;
-    }
-    catch (error) {
-        return error.response.data;
-    }
-}
-
-const getAllCategories = async () => {
-    try {
-        const response = await axios.get(`${API_URL}/GetAllCategories`);
-        return response.data;
-    }
-    catch (error) {
-        return error.response.data;
-    }
-};
-
-const getAllByDeleted = async () => {
-    try {
-        const response = await axios.get(`${API_URL}/GetAllByDeleted`);
-        return response.data;
-    }
-    catch (error) {
-        return error.response.data;
-    }
-};
-
-const getAllByNonDeleted = async () => {
-    try {
-        const response = await axios.get(`${API_URL}/GetAllByNonDeleted`);
-        return response.data;
-    }
-    catch (error) {
-        return error.response.data;
-    }
-};
-
-const getAllByNonDeletedAndActive = async () => {
-    try {
-        const response = await axios.get(`${API_URL}/GetAllByNonDeletedAndActive`);
-        return response.data;
-    }
-    catch (error) {
-        return error.response.data;
-    }
-};
-
-const countCategories = async () => {
-    try {
-        const response = await axios.post(`${API_URL}/CountCategories`);
-        return response.data;
-    }
-    catch (error) {
-        return error.response.data;
-    }
-};
-
-const countByNonDeletedCategories = async () => {
-    try {
-        const response = await axios.post(`${API_URL}/CountByNonDeletedCategories`);
-        return response.data;
-    }
-    catch (error) {
-        return error.response.data;
-    }
-};
-
-
-export default {
-    addCategory,
-    updateCategory,
-    deleteCategory,
-    hardDelete,
-    undoDelete,
-    getCategories,
-    getAllCategories,
-    getAllByDeleted,
-    getAllByNonDeleted,
-    getAllByNonDeletedAndActive,
-    countCategories,
-    countByNonDeletedCategories
-};
+export default CategoryService;

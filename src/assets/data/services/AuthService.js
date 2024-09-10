@@ -1,7 +1,7 @@
 import axios from 'axios';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-const API_URL = 'https://localhost:7117/api/auth';
+const API_URL = 'http://10.0.2.2:5001/api/auth';
 
 const AuthService = {
     login: async (email, password) => {
@@ -10,10 +10,10 @@ const AuthService = {
             const response = await axios.post(`${API_URL}/login`, credentials);
 
             await AsyncStorage.setItem('authToken', response.data.token);
-            await AuthService.fetchAndStorageUserInfo(response.data.token);
+            await AuthService.fetchAndStoreUserInfo(response.data.token);
         }
         catch (error) {
-            console.error('Login failed:', error);
+            console.error('Login failed:', error.response ? error.response.data : error.message);
             throw new Error('Login failed. Please check your credentials and try again.');
         }
     },
@@ -27,15 +27,15 @@ const AuthService = {
             const response = await axios.post(`${API_URL}/register`, registrationData);
 
             await AsyncStorage.setItem('authToken', response.data.token);
-            await AuthService.fetchAndStorageUserInfo(response.data.token);
+            await AuthService.fetchAndStoreUserInfo(response.data.token);
         }
         catch (error) {
-            console.error('Registration failed:', error);
+            console.error('Registration failed:', error.response ? error.response.data : error.message);
             throw new Error('Registration failed. Please check your information and try again.');
         }
     },
 
-    fetchAndStorageUserInfo: async (token) => {
+    fetchAndStoreUserInfo: async (token) => {
         try {
             const response = await axios.get(`${API_URL}/current-user`, {
                 headers: {

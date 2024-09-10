@@ -15,11 +15,17 @@ const RegisterScreen = () => {
     const [error, setError] = useState('');
 
     const handleRegister = async () => {
+        if (!username || !email || !password || !confirmPassword) {
+            setError('Please fill all fields');
+            return;
+        }
+
+        if (password !== confirmPassword) {
+            Alert.alert('Error', 'Passwords do not match');
+            return;
+        }
+
         try {
-            if (!username || !email || !password || !confirmPassword) {
-                Alert.alert('Error', 'Please fill all fields');
-                return;
-            }
             await AuthService.register(username, password, email);
             navigation.navigate('Home');
         }
@@ -28,10 +34,7 @@ const RegisterScreen = () => {
         }
     };
 
-    if (password !== confirmPassword) {
-        Alert.alert('Error', 'Passwords do not match');
-        return;
-    }
+
 
     return (
         <SafeAreaView style={styles.container}>

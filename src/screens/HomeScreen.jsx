@@ -4,7 +4,8 @@ import {
   View,
   Text,
   RefreshControl,
-  TouchableOpacity
+  TouchableOpacity,
+  // ActivityIndicator
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import Feather from "@expo/vector-icons/Feather";
@@ -17,6 +18,7 @@ import Post from '../components/Post';
 import { ScrollView } from "react-native-gesture-handler";
 import { Searchbar } from "react-native-paper";
 import colors from "../assets/colors/colors";
+import PostService from "../assets/data/services/PostService";
 
 {/* DO NOT FORGET TO ADD SCROLLVIEW OR FIX THE ERROR ABOUT VIRTUALIZED LISTS */ }
 
@@ -24,7 +26,23 @@ import colors from "../assets/colors/colors";
 const HomeScreen = ({ navigation }) => {
   const [refreshing, setRefreshing] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
+  // const [data, setData] = useState([]);
+  // const [loading, setLoading] = useState(true);
 
+  // useEffect(() => {
+  //   getPosts();
+  // }, []);
+
+  // async function getPosts() {
+  //   var result = PostService.getAllPostsByNonDeletedAndActive();
+  //   console.log(result.data);
+  //   setData(result.data.posts);
+  //   setLoading(false);
+  // }
+
+  // if (loading) {
+  //   return <ActivityIndicator size="large" color={colors.orange} />;
+  // };
 
   const onRefresh = useCallback(() => {
     setRefreshing(true);
