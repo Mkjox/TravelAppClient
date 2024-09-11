@@ -26,14 +26,15 @@ const PostDetails = ({ route, navigation }) => {
     <ScrollView>
       <View style={styles.container}>
         <ImageBackground
-          src={item.image}
+          // src={item.thumbnail}
+          src={'https://picsum.photos/700'}
           style={styles.backgroundImage}
         >
           <TouchableOpacity
             style={styles.backIcon}
             onPress={() => navigation.goBack()}
           >
-            <Entypo name="chevron-left" size={32} color={colors.white} style={styles.backButton} />
+            <Entypo name="chevron-left" size={32} color={colors.black} style={styles.backButton} />
           </TouchableOpacity>
         </ImageBackground>
 
@@ -43,14 +44,14 @@ const PostDetails = ({ route, navigation }) => {
             <Text style={styles.itemTitle}>{item.title}</Text>
             <View style={styles.locationWrapper}>
               <MaterialIcons name="place" size={20} color="black" />
-              <Text style={styles.locationText}>{item.place}</Text>
+              <Text style={styles.locationText}>{item.location}</Text>
             </View>
           </View>
           <View style={styles.infoWrapper}>
             <View style={styles.infoItem}>
               <Text style={styles.infoTitle}>Suggested Budget</Text>
               <View style={styles.infoTextWrapper}>
-                <Text style={styles.infoText}>{item.price}</Text>
+                <Text style={styles.infoText}>{item.balance}</Text>
                 <Text style={styles.infoSubText}>/per</Text>
               </View>
             </View>
@@ -83,7 +84,7 @@ const PostDetails = ({ route, navigation }) => {
         <View style={styles.detailsWrapper}>
           <View style={styles.detailsTextWrapper}>
             <Text style={styles.detailsTitle}>Details</Text>
-            <Text style={styles.detailsText}>{item.body}</Text>
+            <Text style={styles.detailsText}>{item.content}</Text>
           </View>
 
           {/* ADD COMMENT */}
@@ -109,7 +110,7 @@ const styles = StyleSheet.create({
     // alignItems: 'center',
 
     // I know giving the height by hand is wrong but for now it kinda needs to stay like that
-    height: 1200
+    height: 1300
   },
   backgroundImage: {
     height: height * 0.499,
