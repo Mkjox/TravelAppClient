@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from "react";
-import { View, Text, FlatList, TouchableOpacity, StyleSheet, ImageBackground, Alert, ActivityIndicator } from "react-native";
+import { View, Text, TouchableOpacity, StyleSheet, ImageBackground, ActivityIndicator } from "react-native";
 import colors from "../assets/colors/colors";
 import { Card } from "react-native-paper";
 import { MaterialIcons } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/core";
 import { Entypo } from '@expo/vector-icons';
 import PostService from '../assets/data/services/PostService.js';
+import { FlatList } from "react-native-gesture-handler";
 import LikeService from "../assets/data/services/LikeService";
-import LikedData from '../assets/data/likedData.json';
 
 function Post() {
     const [data, setData] = useState([]);
@@ -45,7 +45,7 @@ function Post() {
     //             console.log(error.liked.data);
     //         }
     //         catch (error) {
-    //             // Alert.alert('Error', 'Could not check liked status');
+    //             // console.error('Error', 'Could not check liked status');
     //             console.log(error.data);
     //         }
     //     };
