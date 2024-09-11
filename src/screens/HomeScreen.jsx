@@ -76,7 +76,7 @@ const HomeScreen = ({ navigation }) => {
               <View style={styles.activityInnerWrapper}>
                 <Text style={styles.activityTitle}>Categories</Text>
               </View>
-              <TouchableOpacity style={styles.activityInnerWrapper} onPress={() => navigation.navigate("Start")}>
+              <TouchableOpacity style={styles.activityInnerWrapper} onPress={() => navigation.navigate("Categories")}>
                 <Text style={styles.activityAll}>See All &gt;</Text>
               </TouchableOpacity>
             </View>
@@ -138,7 +138,8 @@ const styles = StyleSheet.create({
   activities: {
     alignItems: 'center',
     alignSelf: 'center',
-    flexDirection: 'row'
+    flexDirection: 'row',
+    marginTop: 5
   },
   activityInnerWrapper: {
     marginHorizontal: 85

@@ -29,6 +29,7 @@ import CustomTabBar from "../components/CustomTabBar";
 import UserProfileScreen from '../screens/subScreens/UserProfileScreen';
 import ResetPasswordScreen from '../screens/subScreens/ResetPasswordScreen';
 import FollowScreen from '../screens/subScreens/FollowScreen';
+import Categories from '../screens/subScreens/Categories';
 
 const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
@@ -66,7 +67,7 @@ function DrawerNavigator() {
     return (
         <Drawer.Navigator>
             <Drawer.Screen name="Home" component={StackNavigator} options={{ drawerType: 'back', headerShown: false }} />
-            <Drawer.Screen name="AppSettings" component={AppSettings} options={{ drawerType: 'back', headerShown: false }} />
+            <Drawer.Screen name="StartPage" component={StartPage} options={{ drawerType: 'back', headerShown: false }} />
         </Drawer.Navigator>
     );
 }
@@ -176,23 +177,30 @@ function StackNavigator() {
                 options={{ headerShown: false }}
             />
 
-            <Stack.Screen 
+            <Stack.Screen
                 name="UserProfile"
                 component={UserProfileScreen}
-                options={{headerShown: false}}
+                options={{ headerShown: false }}
             />
 
-            <Stack.Screen 
+            <Stack.Screen
                 name='ResetPassword'
                 component={ResetPasswordScreen}
-                options={{headerShown: false}}
+                options={{ headerShown: false }}
             />
 
             <Stack.Screen
                 name='Follow'
                 component={FollowScreen}
-                options={{headerShown: false}}
+                options={{ headerShown: false }}
             />
+
+            <Stack.Screen
+                name='Categories'
+                component={Categories}
+                options={{ headerShown: false }}
+            />
+
         </Stack.Navigator>
     );
 }
