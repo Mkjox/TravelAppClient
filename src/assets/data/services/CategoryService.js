@@ -53,7 +53,7 @@ const CategoryService = {
         }
     },
 
-    getCategories: async (categoryId) => {
+    getCategoryById: async (categoryId) => {
         try {
             const response = await axios.get(`${API_URL}/GetCategoryById/${categoryId}`);
             return response;
