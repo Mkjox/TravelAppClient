@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import {
+  Button,
   Dimensions,
   ImageBackground,
   StyleSheet,
@@ -23,7 +24,7 @@ const PostDetails = ({ route, navigation }) => {
   };
 
   return (
-    <ScrollView>
+    <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
       <View style={styles.container}>
         <ImageBackground
           // src={item.thumbnail}
@@ -74,7 +75,7 @@ const PostDetails = ({ route, navigation }) => {
 
             <View>
               <Text style={styles.categoryText}>Category</Text>
-              <Text style={styles.category}>{item.category}</Text>
+              <Text style={styles.category}>{item.category.name}</Text>
             </View>
           </View>
           <TouchableOpacity onPress={toggleHeart} style={styles.heart}>
@@ -91,6 +92,15 @@ const PostDetails = ({ route, navigation }) => {
 
 
           <View style={styles.commentsWrapper}>
+            <View style={styles.addComment}>
+              <Text style={styles.addCommentTitle}>Add Comment</Text>
+              <View style={styles.commentArea}>
+                {/* i need to add textinput here */}
+              </View>
+              <TouchableOpacity style={styles.button}>
+                <Text>Add A Comment</Text>
+              </TouchableOpacity>
+            </View>
             <View style={styles.commentsInnerWrapper}>
               <Text style={styles.commentsTitle}>Comments</Text>
               <View style={styles.comments} />
@@ -109,8 +119,8 @@ const styles = StyleSheet.create({
     // justifyContent: 'center',
     // alignItems: 'center',
 
-    // I know giving the height by hand is wrong but for now it kinda needs to stay like that
-    height: 1300
+    // I know giving the height by hand is wrong but for now it kinda needs to stay like that,
+    marginBottom: 10
   },
   backgroundImage: {
     height: height * 0.499,
@@ -190,7 +200,7 @@ const styles = StyleSheet.create({
   },
   detailsText: {
     marginTop: 20,
-    color: colors.black,
+    color: colors.gray,
     height: 'auto',
     marginBottom: 20,
     textAlign: 'justify',
@@ -240,14 +250,17 @@ const styles = StyleSheet.create({
   commentsWrapper: {
     marginTop: 20,
     marginHorizontal: 20,
-    fontFamily: 'Poppins_400Regular'
+    fontFamily: 'Poppins_400Regular',
   },
   commentsInnerWrapper: {
 
   },
   commentsTitle: {
     fontSize: 20,
-    fontFamily: 'Poppins_300Light_Italic'
+    fontFamily: 'Poppins_500Medium',
+    fontStyle: 'italic',
+    fontWeight: '700',
+    marginBottom: 5
   },
   comments: {
     borderRadius: 25,

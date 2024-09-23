@@ -77,12 +77,8 @@ const HomeScreen = ({ navigation }) => {
                 <Text style={styles.activityTitle}>Categories</Text>
               </View>
               <TouchableOpacity style={styles.activityInnerWrapper} onPress={() => navigation.navigate("Categories")}>
-                <Text style={styles.activityAll}>See All &gt;</Text>
+                <Text style={styles.activityAll}>See Details &gt;</Text>
               </TouchableOpacity>
-            </View>
-            <View style={styles.activityCategories}>
-              {/* Activity component called here */}
-              <Activity />
             </View>
           </View>
           <View style={styles.postWrapper}>
@@ -142,7 +138,7 @@ const styles = StyleSheet.create({
     marginTop: 5
   },
   activityInnerWrapper: {
-    marginHorizontal: 85
+    marginHorizontal: 80
   },
   activityTitle: {
     fontSize: 18,

@@ -30,6 +30,7 @@ import UserProfileScreen from '../screens/subScreens/UserProfileScreen';
 import ResetPasswordScreen from '../screens/subScreens/ResetPasswordScreen';
 import FollowScreen from '../screens/subScreens/FollowScreen';
 import Categories from '../screens/subScreens/Categories';
+import { FontAwesome } from '@expo/vector-icons';
 
 const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
@@ -65,9 +66,22 @@ function TabNavigator() {
 
 function DrawerNavigator() {
     return (
-        <Drawer.Navigator>
-            <Drawer.Screen name="Home" component={StackNavigator} options={{ drawerType: 'back', headerShown: false }} />
-            <Drawer.Screen name="StartPage" component={StartPage} options={{ drawerType: 'back', headerShown: false }} />
+        <Drawer.Navigator
+            screenOptions={{
+                headerShown: false,
+                drawerType: 'back',
+            }}>
+            <Drawer.Screen name="Home" component={StackNavigator} options={{
+                drawerIcon: ({ }) => (
+                    <FontAwesome name='home' size={22} color={colors.blue} />
+                )
+            }} />
+            <Drawer.Screen name="StartPage" component={StartPage} />
+            <Drawer.Screen name='Settings' component={SettingsScreen} options={{
+                drawerIcon: () => (
+                    <FontAwesome name='gear' size={22} color={colors.blue} />
+                )
+            }} />
         </Drawer.Navigator>
     );
 }

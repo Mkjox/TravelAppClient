@@ -46,13 +46,14 @@ const RegisterScreen = () => {
 
                 <TextInput
                     style={styles.textInput}
-                    placeholder='Enter your full name'
+                    placeholder='Enter your username'
                     value={username}
                     onChangeText={setUsername}
                 />
                 <TextInput
                     style={styles.textInput}
                     placeholder='Enter your email'
+                    keyboardType='email-address'
                     value={email}
                     onChangeText={setEmail}
                 />
