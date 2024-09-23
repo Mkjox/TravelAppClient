@@ -49,14 +49,14 @@ export default function App() {
   });
 
   useEffect(() => {
-  if (loaded|| error){
-    SplashScreen.hideAsync();
+    if (loaded || error) {
+      SplashScreen.hideAsync();
+    }
+  }, [loaded, error]);
+
+  if (!loaded && !error) {
+    return null;
   }
-}, [loaded,error]);
 
-if (!loaded && !error) {
-  return null;
-}
-
-  return <AppNavigator/>;
+  return <AppNavigator />;
 };

@@ -4,7 +4,6 @@ import { Entypo } from "@expo/vector-icons";
 import { FlatList, TouchableOpacity } from "react-native-gesture-handler";
 import colors from "../../assets/colors/colors";
 import { useEffect, useState } from "react";
-import likedData from '../../assets/data/likedData.json';
 import CategoryService from '../../assets/data/services/CategoryService';
 import { useNavigation } from "@react-navigation/core";
 

@@ -11,12 +11,10 @@ import {
 import Feather from "@expo/vector-icons/Feather";
 import { MaterialIcons, Entypo } from "@expo/vector-icons";
 import { SafeAreaView } from "react-native-safe-area-context";
-import LikedData from "../assets/data/likedData.json";
 import colors from "../assets/colors/colors";
 import { useNavigation } from "@react-navigation/core";
 import { Card, Searchbar } from "react-native-paper";
 import PostService from "../assets/data/services/PostService";
-import axios from "axios";
 
 const LikedScreen = () => {
   const [data, setData] = useState([]);

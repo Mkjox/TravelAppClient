@@ -8,23 +8,32 @@ import { Entypo } from '@expo/vector-icons';
 import PostService from '../assets/data/services/PostService.js';
 import { FlatList } from "react-native-gesture-handler";
 import LikeService from "../assets/data/services/LikeService";
+import CategoryService from "../assets/data/services/CategoryService.js";
 
 function Post() {
-    const [data, setData] = useState([]);
+    const [post, setPost] = useState([]);
+    const [category, setCategory] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
     const [isLiked, setIsLiked] = useState(false);
     const navigation = useNavigation();
 
-    useEffect(() => {
-        getPosts();
-    }, []);
 
     async function getPosts() {
         var result = await PostService.getAllPostsByNonDeletedAndActive();
-        setData(result.data.posts);
+        setPost(result.data.posts);
         setLoading(false);
     }
+
+    async function getCategories() {
+        var result = await CategoryService.getAllByNonDeletedAndActive();
+        setCategory(result.data.categories);
+    }
+
+    useEffect(() => {
+        getPosts();
+        getCategories();
+    }, []);
 
     // const isPostLiked = async (postId, userId) => {
     //     try {
@@ -81,8 +90,21 @@ function Post() {
         <View style={styles.postWrapper}>
             <View style={styles.postItemsWrapper}>
                 <FlatList
-                    data={data}
+                    data={post}
                     keyExtractor={(item) => item.id.toString()}
+                    ListHeaderComponent={() => (
+                        <FlatList
+                            showsHorizontalScrollIndicator={false}
+                            data={category}
+                            horizontal
+                            keyExtractor={(item) => item.id.toString()}
+                            renderItem={({ item }) =>
+                                    <TouchableOpacity style={styles.categoryItem}>
+                                        <Text style={styles.categoryText}>{item.name}</Text>
+                                    </TouchableOpacity>
+                            }
+                        />
+                    )}
                     renderItem={({ item }) => (
                         <TouchableOpacity>
                             <Card
@@ -123,6 +145,16 @@ function Post() {
 }
 
 const styles = StyleSheet.create({
+    categoryItem: {
+        marginVertical: 10,
+        marginHorizontal: 15,
+        alignItems: 'center'
+    },
+    categoryText: {
+        color: colors.darkGray,
+        fontFamily: 'Poppins_500Medium',
+        fontSize: 16
+    },
     postWrapper: {
         marginHorizontal: 5,
         marginBottom: 10,
@@ -156,7 +188,7 @@ const styles = StyleSheet.create({
         fontFamily: 'Poppins_500Medium',
     },
     postPlace: {
-        marginVertical: 5,
+        marginBottom: 5,
         color: colors.black,
         fontFamily: 'Poppins_400Regular',
     },
