@@ -1,7 +1,7 @@
 import React from "react";
 import { View, StyleSheet, Text } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { Entypo } from '@expo/vector-icons';
+import { Ionicons } from '@expo/vector-icons';
 import { TouchableOpacity } from "react-native-gesture-handler";
 import colors from "../../assets/colors/colors";
 import { useNavigation } from "@react-navigation/core";
@@ -15,7 +15,7 @@ const LanguageScreen = () => {
     return (
         <SafeAreaView style={styles.container}>
             <View style={styles.header}>
-                <Entypo name='chevron-left' size={28} onPress={() => navigation.goBack()}/>
+                <Ionicons name='arrow-back' size={24} onPress={() => navigation.goBack()}/>
                 <Text style={styles.title}>Language</Text>
             </View>
             <TouchableOpacity style={styles.button} onPress={handleButtonPress}>
@@ -48,15 +48,16 @@ const styles = StyleSheet.create({
         flex: 1
     },
     header: {
-        marginLeft: 10,
-        marginTop: 10,
+        marginLeft: 15,
+        marginTop: 15,
         marginBottom: 10,
         flexDirection: 'row'
     },
     title: {
         fontFamily: 'Poppins_400Regular',
         fontSize: 18,
-        marginBottom: 10
+        marginBottom: 10,
+        marginLeft: 5
     },
     button: {
         backgroundColor: colors.white,

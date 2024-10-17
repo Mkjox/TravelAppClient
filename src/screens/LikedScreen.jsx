@@ -128,7 +128,7 @@ const styles = StyleSheet.create({
     fontSize: 16,
     marginTop: 16,
     fontFamily: 'Poppins_500Medium',
-    textAlign: 'center'
+    textAlign: 'center',
   },
   likedWrapper: {
     marginHorizontal: 5,

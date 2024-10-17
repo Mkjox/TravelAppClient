@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { View, Text, StyleSheet, Switch, Alert } from 'react-native';
 import { TouchableOpacity } from "react-native-gesture-handler";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { Entypo } from '@expo/vector-icons';
+import { Ionicons } from '@expo/vector-icons';
 import { List } from "react-native-paper";
 import colors from "../../assets/colors/colors";
 import { useNavigation } from "@react-navigation/core";
@@ -50,7 +50,7 @@ const NotificationsScreen = () => {
     return (
         <SafeAreaView style={styles.container}>
             <TouchableOpacity style={styles.titleWrapper}>
-                <Entypo name='chevron-left' size={28} onPress={() => navigation.goBack()} />
+                <Ionicons name='arrow-back' size={24} onPress={() => navigation.goBack()} />
                 <Text style={styles.title}>Notifications</Text>
             </TouchableOpacity>
             <Text style={styles.infoTitle}>Send me notification when;</Text>
@@ -131,19 +131,20 @@ const styles = StyleSheet.create({
     },
     titleWrapper: {
         flexDirection: 'row',
-        marginLeft: 10,
-        marginTop: 5,
+        marginLeft: 15,
+        marginTop: 15,
         fontFamily: 'Poppins_400Regular'
     },
     title: {
         fontSize: 18,
+        marginLeft: 5
     },
     infoTitle: {
         alignSelf: 'center',
         fontSize: 16,
         marginTop: 15,
         fontFamily: 'Poppins_400Regular',
-        marginBottom: 10
+        marginBottom: 10,
     },
     switchContainer: {
         width: '95%',

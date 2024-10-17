@@ -99,9 +99,9 @@ function Post() {
                             horizontal
                             keyExtractor={(item) => item.id.toString()}
                             renderItem={({ item }) =>
-                                    <TouchableOpacity style={styles.categoryItem}>
-                                        <Text style={styles.categoryText}>{item.name}</Text>
-                                    </TouchableOpacity>
+                                <TouchableOpacity style={styles.categoryItem}>
+                                    <Text style={styles.categoryText}>{item.name}</Text>
+                                </TouchableOpacity>
                             }
                         />
                     )}
