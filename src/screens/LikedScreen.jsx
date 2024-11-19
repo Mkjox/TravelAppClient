@@ -6,15 +6,17 @@ import {
   TouchableOpacity,
   ImageBackground,
   Text,
-  ActivityIndicator
+  ActivityIndicator,
+  StatusBar
 } from "react-native";
 import Feather from "@expo/vector-icons/Feather";
 import { MaterialIcons, Entypo } from "@expo/vector-icons";
-import { SafeAreaView } from "react-native-safe-area-context";
 import colors from "../assets/colors/colors";
 import { useNavigation } from "@react-navigation/core";
 import { Card, Searchbar } from "react-native-paper";
 import PostService from "../assets/data/services/PostService";
+import { useTheme } from "../context/ThemeContext";
+import { darkTheme, lightTheme } from "../assets/colors/themeColors";
 
 const LikedScreen = () => {
   const [data, setData] = useState([]);
@@ -23,6 +25,9 @@ const LikedScreen = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const navigation = useNavigation();
+  const { isDark } = useTheme();
+
+  const themeStyles = isDark ? darkTheme : lightTheme;
 
   const toggleHeart = () => {
     setHeart(heart === "heart-outlined" ? "heart" : "heart-outlined");
@@ -47,8 +52,8 @@ const LikedScreen = () => {
   }
 
   return (
-    <SafeAreaView style={{ flex: 1 }}>
-      <View style={styles.container}>
+    <View style={[themeStyles.container, styles.container]}>
+      <View style={styles.topMargin}>
         <View style={styles.menuWrapper}>
           <Feather name="menu" size={32} style={styles.menuButton} onPress={() => navigation.openDrawer()} />
           <Searchbar style={styles.searchBar}
@@ -94,17 +99,19 @@ const LikedScreen = () => {
           />
         </View>
       </View>
-      <TouchableOpacity style={styles.arrowUp}>
+      <TouchableOpacity style={[themeStyles.button, styles.arrowUp]}>
         <MaterialIcons name='keyboard-arrow-up' size={36} color={colors.white} />
       </TouchableOpacity>
-    </SafeAreaView>
+    </View>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#EEEEEE'
+  },
+  topMargin: {
+    marginTop: StatusBar.currentHeight
   },
   menuWrapper: {
     marginHorizontal: 10,
@@ -122,7 +129,8 @@ const styles = StyleSheet.create({
   searchBar: {
     width: 350,
     marginHorizontal: 5,
-    backgroundColor: '#EEEEEE'
+    backgroundColor: '#FFFFFF',
+    borderWidth: 0.1
   },
   title: {
     fontSize: 16,
@@ -201,7 +209,6 @@ const styles = StyleSheet.create({
     bottom: 20,
     width: 46,
     height: 46,
-    backgroundColor: colors.teallight,
     shadowColor: '#000',
     shadowOffset: {
       width: 2,

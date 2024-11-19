@@ -23,6 +23,8 @@ import {
 } from "@expo-google-fonts/poppins";
 import * as SplashScreen from 'expo-splash-screen';
 import AppNavigator from "./src/navigation/AppNavigator";
+import { ThemeProvider } from './src/context/ThemeContext';
+
 
 SplashScreen.preventAutoHideAsync();
 
@@ -58,5 +60,9 @@ export default function App() {
     return null;
   }
 
-  return <AppNavigator />;
+  return (
+    <ThemeProvider>
+      <AppNavigator />
+    </ThemeProvider>
+  );
 };

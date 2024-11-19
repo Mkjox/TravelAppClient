@@ -5,6 +5,7 @@ import {
   Text,
   RefreshControl,
   TouchableOpacity,
+  StatusBar,
   // ActivityIndicator
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
@@ -19,11 +20,17 @@ import { ScrollView } from "react-native-gesture-handler";
 import { Searchbar } from "react-native-paper";
 import colors from "../assets/colors/colors";
 import PostService from "../assets/data/services/PostService";
+import { useTheme } from '../context/ThemeContext';
+import { darkTheme, lightTheme } from '../assets/colors/themeColors';
 
 {/* DO NOT FORGET TO ADD SCROLLVIEW OR FIX THE ERROR ABOUT VIRTUALIZED LISTS */ }
 
 
 const HomeScreen = ({ navigation }) => {
+  const { isDark } = useTheme();
+
+  const themeStyles = isDark ? darkTheme : lightTheme;
+
   const [refreshing, setRefreshing] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
   // const [data, setData] = useState([]);
@@ -52,10 +59,10 @@ const HomeScreen = ({ navigation }) => {
   }, []);
 
   return (
-    <SafeAreaView style={{ flex: 1 }}>
+    <View style={[styles.container, themeStyles.container]} >
       <ScrollView nestedScrollEnabled={true} contentContainerStyle={{ flexGrow: 1 }}
         refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh} />}>
-        <View style={styles.container}>
+        <View style={styles.statusMargin}>
           <View style={styles.menuWrapper}>
             <Feather
               name="menu"
@@ -77,7 +84,7 @@ const HomeScreen = ({ navigation }) => {
                 <Text style={styles.activityTitle}>Categories</Text>
               </View>
               <TouchableOpacity style={styles.activityInnerWrapper} onPress={() => navigation.navigate("Categories")}>
-                <Text style={styles.activityAll}>See Details &gt;</Text>
+                <Text style={[themeStyles.primary, styles.activityAll]}>See Details &gt;</Text>
               </TouchableOpacity>
             </View>
           </View>
@@ -88,20 +95,20 @@ const HomeScreen = ({ navigation }) => {
 
         </View>
       </ScrollView>
-      <TouchableOpacity style={styles.plusIcon} onPress={() => navigation.navigate("AddPost")}>
+      <TouchableOpacity style={[themeStyles.button, styles.plusIcon]} onPress={() => navigation.navigate("AddPost")}>
         <Feather name="plus" size={36} color={colors.white} />
       </TouchableOpacity>
-    </SafeAreaView>
+    </View>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    // justifyContent: "center",
-    // alignContent: "center",
-    // alignItems: "center",
-    backgroundColor: '#EEEEEE'
+  },
+  statusMargin: {
+    marginTop: StatusBar.currentHeight
+
   },
   menuButton: {
     elevation: 5,
@@ -112,15 +119,11 @@ const styles = StyleSheet.create({
   searchBar: {
     width: 350,
     marginHorizontal: 5,
-    backgroundColor: '#f1f1f1',
-    shadowColor: colors.black,
-    shadowOffset: {
-      width: 0,
-      height: -2
-    },
+    backgroundColor: '#FFFFFF',
     elevation: 5,
     shadowOpacity: 0.25,
-    shadowRadius: 3.84
+    shadowRadius: 3.84,
+    borderWidth: 0.1
   },
   menuWrapper: {
     marginHorizontal: 10,
@@ -146,7 +149,6 @@ const styles = StyleSheet.create({
     marginLeft: -15
   },
   activityAll: {
-    color: colors.teallight,
     fontFamily: 'Poppins_500Medium',
     marginLeft: 10
   },
@@ -165,7 +167,6 @@ const styles = StyleSheet.create({
     bottom: 20,
     width: 46,
     height: 46,
-    backgroundColor: colors.teallight,
     shadowColor: '#000',
     shadowOffset: {
       width: 2,
