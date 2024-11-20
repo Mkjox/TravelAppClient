@@ -6,6 +6,7 @@ import {
   RefreshControl,
   TouchableOpacity,
   StatusBar,
+  Dimensions,
   // ActivityIndicator
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
@@ -25,6 +26,7 @@ import { darkTheme, lightTheme } from '../assets/colors/themeColors';
 
 {/* DO NOT FORGET TO ADD SCROLLVIEW OR FIX THE ERROR ABOUT VIRTUALIZED LISTS */ }
 
+const { height, width } = Dimensions.get('window');
 
 const HomeScreen = ({ navigation }) => {
   const { isDark } = useTheme();
@@ -69,6 +71,7 @@ const HomeScreen = ({ navigation }) => {
               size={32}
               style={styles.menuButton}
               onPress={() => navigation.openDrawer()}
+              color={themeStyles.icon.color}
             />
             {/* Don't forget to add post parameters for this */}
             <Searchbar style={styles.searchBar}
@@ -81,7 +84,7 @@ const HomeScreen = ({ navigation }) => {
           <View style={styles.activityWrapper}>
             <View style={styles.activities}>
               <View style={styles.activityInnerWrapper}>
-                <Text style={styles.activityTitle}>Categories</Text>
+                <Text style={[styles.activityTitle, themeStyles.text]}>Categories</Text>
               </View>
               <TouchableOpacity style={styles.activityInnerWrapper} onPress={() => navigation.navigate("Categories")}>
                 <Text style={[themeStyles.primary, styles.activityAll]}>See Details &gt;</Text>
@@ -117,13 +120,14 @@ const styles = StyleSheet.create({
     marginTop: 10
   },
   searchBar: {
-    width: 350,
+    width: width * 0.8,
+    height: height * 0.06,
     marginHorizontal: 5,
     backgroundColor: '#FFFFFF',
     elevation: 5,
     shadowOpacity: 0.25,
     shadowRadius: 3.84,
-    borderWidth: 0.1
+    borderWidth: 0.1,
   },
   menuWrapper: {
     marginHorizontal: 10,
@@ -146,11 +150,13 @@ const styles = StyleSheet.create({
   activityTitle: {
     fontSize: 18,
     fontFamily: 'Poppins_600SemiBold',
-    marginLeft: -15
+    marginLeft: -15,
+    marginTop: 10
   },
   activityAll: {
     fontFamily: 'Poppins_500Medium',
-    marginLeft: 10
+    marginLeft: 10,
+    marginTop: 10
   },
   activityCategories: {
     flexDirection: 'row',

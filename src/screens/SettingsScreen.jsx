@@ -6,12 +6,16 @@ import colors from "../assets/colors/colors";
 import LikedData from '../assets/data/likedData.json';
 import { List } from "react-native-paper";
 import Icon from 'react-native-vector-icons/MaterialIcons';
+import { darkTheme, lightTheme } from "../assets/colors/themeColors";
+import { useTheme } from "../context/ThemeContext";
 
 const SettingsScreen = () => {
   const [data, setData] = useState([]);
   const navigation = useNavigation();
   const [isEnabled, setIsEnabled] = useState(false);
-  const toggleSwitch = () => setIsEnabled(previousState => !previousState);
+  const { isDark, toggleTheme } = useTheme();
+
+  const themeStyles = isDark ? darkTheme : lightTheme;
 
   useEffect(() => {
     try {
@@ -23,26 +27,26 @@ const SettingsScreen = () => {
 
   return (
     <SafeAreaView style={{ flex: 1 }}>
-      <View style={styles.container}>
+      <View style={[styles.container, themeStyles.container]}>
         <View style={styles.back}>
           <TouchableOpacity style={styles.back} onPress={() => navigation.goBack()}>
-            <Ionicons name="arrow-back" size={24} color="black" />
-            <Text style={styles.headerText}>Settings</Text>
+            <Ionicons name="arrow-back" size={24} color={themeStyles.icon.color} />
+            <Text style={[styles.headerText, themeStyles.text]}>Settings</Text>
           </TouchableOpacity>
         </View>
         <View style={styles.settingsWrapper}>
-          <View style={styles.listWrapper}>
+          <View style={[styles.listWrapper, themeStyles.card]}>
             <List.Accordion
               title="Dark Mode"
-              left={props => <List.Icon {...props} icon={() => <Icon name="dark-mode" size={24} />} />}
-              right={props => <List.Icon {...props} icon="chevron-right" />}
+              titleStyle={themeStyles.text}
+              left={props => <List.Icon {...props} icon={() => <Icon name="dark-mode" size={24} color={themeStyles.icon.color} />} />}
+              right={props => <List.Icon {...props} icon="chevron-right" color={themeStyles.icon.color} />}
+              style={themeStyles.card}
             >
-              <List.Item title="Enabled"  style={styles.switch}
+              <List.Item title="Enabled" style={[styles.switch,styles.text]}
                 right={props => <Switch
-                  trackColor={{ false: '#767577', true: '#81b0ff' }}
-                  thumbColor={isEnabled ? '#f5dd4b' : '#f4f3f4'}
-                  onValueChange={toggleSwitch}
-                  value={isEnabled}
+                  value={isDark}
+                  onValueChange={toggleTheme}
                 />}
               />
             </List.Accordion>
@@ -50,24 +54,27 @@ const SettingsScreen = () => {
             <TouchableOpacity onPress={() => navigation.navigate("Notifications")}>
               <List.Item
                 title="Notifications"
-                left={props => <List.Icon {...props} icon={() => <Icon name="notifications" size={24} />} />}
-                right={props => <List.Icon {...props} icon="chevron-right" />}
+                titleStyle={themeStyles.text}
+                left={props => <List.Icon {...props} icon={() => <Icon name="notifications" size={24} color={themeStyles.icon.color} />} />}
+                right={props => <List.Icon {...props} icon="chevron-right" color={themeStyles.icon.color} />}
               />
             </TouchableOpacity>
 
             <TouchableOpacity onPress={() => navigation.navigate("Language")}>
               <List.Item
                 title="Language"
-                left={props => <List.Icon {...props} icon={() => <Icon name="language" size={24} />} />}
-                right={props => <List.Icon {...props} icon="chevron-right" />}
+                titleStyle={themeStyles.text}
+                left={props => <List.Icon {...props} icon={() => <Icon name="language" size={24} color={themeStyles.icon.color} />} />}
+                right={props => <List.Icon {...props} icon="chevron-right" color={themeStyles.icon.color} />}
               />
             </TouchableOpacity>
 
             <TouchableOpacity onPress={() => navigation.navigate("Privacy")}>
               <List.Item
                 title="Privacy"
-                left={props => <List.Icon {...props} icon={() => <Icon name="privacy-tip" size={24} />} />}
-                right={props => <List.Icon {...props} icon="chevron-right" />}
+                titleStyle={themeStyles.text}
+                left={props => <List.Icon {...props} icon={() => <Icon name="privacy-tip" size={24} color={themeStyles.icon.color} />} />}
+                right={props => <List.Icon {...props} icon="chevron-right" color={themeStyles.icon.color} />}
               />
             </TouchableOpacity>
           </View>

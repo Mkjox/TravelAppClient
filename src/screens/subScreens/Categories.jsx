@@ -6,11 +6,16 @@ import colors from "../../assets/colors/colors";
 import { useEffect, useState } from "react";
 import CategoryService from '../../assets/data/services/CategoryService';
 import { useNavigation } from "@react-navigation/core";
+import { useTheme } from "../../context/ThemeContext";
+import { darkTheme, lightTheme } from "../../assets/colors/themeColors";
 
 const Categories = () => {
     const [data, setData] = useState([]);
     const [loading, setLoading] = useState(true);
     const navigation = useNavigation();
+    const { isDark } = useTheme();
+
+    const themeStyles = isDark ? darkTheme : lightTheme;
 
     useEffect(() => {
         getCategories();
@@ -27,22 +32,29 @@ const Categories = () => {
     };
 
     return (
-        <SafeAreaView style={styles.container}>
-            <View>
-                <Entypo name='chevron-left' size={30} style={styles.backIcon} onPress={() => navigation.goBack()} />
+        <SafeAreaView style={[styles.container, themeStyles.container]}>
+            <View style={styles.titleWrapper}>
+                <Entypo
+                    name='chevron-left'
+                    size={30}
+                    style={styles.backIcon}
+                    onPress={() => navigation.goBack()}
+                    color={themeStyles.icon.color}
+                />
+                {/* <Text style={[styles.title, themeStyles.text]}>All Categories</Text> */}
             </View>
             <View style={styles.categoryContainer}>
                 <FlatList
                     alwaysBounceVertical
-                    style={styles.listWrapper}
+                    style={[styles.listWrapper]}
                     // pagingEnabled
                     data={data}
                     keyExtractor={(item) => item.id.toString()}
                     renderItem={({ item }) => (
                         <TouchableOpacity>
-                            <View style={styles.categoryWrapper}>
-                                <Text style={styles.title}>{item.name}</Text>
-                                <Text style={styles.description}>{item.description}</Text>
+                            <View style={[styles.categoryWrapper, themeStyles.card]}>
+                                <Text style={[styles.title, themeStyles.text]}>{item.name}</Text>
+                                <Text style={[styles.description, themeStyles.text]}>{item.description}</Text>
                             </View>
                         </TouchableOpacity>
                     )}
@@ -60,6 +72,12 @@ const styles = StyleSheet.create({
         minHeight: 150,
         maxHeight: 1500,
     },
+    titleWrapper: {
+        flexDirection: 'row',
+    },
+    // title: {
+    //     marginTop: 5
+    // },
     backIcon: {
         marginLeft: 10,
         marginTop: 5
@@ -69,7 +87,6 @@ const styles = StyleSheet.create({
     },
     categoryWrapper: {
         padding: 15,
-        backgroundColor: colors.teallight,
         width: '90%',
         alignSelf: 'center',
         marginTop: 10,

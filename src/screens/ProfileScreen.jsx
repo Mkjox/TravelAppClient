@@ -91,31 +91,31 @@ const ProfileScreen = () => {
         <View style={styles.options}>
           <TouchableOpacity onPress={() => navigation.navigate("SharedPosts")}>
             <FontAwesome name="heart" style={[styles.optionItem, themeStyles.primary]} size={17}>
-              <Text style={styles.optionItemText}> Shared Posts</Text>
+              <Text style={[styles.optionItemText, themeStyles.text]}> Shared Posts</Text>
             </FontAwesome>
           </TouchableOpacity>
 
           <TouchableOpacity onPress={() => navigation.navigate("Comments")}>
             <FontAwesome name="comment" style={[styles.optionItem, themeStyles.primary]} size={17}>
-              <Text style={styles.optionItemText}> Comments</Text>
+              <Text style={[styles.optionItemText, themeStyles.text]}> Comments</Text>
             </FontAwesome>
           </TouchableOpacity>
 
           <TouchableOpacity onPress={() => navigation.navigate("CustomizeProfile")}>
             <FontAwesome name="pencil" style={[styles.optionItem, themeStyles.primary]} size={17}>
-              <Text style={styles.optionItemText}> Customize Profile</Text>
+              <Text style={[styles.optionItemText, themeStyles.text]}> Customize Profile</Text>
             </FontAwesome>
           </TouchableOpacity>
 
           <TouchableOpacity>
             <FontAwesome name="share" style={[styles.optionItem, themeStyles.primary]} size={17}>
-              <Text style={styles.optionItemText}> Recommend the app to your friend</Text>
+              <Text style={[styles.optionItemText, themeStyles.text]}> Recommend the app to your friend</Text>
             </FontAwesome>
           </TouchableOpacity>
 
           <TouchableOpacity onPress={() => navigation.navigate("Settings")}>
             <FontAwesome name="gear" style={[styles.optionItem, themeStyles.primary]} size={17}>
-              <Text style={styles.optionItemText}> Settings</Text>
+              <Text style={[styles.optionItemText, themeStyles.text]}> Settings</Text>
             </FontAwesome>
           </TouchableOpacity>
         </View>

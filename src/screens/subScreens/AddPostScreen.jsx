@@ -1,15 +1,19 @@
 import React, { useState } from 'react';
-import { View, StyleSheet, TouchableOpacity, Text, TextInput, Button } from 'react-native';
+import { View, StyleSheet, TouchableOpacity, Text, TextInput, Button, StatusBar, Dimensions } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Entypo } from '@expo/vector-icons';
 import colors from '../../assets/colors/colors';
 import { ScrollView } from 'react-native-gesture-handler';
 import PostService from '../../assets/data/services/PostService';
 import DropDownPicker from 'react-native-dropdown-picker';
+import { useTheme } from '../../context/ThemeContext';
+import { darkTheme, lightTheme } from '../../assets/colors/themeColors';
 import axios from 'axios';
 // import ProtectedRoute from '../../assets/data/services/ProtectedRoute';
 import * as ImagePicker from 'expo-image-picker';
 // import ImageViewer from '../../components/ImageViewer';
+
+const { height, width } = Dimensions.get('window');
 
 const AddPostScreen = ({ navigation }) => {
     // const { user } = useAuth();
@@ -33,6 +37,9 @@ const AddPostScreen = ({ navigation }) => {
         { label: 'Swim', value: 'swim' },
     ]);
     const [selectedImage, setSelectedImage] = useState(null);
+    const { isDark } = useTheme();
+
+    const themeStyles = isDark ? darkTheme : lightTheme;
 
     const handleAddPost = async () => {
         try {
@@ -72,14 +79,14 @@ const AddPostScreen = ({ navigation }) => {
     // }
 
     return (
-        <ScrollView style={{ flex: 1 }}>
+        <ScrollView style={[{ flex: 1 }, themeStyles.container]}>
             {/* <ProtectedRoute roles={['User']} /> */}
-            <View style={styles.container}>
+            <View style={[styles.container]}>
                 <View style={styles.header}>
                     <TouchableOpacity onPress={() => navigation.goBack()}>
-                        <Entypo name='chevron-left' size={32} color={colors.black} />
+                        <Entypo name='chevron-left' size={32} color={themeStyles.icon.color} />
                     </TouchableOpacity>
-                    <Text style={styles.title}>Add Post</Text>
+                    <Text style={[styles.title, themeStyles.text]}>Add Post</Text>
                 </View>
 
                 {/* <View style={styles.image}>
@@ -90,32 +97,32 @@ const AddPostScreen = ({ navigation }) => {
                 </View> */}
 
                 <View style={styles.inputWrapper}>
-                    <Text style={styles.inputText}>Post Title</Text>
-                    <TextInput style={styles.input}
+                    <Text style={[styles.inputText, themeStyles.text]}>Post Title</Text>
+                    <TextInput style={[styles.input, themeStyles.card]}
                         onChangeText={setTitle}
                         value={title}
                     />
                 </View>
 
                 <View style={styles.inputWrapper}>
-                    <Text style={styles.inputText}>Post Description</Text>
-                    <TextInput style={[styles.input, { height: 200 }]}
+                    <Text style={[styles.inputText, themeStyles.text]}>Post Description</Text>
+                    <TextInput style={[[styles.input, themeStyles.card], { height: 200 }]}
                         onChangeText={setDescription}
                         value={description}
                     />
                 </View>
 
                 <View style={styles.inputWrapper}>
-                    <Text style={styles.inputText}>Place</Text>
-                    <TextInput style={styles.maps}
+                    <Text style={[styles.inputText, themeStyles.text]}>Place</Text>
+                    <TextInput style={[styles.maps, themeStyles.card]}
                         onChangeText={setPlace}
                         value={place}
                     />
                 </View>
 
                 <View style={styles.inputWrapper}>
-                    <Text style={styles.inputText}>Suggested budget</Text>
-                    <TextInput style={styles.input}
+                    <Text style={[styles.inputText, themeStyles.text]}>Suggested budget</Text>
+                    <TextInput style={[styles.input, themeStyles.card]}
                         onChangeText={setBudget}
                         value={budget}
                         inputMode='numeric'
@@ -123,8 +130,8 @@ const AddPostScreen = ({ navigation }) => {
                 </View>
 
                 <View style={styles.inputWrapper}>
-                    <Text style={styles.inputText}>Rating out of five</Text>
-                    <TextInput style={styles.input}
+                    <Text style={[styles.inputText, themeStyles.text]}>Rating out of five</Text>
+                    <TextInput style={[styles.input, themeStyles.card]}
                         onChangeText={setRating}
                         value={rating}
                         inputMode='numeric'
@@ -132,16 +139,16 @@ const AddPostScreen = ({ navigation }) => {
                 </View>
 
                 <View style={styles.inputWrapper}>
-                    <Text style={styles.inputText}>How long does the trip take</Text>
-                    <TextInput style={styles.input}
+                    <Text style={[styles.inputText, themeStyles.text]}>How long does the trip take</Text>
+                    <TextInput style={[styles.input, themeStyles.card]}
                         onChangeText={setDuration}
                         value={duration}
                         inputMode='numeric'
                     />
                 </View>
 
-                <View style={styles.inputWrapper}>
-                    <Text style={styles.inputText}>Category</Text>
+                {/* <View style={styles.inputWrapper}>
+                    <Text style={[styles.inputText,themeStyles.text]}>Category</Text>
                     <DropDownPicker
                         open={open}
                         value={value}
@@ -153,13 +160,13 @@ const AddPostScreen = ({ navigation }) => {
                         style={styles.dropdown}
                         dropDownContainerStyle={styles.dropdownContainer}
                     />
-                </View>
+                </View> */}
 
                 {error ? <Text style={styles.errorText}>{error}</Text> : null}
 
-                <View style={styles.button}>
-                    <Button onPress={handleAddPost} title='Submit' color={colors.teallight} />
-                </View>
+                <TouchableOpacity style={[styles.button, themeStyles.button]} onPress={handleAddPost}>
+                    <Button title='Submit' color={themeStyles.buttonText} />
+                </TouchableOpacity>
             </View>
         </ScrollView>
     );
@@ -168,7 +175,7 @@ const AddPostScreen = ({ navigation }) => {
 var styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#EEEEEE'
+        marginTop: StatusBar.currentHeight - 30
     },
     header: {
         marginTop: 25,
@@ -208,6 +215,7 @@ var styles = StyleSheet.create({
         borderTopWidth: 0,
         borderBottomWidth: 1,
         fontFamily: 'Poppins_400Regular',
+        borderRadius: 10
     },
     maps: {
         borderWidth: 0.7,
@@ -226,30 +234,23 @@ var styles = StyleSheet.create({
         alignSelf: 'center',
         width: 300,
         marginTop: 15,
-        shadowColor: colors.black,
-        shadowOffset: {
-            width: 2,
-            height: 2
-        },
         elevation: 10,
     },
-    dropdownContainer: {
-        backgroundColor: '#fff',
-        borderWidth: 0.3,
-        borderColor: '#ccc',
-        borderRadius: 10,
-        width: 300,
-        alignSelf: 'center'
-    },
+    // dropdownContainer: {
+    //     backgroundColor: '#fff',
+    //     borderWidth: 0.3,
+    //     borderColor: '#ccc',
+    //     borderRadius: 10,
+    //     width: 300,
+    //     alignSelf: 'center'
+    // },
     button: {
-        width: 300,
+        width: width * 0.7,
         margin: 10,
         alignSelf: 'center',
         borderRadius: 20,
-        padding: 20,
-        bottom: -40,
-        marginBottom: 35,
-        marginTop: -20
+        marginBottom: height * 0.1,
+        marginTop: 20
     }
 });
 

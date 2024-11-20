@@ -7,7 +7,8 @@ import {
   ImageBackground,
   Text,
   ActivityIndicator,
-  StatusBar
+  StatusBar,
+  Dimensions
 } from "react-native";
 import Feather from "@expo/vector-icons/Feather";
 import { MaterialIcons, Entypo } from "@expo/vector-icons";
@@ -17,6 +18,8 @@ import { Card, Searchbar } from "react-native-paper";
 import PostService from "../assets/data/services/PostService";
 import { useTheme } from "../context/ThemeContext";
 import { darkTheme, lightTheme } from "../assets/colors/themeColors";
+
+const {height,width} = Dimensions.get('window');
 
 const LikedScreen = () => {
   const [data, setData] = useState([]);
@@ -55,7 +58,7 @@ const LikedScreen = () => {
     <View style={[themeStyles.container, styles.container]}>
       <View style={styles.topMargin}>
         <View style={styles.menuWrapper}>
-          <Feather name="menu" size={32} style={styles.menuButton} onPress={() => navigation.openDrawer()} />
+          <Feather name="menu" size={32} style={styles.menuButton} onPress={() => navigation.openDrawer()} color={themeStyles.icon.color} />
           <Searchbar style={styles.searchBar}
             placeholder="Search"
             onChangeText={setSearchQuery}
@@ -64,7 +67,7 @@ const LikedScreen = () => {
           />
         </View>
         <View>
-          <Text style={styles.title}>
+          <Text style={[styles.title,themeStyles.text]}>
             Liked Posts
           </Text>
         </View>
@@ -74,22 +77,22 @@ const LikedScreen = () => {
             keyExtractor={(item) => item.id.toString()}
             renderItem={({ item }) => (
               <TouchableOpacity onPress={() => navigation.navigate("PostDetails", { item: item })}>
-                <Card style={styles.likedItemWrapper}>
+                <Card style={[styles.likedItemWrapper,themeStyles.card]}>
                   <ImageBackground src={'https://picsum.photos/700'} style={styles.likedItemImage}>
                     <TouchableOpacity style={styles.moreButton}>
-                      <Entypo name='dots-three-vertical' size={18} colors={colors.white} />
+                      <Entypo name='dots-three-vertical' size={18} color={themeStyles.icon.color} />
                     </TouchableOpacity>
                     <TouchableOpacity onPress={toggleHeart} style={styles.heart}>
                       <Entypo name={heart} size={28} color={colors.orange} />
                     </TouchableOpacity>
                   </ImageBackground>
                   <Card.Content>
-                    <Text style={styles.likedItemTitle}>{item.title}</Text>
-                    <Text style={styles.likedItemLocation}>
-                      <MaterialIcons name='place' size={15} color={colors.black} />
+                    <Text style={[styles.likedItemTitle,themeStyles.text]}>{item.title}</Text>
+                    <Text style={[styles.likedItemLocation,themeStyles.text]}>
+                      <MaterialIcons name='place' size={15} color={themeStyles.icon.color} />
                       {item.location}
                     </Text>
-                    <Text>{item.content}</Text>
+                    <Text style={themeStyles.text}>{item.content}</Text>
                   </Card.Content>
                 </Card>
               </TouchableOpacity>
@@ -127,10 +130,11 @@ const styles = StyleSheet.create({
     marginTop: 10
   },
   searchBar: {
-    width: 350,
+    width: width * 0.8,
     marginHorizontal: 5,
     backgroundColor: '#FFFFFF',
-    borderWidth: 0.1
+    borderWidth: 0.1,
+    height: height * 0.06
   },
   title: {
     fontSize: 16,

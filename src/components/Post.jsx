@@ -9,6 +9,8 @@ import PostService from '../assets/data/services/PostService.js';
 import { FlatList } from "react-native-gesture-handler";
 import LikeService from "../assets/data/services/LikeService";
 import CategoryService from "../assets/data/services/CategoryService.js";
+import { useTheme } from "../context/ThemeContext.tsx";
+import { darkTheme, lightTheme } from "../assets/colors/themeColors.tsx";
 
 function Post() {
     const [post, setPost] = useState([]);
@@ -17,6 +19,9 @@ function Post() {
     const [error, setError] = useState(null);
     const [isLiked, setIsLiked] = useState(false);
     const navigation = useNavigation();
+    const { isDark } = useTheme();
+
+    const themeStyles = isDark ? darkTheme : lightTheme;
 
 
     async function getPosts() {
@@ -108,7 +113,7 @@ function Post() {
                     renderItem={({ item }) => (
                         <TouchableOpacity>
                             <Card
-                                style={styles.postInnerWrapper}
+                                style={[styles.postInnerWrapper, themeStyles.card]}
                                 onPress={() =>
                                     navigation.navigate("PostDetails", { item: item })
                                 }
@@ -122,16 +127,16 @@ function Post() {
                                     </TouchableOpacity>
                                 </ImageBackground>
                                 <Card.Content style={styles.postText}>
-                                    <Text style={styles.postItemTitle}>{item.title}</Text>
-                                    <Text style={styles.postPlace}>
+                                    <Text style={[styles.postItemTitle,themeStyles.text]}>{item.title}</Text>
+                                    <Text style={[styles.postPlace,themeStyles.text]}>
                                         <MaterialIcons
                                             name="place"
                                             size={15}
-                                            color={colors.darkGray}
+                                            color={themeStyles.icon.color}
                                         />
                                         {item.location}
                                     </Text>
-                                    <Text style={styles.postContent}>{item.content}</Text>
+                                    <Text style={[styles.postContent,themeStyles.text]}>{item.content}</Text>
                                 </Card.Content>
                             </Card>
                         </TouchableOpacity>

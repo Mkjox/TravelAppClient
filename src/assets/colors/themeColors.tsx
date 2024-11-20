@@ -38,9 +38,9 @@ export const lightTheme = StyleSheet.create({
     textGray: {
         color: '#656565'
     },
-    iconColor: {
+    icon: {
         color: '#4F4F4F'
-    }
+    },
 });
 
 export const darkTheme = StyleSheet.create({
@@ -81,7 +81,7 @@ export const darkTheme = StyleSheet.create({
     textGray: {
         color: '#656565'
     },
-    iconColor: {
+    icon: {
         color: '#E0E0E0'
     }
 });

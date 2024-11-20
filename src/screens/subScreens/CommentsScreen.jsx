@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { StyleSheet, View, Text } from "react-native";
+import { StyleSheet, View, Text, Dimensions, StatusBar } from "react-native";
 import { useNavigation } from "@react-navigation/core";
 import { Entypo } from '@expo/vector-icons';
 import colors from "../../assets/colors/colors";
@@ -7,10 +7,17 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import { FlatList } from "react-native-gesture-handler";
 import LikedData from '../../assets/data/likedData.json';
 import { Card } from "react-native-paper";
+import { useTheme } from "../../context/ThemeContext";
+import { darkTheme, lightTheme } from "../../assets/colors/themeColors";
+
+const {height, width} = Dimensions.get('window');
 
 const CommentsSreen = () => {
     const [data, setData] = useState([]);
     var navigation = useNavigation();
+    const { isDark } = useTheme();
+
+    const themeStyles = isDark ? darkTheme : lightTheme;
 
     useEffect(() => {
         try {
@@ -22,10 +29,10 @@ const CommentsSreen = () => {
     }, []);
 
     return (
-        <SafeAreaView style={styles.container}>
+        <View style={[styles.container, themeStyles.container]}>
             <View style={styles.header}>
-                <Entypo name='chevron-left' size={24} onPress={() => navigation.goBack()}>
-                    <Text style={styles.headerText}>Comments</Text>
+                <Entypo name='chevron-left' size={24} onPress={() => navigation.goBack()} color={themeStyles.icon.color}>
+                    <Text style={[styles.headerText, themeStyles.text]}>Comments</Text>
                 </Entypo>
             </View>
 
@@ -34,32 +41,32 @@ const CommentsSreen = () => {
                 data={data}
                 keyExtractor={(item) => item.id.toString()}
                 renderItem={({ item }) => (
-                    <Card style={styles.commentWrapper}>
+                    <Card style={[styles.commentWrapper, themeStyles.card]}>
                         <Card.Content>
-                            <Entypo name='dots-three-vertical' style={styles.more} size={20} color={colors.white} />
-                            <Text style={styles.body}>{item.body}</Text>
-                            <View style={styles.titleWrapper}>
-                                <Entypo name='text-document' size={22} style={styles.icon} />
-                                <Text style={styles.title}>{item.title}</Text>
+                            <Entypo name='dots-three-vertical' style={styles.more} size={20} color={themeStyles.icon.color} />
+                            <Text style={[styles.body,themeStyles.text]}>{item.body}</Text>
+                            <View style={[styles.titleWrapper,themeStyles.text]}>
+                                <Entypo name='text-document' size={22} style={styles.icon} color={themeStyles.icon.color} />
+                                <Text style={[styles.title,themeStyles.text]}>{item.title}</Text>
                             </View>
                         </Card.Content>
                     </Card>
                 )}
             />
             <Text></Text>
-        </SafeAreaView>
+        </View>
     );
 };
 
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#EEEEEE',
     },
     header: {
         position: 'static',
         marginTop: 15,
         marginLeft: 15,
+        marginTop: StatusBar.currentHeight - height * 0.01
     },
     headerText: {
         fontFamily: 'Poppins_400Regular',
@@ -69,7 +76,6 @@ const styles = StyleSheet.create({
         width: '90%',
         alignSelf: 'center',
         marginVertical: 10,
-        backgroundColor: colors.teallight,
         borderRadius: 15
     },
     body: {
