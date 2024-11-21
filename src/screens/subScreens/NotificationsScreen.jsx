@@ -1,11 +1,15 @@
 import React, { useState } from "react";
-import { View, Text, StyleSheet, Switch, Alert } from 'react-native';
+import { View, Text, StyleSheet, Switch, Alert, StatusBar, Dimensions } from 'react-native';
 import { TouchableOpacity } from "react-native-gesture-handler";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { Ionicons } from '@expo/vector-icons';
 import { List } from "react-native-paper";
 import colors from "../../assets/colors/colors";
 import { useNavigation } from "@react-navigation/core";
+import { useTheme } from "../../context/ThemeContext";
+import { darkTheme, lightTheme } from "../../assets/colors/themeColors";
+
+const { height, width } = Dimensions.get('window');
 
 const NotificationsScreen = () => {
     const navigation = useNavigation();
@@ -14,6 +18,9 @@ const NotificationsScreen = () => {
     const [likesContentNotification, setLikesContentNotification] = useState(false);
     const [likesCommentNotification, setLikesCommentNotification] = useState(false);
     const [loginNotification, setLoginNotification] = useState(true);
+    const { isDark } = useTheme();
+
+    const themeStyles = isDark ? darkTheme : lightTheme;
 
     const handleConfirm = async () => {
         const data = {
@@ -48,86 +55,91 @@ const NotificationsScreen = () => {
     };
 
     return (
-        <SafeAreaView style={styles.container}>
-            <TouchableOpacity style={styles.titleWrapper}>
-                <Ionicons name='arrow-back' size={24} onPress={() => navigation.goBack()} />
-                <Text style={styles.title}>Notifications</Text>
-            </TouchableOpacity>
-            <Text style={styles.infoTitle}>Send me notification when;</Text>
-            <View>
-                <View style={styles.switchContainer}>
-                    <Text style={styles.switchLabel}>someone replies to my comment</Text>
-                    <Switch
-                        value={repliesNotification}
-                        onValueChange={setRepliesNotification}
-                        trackColor={{ false: '#E5E5E5', true: '#2DCCA7' }}
-                        thumbColor={repliesNotification ? '#ffffff' : '#f4f3f4'}
-                        ios_backgroundColor='#E5E5E5'
-                        style={styles.switch}
-                    />
-                </View>
-
-                <View style={styles.switchContainer}>
-                    <Text style={styles.switchLabel}>someone comments on my post</Text>
-                    <Switch
-                        value={commentsNotification}
-                        onValueChange={setCommentsNotification}
-                        trackColor={{ false: '#E5E5E5', true: '#2DCCA7' }}
-                        thumbColor={commentsNotification ? '#ffffff' : '#f4f3f4'}
-                        ios_backgroundColor='#E5E5E5'
-                        style={styles.switch}
-                    />
-                </View>
-
-                <View style={styles.switchContainer}>
-                    <Text style={styles.switchLabel}>someone likes my content</Text>
-                    <Switch
-                        value={likesContentNotification}
-                        onValueChange={setLikesContentNotification}
-                        trackColor={{ false: '#E5E5E5', true: '#2DCCA7' }}
-                        thumbColor={likesContentNotification ? '#ffffff' : '#f4f3f4'}
-                        ios_backgroundColor='#E5E5E5'
-                        style={styles.switch}
-                    />
-                </View>
-
-                <View style={styles.switchContainer}>
-                    <Text style={styles.switchLabel}>someone likes my comment</Text>
-                    <Switch
-                        value={likesCommentNotification}
-                        onValueChange={setLikesCommentNotification}
-                        trackColor={{ false: '#E5E5E5', true: '#2DCCA7' }}
-                        thumbColor={likesCommentNotification ? '#ffffff' : '#f4f3f4'}
-                        ios_backgroundColor='#E5E5E5'
-                        style={styles.switch}
-                    />
-                </View>
-
-                <View style={styles.switchContainer}>
-                    <Text style={styles.switchLabel}>someone tries to login to my account</Text>
-                    <Switch
-                        value={loginNotification}
-                        onValueChange={setLoginNotification}
-                        trackColor={{ false: '#E5E5E5', true: '#2DCCA7' }}
-                        thumbColor={loginNotification ? '#ffffff' : '#f4f3f4'}
-                        ios_backgroundColor='#E5E5E5'
-                        style={styles.switch}
-                    />
-                </View>
-
-                <TouchableOpacity style={styles.confirmButton} onPress={handleConfirm}>
-                    <Text style={styles.confirmButtonText}>
-                        Confirm
-                    </Text>
+        <View style={[styles.container, themeStyles.container]}>
+            <View style={styles.innerContainer}>
+                <TouchableOpacity style={styles.titleWrapper}>
+                    <Ionicons name='arrow-back' size={24} onPress={() => navigation.goBack()} color={themeStyles.icon.color} />
+                    <Text style={[styles.title, themeStyles.text]}>Notifications</Text>
                 </TouchableOpacity>
+                <Text style={[styles.infoTitle, themeStyles.text]}>Send me notification when;</Text>
+                <View>
+                    <View style={styles.switchContainer}>
+                        <Text style={[styles.switchLabel, themeStyles.text]}>someone replies to my comment</Text>
+                        <Switch
+                            value={repliesNotification}
+                            onValueChange={setRepliesNotification}
+                            trackColor={{ false: '#E5E5E5', true: '#2DCCA7' }}
+                            thumbColor={repliesNotification ? '#ffffff' : '#f4f3f4'}
+                            ios_backgroundColor='#E5E5E5'
+                            style={styles.switch}
+                        />
+                    </View>
+
+                    <View style={styles.switchContainer}>
+                        <Text style={[styles.switchLabel, themeStyles.text]}>someone comments on my post</Text>
+                        <Switch
+                            value={commentsNotification}
+                            onValueChange={setCommentsNotification}
+                            trackColor={{ false: '#E5E5E5', true: '#2DCCA7' }}
+                            thumbColor={commentsNotification ? '#ffffff' : '#f4f3f4'}
+                            ios_backgroundColor='#E5E5E5'
+                            style={styles.switch}
+                        />
+                    </View>
+
+                    <View style={styles.switchContainer}>
+                        <Text style={[styles.switchLabel, themeStyles.text]}>someone likes my content</Text>
+                        <Switch
+                            value={likesContentNotification}
+                            onValueChange={setLikesContentNotification}
+                            trackColor={{ false: '#E5E5E5', true: '#2DCCA7' }}
+                            thumbColor={likesContentNotification ? '#ffffff' : '#f4f3f4'}
+                            ios_backgroundColor='#E5E5E5'
+                            style={styles.switch}
+                        />
+                    </View>
+
+                    <View style={styles.switchContainer}>
+                        <Text style={[styles.switchLabel, themeStyles.text]}>someone likes my comment</Text>
+                        <Switch
+                            value={likesCommentNotification}
+                            onValueChange={setLikesCommentNotification}
+                            trackColor={{ false: '#E5E5E5', true: '#2DCCA7' }}
+                            thumbColor={likesCommentNotification ? '#ffffff' : '#f4f3f4'}
+                            ios_backgroundColor='#E5E5E5'
+                            style={styles.switch}
+                        />
+                    </View>
+
+                    <View style={styles.switchContainer}>
+                        <Text style={[styles.switchLabel, themeStyles.text]}>someone tries to login to my account</Text>
+                        <Switch
+                            value={loginNotification}
+                            onValueChange={setLoginNotification}
+                            trackColor={{ false: '#E5E5E5', true: '#2DCCA7' }}
+                            thumbColor={loginNotification ? '#ffffff' : '#f4f3f4'}
+                            ios_backgroundColor='#E5E5E5'
+                            style={styles.switch}
+                        />
+                    </View>
+
+                    <TouchableOpacity style={[styles.confirmButton, themeStyles.button]} onPress={handleConfirm}>
+                        <Text style={[styles.confirmButtonText, themeStyles.text]}>
+                            Confirm
+                        </Text>
+                    </TouchableOpacity>
+                </View>
             </View>
-        </SafeAreaView>
+        </View>
     )
 }
 
 const styles = StyleSheet.create({
     container: {
         flex: 1,
+    },
+    innerContainer: {
+        marginTop: StatusBar.currentHeight - height * 0.02
     },
     titleWrapper: {
         flexDirection: 'row',
@@ -161,7 +173,6 @@ const styles = StyleSheet.create({
         width: 100
     },
     confirmButton: {
-        backgroundColor: colors.teallight,
         borderRadius: 10,
         paddingVertical: 12,
         paddingHorizontal: 32,

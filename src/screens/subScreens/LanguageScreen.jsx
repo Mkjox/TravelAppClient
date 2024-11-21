@@ -1,51 +1,64 @@
 import React from "react";
-import { View, StyleSheet, Text } from "react-native";
+import { View, StyleSheet, Text, Dimensions, StatusBar } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { Ionicons } from '@expo/vector-icons';
 import { TouchableOpacity } from "react-native-gesture-handler";
 import colors from "../../assets/colors/colors";
 import { useNavigation } from "@react-navigation/core";
+import { useTheme } from "../../context/ThemeContext";
+import { darkTheme, lightTheme } from "../../assets/colors/themeColors";
+
+const { height, width } = Dimensions.get('window');
 
 const LanguageScreen = () => {
     const navigation = useNavigation();
+    const { isDark } = useTheme();
+
+    const themeStyles = isDark ? darkTheme : lightTheme;
+
     const handleButtonPress = () => {
         console.warn("Confirm button pressed");
     }
 
     return (
-        <SafeAreaView style={styles.container}>
+        <View style={[styles.container, themeStyles.container]}>
+            <View style={styles.innerContainer}>
             <View style={styles.header}>
-                <Ionicons name='arrow-back' size={24} onPress={() => navigation.goBack()}/>
-                <Text style={styles.title}>Language</Text>
+                <Ionicons name='arrow-back' size={24} onPress={() => navigation.goBack()} color={themeStyles.icon.color} />
+                <Text style={[styles.title, themeStyles.text]}>Language</Text>
             </View>
-            <TouchableOpacity style={styles.button} onPress={handleButtonPress}>
-                <Text style={styles.buttonText}>
+            <TouchableOpacity style={[styles.button, themeStyles.button]} onPress={handleButtonPress}>
+                <Text style={[styles.buttonText, themeStyles.buttonText]}>
                     English
                 </Text>
             </TouchableOpacity>
-            <TouchableOpacity style={styles.button} onPress={handleButtonPress}>
-                <Text style={styles.buttonText}>
+            <TouchableOpacity style={[styles.button, themeStyles.button]} onPress={handleButtonPress}>
+                <Text style={[styles.buttonText, themeStyles.buttonText]}>
                     Turkish
                 </Text>
             </TouchableOpacity>
-            <TouchableOpacity style={styles.button} onPress={handleButtonPress}>
-                <Text style={styles.buttonText}>
+            <TouchableOpacity style={[styles.button, themeStyles.button]} onPress={handleButtonPress}>
+                <Text style={[styles.buttonText, themeStyles.buttonText]}>
                     Spanish
                 </Text>
             </TouchableOpacity>
 
-            <TouchableOpacity style={styles.confirmButton} onPress={handleButtonPress}>
-                <Text style={styles.confirmButtonText}>
+            <TouchableOpacity style={[styles.confirmButton, themeStyles.button]} onPress={handleButtonPress}>
+                <Text style={[styles.confirmButtonText, themeStyles.buttonText]}>
                     Confirm
                 </Text>
             </TouchableOpacity>
-        </SafeAreaView>
+            </View>
+        </View>
     )
 }
 
 const styles = StyleSheet.create({
     container: {
         flex: 1
+    },
+    innerContainer: {
+        marginTop: StatusBar.currentHeight - height * 0.02
     },
     header: {
         marginLeft: 15,

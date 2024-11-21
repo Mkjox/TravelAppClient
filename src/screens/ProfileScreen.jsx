@@ -30,40 +30,40 @@ const ProfileScreen = () => {
   return (
     <View style={[styles.container, themeStyles.container]}>
       <ScrollView style={styles.topSection}>
-        <View style={[styles.profileTopWrapper, themeStyles.button]}>
+        <View style={styles.profileTopWrapper}>
 
           <View style={styles.information}>
             <Avatar.Image size={70} style={styles.avatar} />
             <View style={styles.informationInnerWrapper}>
-              <Text style={[styles.headerText, themeStyles.textWhite]}>Welcome USER</Text>
-              <Text style={[styles.headerText, themeStyles.textWhite, { marginBottom: 5 }]}>@</Text>
+              <Text style={[styles.headerText, themeStyles.text]}>Welcome USER</Text>
+              <Text style={[styles.headerText, themeStyles.text, { marginBottom: 5 }]}>@</Text>
             </View>
           </View>
 
           <Entypo name="location-pin" size={18} color='#FFFFFF' style={styles.profileDetails}>
-            <Text style={[styles.profileDetailsText, themeStyles.textWhite]}> Location</Text>
+            <Text style={[styles.profileDetailsText, themeStyles.text]}> Location</Text>
           </Entypo>
 
           <Entypo name="phone" size={18} color='#FFFFFF' style={styles.profileDetails}>
-            <Text style={[styles.profileDetailsText, themeStyles.textWhite]}> Phone Number</Text>
+            <Text style={[styles.profileDetailsText, themeStyles.text]}> Phone Number</Text>
           </Entypo>
 
           <Entypo name="mail" size={18} color='#FFFFFF' style={styles.profileDetails}>
-            <Text style={[styles.profileDetailsText, themeStyles.textWhite]}> Email</Text>
+            <Text style={[styles.profileDetailsText, themeStyles.text]}> Email</Text>
           </Entypo>
 
           {/* FIX STYLING ON THIS AREA  ALSO ADD DB DATA */}
           <View style={styles.detailsContainer}>
             <View style={styles.detailsWrapper}>
               <TouchableOpacity onPress={() => navigation.navigate('Follow')}>
-                <Text style={[styles.detailsText, themeStyles.textWhite]}>0</Text>
-                <Caption style={[styles.detailsText, themeStyles.textWhite]}>Followers</Caption>
+                <Text style={[styles.detailsText, themeStyles.text]}>0</Text>
+                <Caption style={[styles.detailsText, themeStyles.text]}>Followers</Caption>
               </TouchableOpacity>
             </View>
             <View style={styles.followingDetails}>
               <TouchableOpacity onPress={() => navigation.navigate('Follow')}>
-                <Text style={[styles.detailsText, themeStyles.textWhite]}>0</Text>
-                <Caption style={[styles.detailsText, themeStyles.textWhite]}>Following</Caption>
+                <Text style={[styles.detailsText, themeStyles.text]}>0</Text>
+                <Caption style={[styles.detailsText, themeStyles.text]}>Following</Caption>
               </TouchableOpacity>
             </View>
           </View>
@@ -83,8 +83,8 @@ const ProfileScreen = () => {
             </View>
           </View> */}
 
-          <TouchableOpacity onPress={() => navigation.navigate('UserProfile')} style={{ alignSelf: 'center', marginTop: 15, borderRadius: 10, borderWidth: 0.5, height: 30, alignItems: 'center' }}>
-            <Text>Go to User Profile Screen</Text>
+          <TouchableOpacity onPress={() => navigation.navigate('UserProfile')} style={[styles.temporaryUserProfile]}>
+            <Text style={themeStyles.text}>Go to User Profile Screen</Text>
           </TouchableOpacity>
         </View>
 
@@ -127,7 +127,7 @@ const ProfileScreen = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    
+
   },
   topSection: {
   },
@@ -135,22 +135,21 @@ const styles = StyleSheet.create({
     borderBottomEndRadius: 20,
     borderBottomLeftRadius: 20,
     height: height * 0.45,
-    shadowOpacity: 30,
-    
+
   },
   avatar: {
-    marginTop: 25,
     marginBottom: 10,
     alignSelf: 'left',
-    marginLeft: 35
+    justifyContent: 'center',
+    alignSelf: 'center',
+    marginVertical: height * 0.01
   },
   information: {
-    flexDirection: 'row',
-    marginTop: StatusBar.currentHeight - height * 0.03
+    flexDirection: 'column',
+    marginTop: StatusBar.currentHeight
   },
   informationInnerWrapper: {
-    marginHorizontal: 15,
-    marginTop: 35
+    marginVertical: height * 0.01
   },
   headerText: {
     fontFamily: 'Poppins_500Medium',
@@ -159,20 +158,19 @@ const styles = StyleSheet.create({
   },
   profileDetails: {
     marginVertical: 4,
-    marginLeft: 120
+    justifyContent: 'center',
+    alignSelf: 'center'
   },
   profileDetailsText: {
     fontFamily: 'Poppins_300Light',
+    textAlign: 'left'
   },
   detailsContainer: {
-    marginTop: 10,
+    marginVertical: height * 0.01,
     flexDirection: 'row',
-    marginHorizontal: 10,
-    alignContent: "space-between",
-    alignSelf: 'center'
   },
   detailsWrapper: {
-    marginRight: 50
+    marginHorizontal: width * 0.23,
   },
   detailsText: {
     fontFamily: 'Poppins_400Regular',
@@ -181,17 +179,24 @@ const styles = StyleSheet.create({
     alignSelf: 'center'
   },
   followingDetails: {
-    marginLeft: 50
   },
-  countContainer: {
-    marginHorizontal: 40,
-    alignItems: 'center',
-    marginRight: 25
+  // countContainer: {
+  //   marginHorizontal: 40,
+  //   alignItems: 'center',
+  //   marginRight: 25
+  // },
+  temporaryUserProfile: {
+    alignSelf: 'center',
+    marginVertical: 15,
+    borderRadius: 10,
+    borderWidth: 0.5,
+    height: 30,
+    alignItems: 'center'
   },
   options: {
     flexDirection: 'column',
     marginLeft: 40,
-    marginTop: 25
+    marginTop: height * 0.07,
   },
   optionItem: {
     marginVertical: 10,

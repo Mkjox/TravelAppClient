@@ -43,7 +43,7 @@ const SettingsScreen = () => {
               right={props => <List.Icon {...props} icon="chevron-right" color={themeStyles.icon.color} />}
               style={themeStyles.card}
             >
-              <List.Item title="Enabled" style={[styles.switch,styles.text]}
+              <List.Item title="Enabled" style={styles.switch} titleStyle={themeStyles.text}
                 right={props => <Switch
                   value={isDark}
                   onValueChange={toggleTheme}
@@ -103,7 +103,7 @@ const styles = StyleSheet.create({
   settingsWrapper: {
     alignItems: "center",
     padding: 20,
-    marginTop: 80
+    marginTop: 80,
   },
   listWrapper: {
     marginTop: 50,
@@ -111,7 +111,9 @@ const styles = StyleSheet.create({
     margin: 20,
     borderRadius: 10,
     padding: 25,
-    elevation: 2
+    elevation: 2,
+    borderColor: '#FFFFFF',
+    borderWidth: 0.5
   },
   switch: {
     marginLeft: 15
