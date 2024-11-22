@@ -83,9 +83,10 @@ const ProfileScreen = () => {
             </View>
           </View> */}
 
-          <TouchableOpacity onPress={() => navigation.navigate('UserProfile')} style={[styles.temporaryUserProfile]}>
+          {/* <TouchableOpacity onPress={() => navigation.navigate('UserProfile')} style={[styles.temporaryUserProfile]}>
             <Text style={themeStyles.text}>Go to User Profile Screen</Text>
-          </TouchableOpacity>
+          </TouchableOpacity> */}
+          <View style={styles.line} />
         </View>
 
         <View style={styles.options}>
@@ -146,7 +147,7 @@ const styles = StyleSheet.create({
   },
   information: {
     flexDirection: 'column',
-    marginTop: StatusBar.currentHeight
+    marginTop: StatusBar.currentHeight + height * 0.01
   },
   informationInnerWrapper: {
     marginVertical: height * 0.01
@@ -185,18 +186,24 @@ const styles = StyleSheet.create({
   //   alignItems: 'center',
   //   marginRight: 25
   // },
-  temporaryUserProfile: {
+  // temporaryUserProfile: {
+  //   alignSelf: 'center',
+  //   marginVertical: 15,
+  //   borderRadius: 10,
+  //   borderWidth: 0.5,
+  //   height: 30,
+  //   alignItems: 'center'
+  // },
+  line: {
+    borderBottomWidth: 0.5,
+    width: '90%',
     alignSelf: 'center',
-    marginVertical: 15,
-    borderRadius: 10,
-    borderWidth: 0.5,
-    height: 30,
-    alignItems: 'center'
+    marginTop: 10
   },
   options: {
     flexDirection: 'column',
     marginLeft: 40,
-    marginTop: height * 0.07,
+    marginTop: height * 0.03,
   },
   optionItem: {
     marginVertical: 10,

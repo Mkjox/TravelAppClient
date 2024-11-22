@@ -3,25 +3,30 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import colors from "../../assets/colors/colors";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import { useNavigation } from "@react-navigation/core";
+import { useTheme } from "../../context/ThemeContext";
+import { darkTheme, lightTheme } from "../../assets/colors/themeColors";
 
 const ResetPasswordScreen = () => {
     const navigation = useNavigation();
+    const { isDark } = useTheme();
+
+    const themeStyles = isDark ? darkTheme : lightTheme;
 
     return (
-        <SafeAreaView style={{ flex: 1 }}>
-            <View style={styles.container}>
-                <Text style={styles.text}>Reset Password</Text>
+        <SafeAreaView style={[styles.container, themeStyles.container]}>
+            <View style={{ alignItems: 'center' }}>
+                <Text style={[styles.text, themeStyles.text]}>Reset Password</Text>
                 <TextInput
-                    style={styles.textInput}
+                    style={[styles.textInput, themeStyles.textinput]}
                     placeholder="Enter your email"
                 />
-                <TouchableOpacity style={styles.button}>
-                    <Text style={styles.buttonText}>Send Email</Text>
+                <TouchableOpacity style={[styles.button, themeStyles.button]}>
+                    <Text style={[styles.buttonText, themeStyles.buttonText]}>Send Email</Text>
                 </TouchableOpacity>
 
-                <TouchableOpacity onPress={() => navigation.navigate('')}>
-                    <Text style={styles.forgotWrapper}>
-                        Do you remember your password?{<Text style={styles.forgotText}> Sign In</Text>}
+                <TouchableOpacity onPress={() => navigation.navigate('Login')}>
+                    <Text style={[styles.forgotWrapper, themeStyles.text]}>
+                        Do you remember your password?{<Text style={[styles.forgotText, themeStyles.textBlue]}> Sign In</Text>}
                     </Text>
                 </TouchableOpacity>
             </View>
@@ -31,7 +36,7 @@ const ResetPasswordScreen = () => {
 
 const styles = StyleSheet.create({
     container: {
-        alignItems: 'center',
+        flex: 1,
     },
     text: {
         marginTop: 300,
@@ -68,11 +73,13 @@ const styles = StyleSheet.create({
     },
     forgotWrapper: {
         marginTop: 10,
-        color: colors.lightGray
+        color: colors.lightGray,
+        fontSize: 14,
+        fontFamily: 'Poppins_500Medium'
     },
     forgotText: {
-        color: colors.darkBlue,
-        fontWeight: 'bold'
+        fontFamily: 'Poppins_700Bold',
+        fontSize: 15
     }
 })
 

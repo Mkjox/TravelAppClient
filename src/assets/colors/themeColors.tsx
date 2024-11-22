@@ -41,6 +41,12 @@ export const lightTheme = StyleSheet.create({
     icon: {
         color: '#4F4F4F'
     },
+    textinput: {
+        backgroundColor: '#FFFFFF'
+    },
+    textinputPlaceholder:{
+        color: '#505050'
+    }
 });
 
 export const darkTheme = StyleSheet.create({
@@ -83,5 +89,11 @@ export const darkTheme = StyleSheet.create({
     },
     icon: {
         color: '#E0E0E0'
+    },
+    textinput: {
+        backgroundColor: '#FFFFFF'
+    },
+    textinputPlaceholder:{
+        color: '#505050'
     }
 });

@@ -110,8 +110,7 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   statusMargin: {
-    marginTop: StatusBar.currentHeight
-
+    marginTop: StatusBar.currentHeight + height * 0.01
   },
   menuButton: {
     elevation: 5,

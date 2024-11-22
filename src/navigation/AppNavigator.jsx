@@ -69,7 +69,8 @@ function DrawerNavigator() {
         <Drawer.Navigator
             screenOptions={{
                 headerShown: false,
-                drawerType: 'back',
+                drawerType: 'slide',
+                
             }}>
             <Drawer.Screen name="Home" component={StackNavigator} options={{
                 drawerIcon: ({ }) => (

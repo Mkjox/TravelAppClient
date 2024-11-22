@@ -114,7 +114,7 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   topMargin: {
-    marginTop: StatusBar.currentHeight
+    marginTop: StatusBar.currentHeight + height * 0.01
   },
   menuWrapper: {
     marginHorizontal: 10,
