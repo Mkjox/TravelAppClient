@@ -57,10 +57,14 @@ const NotificationsScreen = () => {
     return (
         <View style={[styles.container, themeStyles.container]}>
             <View style={styles.innerContainer}>
+
                 <TouchableOpacity style={styles.titleWrapper}>
                     <Ionicons name='arrow-back' size={24} onPress={() => navigation.goBack()} color={themeStyles.icon.color} />
                     <Text style={[styles.title, themeStyles.text]}>Notifications</Text>
                 </TouchableOpacity>
+                
+                <View style={themeStyles.hairLine} />
+
                 <Text style={[styles.infoTitle, themeStyles.text]}>Send me notification when;</Text>
                 <View>
                     <View style={styles.switchContainer}>
@@ -124,7 +128,7 @@ const NotificationsScreen = () => {
                     </View>
 
                     <TouchableOpacity style={[styles.confirmButton, themeStyles.button]} onPress={handleConfirm}>
-                        <Text style={[styles.confirmButtonText, themeStyles.text]}>
+                        <Text style={[styles.confirmButtonText, themeStyles.buttonText]}>
                             Confirm
                         </Text>
                     </TouchableOpacity>
@@ -139,12 +143,12 @@ const styles = StyleSheet.create({
         flex: 1,
     },
     innerContainer: {
-        marginTop: StatusBar.currentHeight - height * 0.02
+        marginTop: StatusBar.currentHeight - 10
     },
     titleWrapper: {
         flexDirection: 'row',
         marginLeft: 15,
-        marginTop: 15,
+        marginTop: 20,
         fontFamily: 'Poppins_400Regular'
     },
     title: {
@@ -186,10 +190,9 @@ const styles = StyleSheet.create({
         shadowRadius: 3.84,
         width: 150,
         alignSelf: 'center',
-        bottom: -400
+        marginTop: height * 0.4
     },
     confirmButtonText: {
-        color: '#fff',
         fontSize: 16,
         fontWeight: 'bold',
         textAlign: 'center'

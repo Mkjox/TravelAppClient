@@ -61,7 +61,7 @@ const styles = StyleSheet.create({
         width: width * 0.54,
         height: height * 0.24,
         alignSelf: 'center',
-        marginTop: -70,
+        marginTop: height * 0.2,
         position: 'static'
     },
     infoText: {
@@ -73,10 +73,10 @@ const styles = StyleSheet.create({
     button: {
         alignSelf: 'center',
         padding: 18,
-        width: 300,
+        width: width * 0.7,
         alignItems: 'center',
         borderRadius: 10,
-        bottom: -height * 0.3,
+        marginTop: height * 0.3,
         elevation: 5
     },
     buttonText: {

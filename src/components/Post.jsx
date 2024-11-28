@@ -166,7 +166,8 @@ const styles = StyleSheet.create({
     },
     postInnerWrapper: {
         marginHorizontal: 2,
-        marginVertical: 5
+        marginVertical: 5,
+        // borderWidth: 1,
     },
     postItemsWrapper: {
         paddingTop: 10,

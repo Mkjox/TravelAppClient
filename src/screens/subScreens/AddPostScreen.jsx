@@ -88,6 +88,7 @@ const AddPostScreen = ({ navigation }) => {
                     </TouchableOpacity>
                     <Text style={[styles.title, themeStyles.text]}>Add Post</Text>
                 </View>
+                <View style={themeStyles.hairLine} />
 
                 {/* <View style={styles.image}>
                     <ImageViewer 
@@ -162,10 +163,12 @@ const AddPostScreen = ({ navigation }) => {
                     />
                 </View> */}
 
-                {error ? <Text style={styles.errorText}>{error}</Text> : null}
+                {error ? <Text style={[styles.errorText, themeStyles.text]}>{error}</Text> : null}
 
                 <TouchableOpacity style={[styles.button, themeStyles.button]} onPress={handleAddPost}>
-                    <Button title='Submit' color={themeStyles.buttonText} />
+                    <Text style={[styles.buttonText, themeStyles.buttonText]}>
+                        Submit
+                    </Text>
                 </TouchableOpacity>
             </View>
         </ScrollView>
@@ -175,13 +178,17 @@ const AddPostScreen = ({ navigation }) => {
 var styles = StyleSheet.create({
     container: {
         flex: 1,
-        marginTop: StatusBar.currentHeight - 30
+        marginTop: StatusBar.currentHeight - 20
     },
     header: {
         marginTop: 25,
         marginLeft: 15,
         position: 'relative',
         flexDirection: 'row'
+    },
+    title: {
+        marginTop: 5,
+        fontFamily: 'Poppins_400Regular'
     },
     image: {
         borderWidth: 1,
@@ -190,10 +197,6 @@ var styles = StyleSheet.create({
         alignSelf: 'center',
         marginVertical: 20,
         borderRadius: 15,
-    },
-    title: {
-        marginTop: 5,
-        fontFamily: 'Poppins_400Regular'
     },
     inputWrapper: {
         flexDirection: 'column',
@@ -208,14 +211,14 @@ var styles = StyleSheet.create({
     input: {
         marginHorizontal: 10,
         color: colors.black,
-        width: 300,
+        width: width * 0.7,
         height: 40,
         textAlign: 'left',
         borderStartEndRadius: 25,
-        borderTopWidth: 0,
-        borderBottomWidth: 1,
+        borderWidth: 1,
         fontFamily: 'Poppins_400Regular',
-        borderRadius: 10
+        borderRadius: 10,
+        elevation: 5
     },
     maps: {
         borderWidth: 0.7,
@@ -246,11 +249,19 @@ var styles = StyleSheet.create({
     // },
     button: {
         width: width * 0.7,
-        margin: 10,
+        height: height * 0.05,
         alignSelf: 'center',
-        borderRadius: 20,
+        borderRadius: 10,
         marginBottom: height * 0.1,
-        marginTop: 20
+        marginTop: height * 0.03,
+        elevation: 5,
+        alignItems: 'center',
+        justifyContent: 'center'
+    },
+    buttonText: {
+        fontFamily: 'Poppins_400Regular',
+        fontWeight: 'bold',
+        fontSize: 15,
     }
 });
 

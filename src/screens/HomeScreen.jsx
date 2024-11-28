@@ -9,10 +9,8 @@ import {
   Dimensions,
   // ActivityIndicator
 } from "react-native";
-import { SafeAreaView } from "react-native-safe-area-context";
 import Feather from "@expo/vector-icons/Feather";
 import Activity from "../components/Activity";
-import LikedData from "../assets/data/likedData.json";
 import { DrawerActions } from '@react-navigation/drawer';
 // import { Appbar } from '../components/Appbar';
 import Explore from '../components/Explore';
@@ -64,7 +62,8 @@ const HomeScreen = ({ navigation }) => {
     <View style={[styles.container, themeStyles.container]} >
       <ScrollView nestedScrollEnabled={true} contentContainerStyle={{ flexGrow: 1 }}
         refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh} />}>
-        <View style={styles.statusMargin}>
+
+        <View style={styles.topMargin}>
           <View style={styles.menuWrapper}>
             <Feather
               name="menu"
@@ -81,6 +80,7 @@ const HomeScreen = ({ navigation }) => {
               mode="bar"
             />
           </View>
+
           <View style={styles.activityWrapper}>
             <View style={styles.activities}>
               <View style={styles.activityInnerWrapper}>
@@ -91,6 +91,7 @@ const HomeScreen = ({ navigation }) => {
               </TouchableOpacity>
             </View>
           </View>
+
           <View style={styles.postWrapper}>
             {/* Post component called here */}
             <Post />
@@ -109,7 +110,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
   },
-  statusMargin: {
+  topMargin: {
     marginTop: StatusBar.currentHeight + height * 0.01
   },
   menuButton: {

@@ -51,12 +51,14 @@ const PrivacyScreen = () => {
     return (
         <View style={[styles.container, themeStyles.container]}>
             <View style={styles.innerContainer}>
+
                 <TouchableOpacity style={styles.titleWrapper}>
                     <Ionicons name='arrow-back' size={24} onPress={() => navigation.goBack()} color={themeStyles.icon.color} />
                     <Text style={[styles.title, themeStyles.text]}>Privacy</Text>
                 </TouchableOpacity>
-                <View style={styles.listWrapper}>
+                <View style={themeStyles.hairLine} />
 
+                <View style={styles.listWrapper}>
                     <View style={styles.switchContainer}>
                         <Text style={[styles.switchLabel, themeStyles.text]}>make my post count private</Text>
                         <Switch
@@ -93,8 +95,8 @@ const PrivacyScreen = () => {
                         />
                     </View>
 
-                    <TouchableOpacity style={[styles.confirmButton, themeStyles.button]} onPress={handleConfirm}>
-                        <Text style={[styles.confirmButtonText, themeStyles.buttonText]}>
+                    <TouchableOpacity style={[styles.button, themeStyles.button]} onPress={handleConfirm}>
+                        <Text style={[styles.buttonText, themeStyles.buttonText]}>
                             Confirm
                         </Text>
                     </TouchableOpacity>
@@ -109,12 +111,12 @@ const styles = StyleSheet.create({
         flex: 1,
     },
     innerContainer: {
-        marginTop: StatusBar.currentHeight - height * 0.02
+        marginTop: StatusBar.currentHeight - 10
     },
     titleWrapper: {
         flexDirection: 'row',
         marginLeft: 15,
-        marginTop: 15,
+        marginTop: 20,
         fontFamily: 'Poppins_400Regular'
     },
     title: {
@@ -139,7 +141,7 @@ const styles = StyleSheet.create({
     switch: {
         width: 100
     },
-    confirmButton: {
+    button: {
         backgroundColor: colors.teallight,
         borderRadius: 10,
         paddingVertical: 12,
@@ -154,9 +156,9 @@ const styles = StyleSheet.create({
         shadowRadius: 3.84,
         width: 150,
         alignSelf: 'center',
-        bottom: -550
+        marginTop: height * 0.6
     },
-    confirmButtonText: {
+    buttonText: {
         color: '#fff',
         fontSize: 16,
         fontWeight: 'bold',

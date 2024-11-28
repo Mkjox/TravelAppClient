@@ -11,7 +11,7 @@ export const lightTheme = StyleSheet.create({
         color: '#4C4DDC'
     },
     buttonText: {
-        color: '#FFFFFF'
+        color: '#FFFFFF',
     },
     iconBackgroundSquare: {
         backgroundColor: '#FFFFFF',
@@ -46,6 +46,11 @@ export const lightTheme = StyleSheet.create({
     },
     textinputPlaceholder:{
         color: '#505050'
+    },
+    hairLine: {
+        borderBottomColor: '#002055',
+        borderBottomWidth: StyleSheet.hairlineWidth,
+        marginTop: 10
     }
 });
 
@@ -95,5 +100,10 @@ export const darkTheme = StyleSheet.create({
     },
     textinputPlaceholder:{
         color: '#505050'
+    },
+    hairLine: {
+        borderBottomColor: '#FFFFFF',
+        borderBottomWidth: StyleSheet.hairlineWidth,
+        marginTop: 10
     }
 });

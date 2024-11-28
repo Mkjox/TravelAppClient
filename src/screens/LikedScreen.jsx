@@ -18,8 +18,9 @@ import { Card, Searchbar } from "react-native-paper";
 import PostService from "../assets/data/services/PostService";
 import { useTheme } from "../context/ThemeContext";
 import { darkTheme, lightTheme } from "../assets/colors/themeColors";
+import { ScrollView } from "react-native-gesture-handler";
 
-const {height,width} = Dimensions.get('window');
+const { height, width } = Dimensions.get('window');
 
 const LikedScreen = () => {
   const [data, setData] = useState([]);
@@ -56,7 +57,8 @@ const LikedScreen = () => {
 
   return (
     <View style={[themeStyles.container, styles.container]}>
-      <View style={styles.topMargin}>
+      <ScrollView style={styles.topMargin}>
+
         <View style={styles.menuWrapper}>
           <Feather name="menu" size={32} style={styles.menuButton} onPress={() => navigation.openDrawer()} color={themeStyles.icon.color} />
           <Searchbar style={styles.searchBar}
@@ -66,18 +68,22 @@ const LikedScreen = () => {
             mode="bar"
           />
         </View>
+
         <View>
-          <Text style={[styles.title,themeStyles.text]}>
+          <Text style={[styles.title, themeStyles.text]}>
             Liked Posts
           </Text>
         </View>
+
+        <View style={[themeStyles.hairLine]} />
+
         <View style={styles.likedWrapper}>
           <FlatList
             data={data}
             keyExtractor={(item) => item.id.toString()}
             renderItem={({ item }) => (
               <TouchableOpacity onPress={() => navigation.navigate("PostDetails", { item: item })}>
-                <Card style={[styles.likedItemWrapper,themeStyles.card]}>
+                <Card style={[styles.likedItemWrapper, themeStyles.card]}>
                   <ImageBackground src={'https://picsum.photos/700'} style={styles.likedItemImage}>
                     <TouchableOpacity style={styles.moreButton}>
                       <Entypo name='dots-three-vertical' size={18} color={themeStyles.icon.color} />
@@ -87,8 +93,8 @@ const LikedScreen = () => {
                     </TouchableOpacity>
                   </ImageBackground>
                   <Card.Content>
-                    <Text style={[styles.likedItemTitle,themeStyles.text]}>{item.title}</Text>
-                    <Text style={[styles.likedItemLocation,themeStyles.text]}>
+                    <Text style={[styles.likedItemTitle, themeStyles.text]}>{item.title}</Text>
+                    <Text style={[styles.likedItemLocation, themeStyles.text]}>
                       <MaterialIcons name='place' size={15} color={themeStyles.icon.color} />
                       {item.location}
                     </Text>
@@ -101,7 +107,8 @@ const LikedScreen = () => {
             showsVerticalScrollIndicator={false}
           />
         </View>
-      </View>
+      </ScrollView>
+
       <TouchableOpacity style={[themeStyles.button, styles.arrowUp]}>
         <MaterialIcons name='keyboard-arrow-up' size={36} color={colors.white} />
       </TouchableOpacity>
@@ -147,11 +154,13 @@ const styles = StyleSheet.create({
     marginBottom: 100,
     borderRadius: 20,
     paddingTop: 7,
+    marginTop: 10
   },
   likedItemWrapper: {
     marginHorizontal: 5,
     marginVertical: 5,
     width: "auto",
+    borderColor: colors.white
   },
   likedItemImage: {
     height: 200,

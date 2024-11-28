@@ -8,7 +8,7 @@ import AuthService from '../../assets/data/services/AuthService';
 import { useTheme } from '../../context/ThemeContext';
 import { darkTheme, lightTheme } from '../../assets/colors/themeColors';
 
-const {height, width} = Dimensions.get('window')
+const { height, width } = Dimensions.get('window')
 
 const RegisterScreen = () => {
     const navigation = useNavigation();
@@ -44,22 +44,22 @@ const RegisterScreen = () => {
 
 
     return (
-        <SafeAreaView style={[styles.container,themeStyles.container]}>
+        <SafeAreaView style={[styles.container, themeStyles.container]}>
             <View>
                 <View style={styles.header}>
-                    <Text style={[styles.headerTextMain,themeStyles.text]}>Welcome Onboard!</Text>
-                    <Text style={[styles.headerTextSecondary,themeStyles.text]}>Let's help you find new traveling routes.</Text>
+                    <Text style={[styles.headerTextMain, themeStyles.text]}>Welcome Onboard!</Text>
+                    <Text style={[styles.headerTextSecondary, themeStyles.text]}>Let's help you find new traveling routes.</Text>
                 </View>
 
                 <TextInput
-                    style={[styles.textInput,themeStyles.textinput]}
+                    style={[styles.textInput, themeStyles.textinput]}
                     placeholder='Enter your username'
                     placeholderTextColor={themeStyles.textinputPlaceholder}
                     value={username}
                     onChangeText={setUsername}
                 />
                 <TextInput
-                    style={[styles.textInput,themeStyles.textinput]}
+                    style={[styles.textInput, themeStyles.textinput]}
                     placeholder='Enter your email'
                     placeholderTextColor={themeStyles.textinputPlaceholder}
                     keyboardType='email-address'
@@ -67,7 +67,7 @@ const RegisterScreen = () => {
                     onChangeText={setEmail}
                 />
                 <TextInput
-                    style={[styles.textInput,themeStyles.textinput]}
+                    style={[styles.textInput, themeStyles.textinput]}
                     placeholder='Enter your password'
                     placeholderTextColor={themeStyles.textinputPlaceholder}
                     secureTextEntry
@@ -75,7 +75,7 @@ const RegisterScreen = () => {
                     onChangeText={setPassword}
                 />
                 <TextInput
-                    style={[styles.textInput,themeStyles.textinput]}
+                    style={[styles.textInput, themeStyles.textinput]}
                     placeholder='Confirm password'
                     placeholderTextColor={themeStyles.textinputPlaceholder}
                     secureTextEntry
@@ -90,7 +90,7 @@ const RegisterScreen = () => {
                 {error ? <Text style={[styles.errorText, themeStyles.text]}>{error}</Text> : null}
 
                 <TouchableOpacity onPress={() => navigation.navigate("Login")}>
-                    <Text style={[styles.information,themeStyles.text]}>Already have an account? {<Text style={[styles.signInText, themeStyles.textBlue]}>Sign in</Text>}</Text>
+                    <Text style={[styles.information, themeStyles.text]}>Already have an account? {<Text style={[styles.signInText, themeStyles.textBlue]}>Sign in</Text>}</Text>
                 </TouchableOpacity>
             </View>
         </SafeAreaView>
@@ -126,32 +126,35 @@ const styles = StyleSheet.create({
         elevation: 5
     },
     button: {
-        width: 300,
+        width: width * 0.7,
         margin: 10,
         alignSelf: 'center',
         borderRadius: 15,
         padding: 15,
-        bottom: -170,
+        marginTop: height * 0.21,
         backgroundColor: colors.teallight,
         alignItems: 'center',
         elevation: 5
     },
     buttonText: {
-        color: colors.white,
         fontSize: 17,
         fontFamily: 'Poppins_400Regular',
         fontWeight: 'bold'
     },
     information: {
-        bottom: -180,
         alignSelf: 'center',
         fontFamily: 'Poppins_500Medium',
-        fontSize: 14
+        fontSize: 14,
     },
     signInText: {
         fontFamily: 'Poppins_700Bold',
         fontSize: 15
-    }
+    },
+    errorText: {
+        alignSelf: 'center',
+        fontFamily: 'Poppins_700Bold',
+        fontSize: 15
+    },
 });
 
 

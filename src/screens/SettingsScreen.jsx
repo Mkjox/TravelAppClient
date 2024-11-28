@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { View, Text, StyleSheet, TouchableOpacity, SafeAreaView, Switch } from "react-native";
+import { View, Text, StyleSheet, TouchableOpacity, SafeAreaView, Switch, StatusBar } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/core";
 import colors from "../assets/colors/colors";
@@ -26,14 +26,18 @@ const SettingsScreen = () => {
   }, []);
 
   return (
-    <SafeAreaView style={{ flex: 1 }}>
-      <View style={[styles.container, themeStyles.container]}>
+    <View style={[{ flex: 1 }, themeStyles.container]}>
+      <View style={styles.container}>
+
         <View style={styles.back}>
           <TouchableOpacity style={styles.back} onPress={() => navigation.goBack()}>
             <Ionicons name="arrow-back" size={24} color={themeStyles.icon.color} />
             <Text style={[styles.headerText, themeStyles.text]}>Settings</Text>
           </TouchableOpacity>
         </View>
+
+        <View style={themeStyles.hairLine} />
+
         <View style={styles.settingsWrapper}>
           <View style={[styles.listWrapper, themeStyles.card]}>
             <List.Accordion
@@ -80,13 +84,14 @@ const SettingsScreen = () => {
           </View>
         </View>
       </View>
-    </SafeAreaView>
+    </View>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    marginTop: StatusBar.currentHeight - 30
   },
   back: {
     alignItems: "left",

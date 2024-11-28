@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
-import { View, Text, StyleSheet, TextInput, TouchableOpacity } from 'react-native';
+import { View, Text, StyleSheet, TextInput, TouchableOpacity, Dimensions } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useNavigation } from "@react-navigation/core";
 import colors from '../../assets/colors/colors';
 import AuthService from '../../assets/data/services/AuthService';
 import { useTheme } from '../../context/ThemeContext';
 import { darkTheme, lightTheme } from '../../assets/colors/themeColors';
+
+const { height, width } = Dimensions.get('window');
 
 const LoginScreen = () => {
     const navigation = useNavigation();
@@ -87,7 +89,8 @@ const styles = StyleSheet.create({
         fontFamily: 'Poppins_700Bold',
         alignSelf: 'center',
         marginVertical: 15,
-        fontSize: 24
+        fontSize: 24,
+        marginTop: height * 0.2
     },
     textInput: {
         marginHorizontal: 10,
@@ -108,12 +111,12 @@ const styles = StyleSheet.create({
         fontSize: 15,
     },
     button: {
-        width: 300,
+        width: width * 0.7,
         margin: 10,
         alignSelf: 'center',
         borderRadius: 15,
         padding: 18,
-        bottom: -170,
+        marginTop: height * 0.25,
         alignItems: 'center',
         elevation: 5
     },
@@ -125,13 +128,18 @@ const styles = StyleSheet.create({
     signUpText: {
         fontSize: 14,
         color: colors.lightGray,
-        bottom: -180,
+        marginTop: height * 0.01,
         fontFamily: 'Poppins_500Medium'
     },
     signUpLink: {
         fontFamily: 'Poppins_700Bold',
         fontSize: 15
     },
+    errorText: {
+        alignSelf: 'center',
+        fontFamily: 'Poppins_700Bold',
+        fontSize: 15
+    }
 });
 
 export default LoginScreen;
