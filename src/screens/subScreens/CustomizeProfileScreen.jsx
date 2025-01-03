@@ -64,9 +64,11 @@ const CustomizeProfileScreen = () => {
     return (
         <SafeAreaView style={{ flex: 1 }}>
             <View style={styles.container}>
-                <Entypo name='chevron-left' size={26} style={styles.backIcon}>
-                    <Text style={styles.title}>Customize Profile</Text>
-                </Entypo>
+                <TouchableOpacity onPress={() => navigation.goBack()}>
+                    <Entypo name='chevron-left' size={26} style={styles.backIcon}>
+                        <Text style={styles.title}>Customize Profile</Text>
+                    </Entypo>
+                </TouchableOpacity>
                 <View style={styles.content}>
                     <Avatar.Image size={60} style={styles.profilePhoto} />
 
@@ -125,9 +127,9 @@ const CustomizeProfileScreen = () => {
                     </View>
 
                     <TouchableOpacity onPress={handlePress}>
-                    <View style={styles.button}>
-                        <Text style={styles.buttonText}>Update</Text>
-                    </View>
+                        <View style={styles.button}>
+                            <Text style={styles.buttonText}>Update</Text>
+                        </View>
                     </TouchableOpacity>
                 </View>
             </View>

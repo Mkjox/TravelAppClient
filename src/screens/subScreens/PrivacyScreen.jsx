@@ -111,7 +111,7 @@ const styles = StyleSheet.create({
         flex: 1,
     },
     innerContainer: {
-        marginTop: StatusBar.currentHeight - 10
+        marginTop: StatusBar.currentHeight
     },
     titleWrapper: {
         flexDirection: 'row',

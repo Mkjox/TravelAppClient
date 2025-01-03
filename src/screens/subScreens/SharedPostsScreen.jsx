@@ -4,7 +4,7 @@ import colors from "../../assets/colors/colors";
 import LikedData from '../../assets/data/likedData.json';
 import { SafeAreaView } from "react-native-safe-area-context";
 import { FlatList } from "react-native-gesture-handler";
-import { Entypo, MaterialIcons } from '@expo/vector-icons';
+import { Ionicons, Entypo, MaterialIcons } from '@expo/vector-icons';
 import { Card } from "react-native-paper";
 import { useNavigation } from "@react-navigation/core";
 import { useTheme } from '../../context/ThemeContext';
@@ -30,38 +30,40 @@ const SharedPostsScreen = () => {
 
     return (
         <View style={[styles.container, themeStyles.container]}>
-            <View style={styles.header}>
-                <Entypo name='chevron-left' size={24} onPress={() => navigation.goBack()} color={themeStyles.icon.color}>
+            <View style={styles.innerContainer}>
+                <View style={styles.header}>
+                    <Ionicons name='arrow-back' size={24} onPress={() => navigation.goBack()} color={themeStyles.icon.color} />
                     <Text style={[styles.headerText, themeStyles.text]}>Shared Posts</Text>
-                </Entypo>
-            </View>
+                </View>
+                <View style={[themeStyles.hairLine, { marginBottom: 10 }]} />
 
-            <View style={styles.sharedWrapper}>
-                <FlatList
-                    data={data}
-                    keyExtractor={(item) => item.id.toString()}
-                    renderItem={({ item }) => (
-                        <TouchableOpacity onPress={() => navigation.navigate("PostDetails", { item: item })}>
-                            <Card style={[styles.sharedItemWrapper, themeStyles.card]}>
-                                <ImageBackground src={item.image} style={styles.sharedItemImage}>
-                                    <TouchableOpacity style={styles.moreButton}>
-                                        <Entypo name='dots-three-vertical' size={20} colors={themeStyles.icon.color} />
-                                    </TouchableOpacity>
-                                </ImageBackground>
-                                <Card.Content>
-                                    <Text style={[styles.sharedItemTitle, themeStyles.text]}>{item.title}</Text>
-                                    <Text style={[{ marginVertical: 1 }, themeStyles.text]}>
-                                        <MaterialIcons name='place' size={15} color={themeStyles.icon.color} />
-                                        {item.place}
-                                    </Text>
-                                    <Text style={[styles.sharedItemBody, themeStyles.text]}>{item.body}</Text>
-                                </Card.Content>
-                            </Card>
-                        </TouchableOpacity>
-                    )}
-                    alwaysBounceVertical={true}
-                    showsVerticalScrollIndicator={false}
-                />
+                <View style={styles.sharedWrapper}>
+                    <FlatList
+                        data={data}
+                        keyExtractor={(item) => item.id.toString()}
+                        renderItem={({ item }) => (
+                            <TouchableOpacity onPress={() => navigation.navigate("PostDetails", { item: item })}>
+                                <Card style={[styles.sharedItemWrapper, themeStyles.card]}>
+                                    <ImageBackground src={item.image} style={styles.sharedItemImage}>
+                                        <TouchableOpacity style={styles.moreButton}>
+                                            <Entypo name='dots-three-vertical' size={20} colors={themeStyles.icon.color} />
+                                        </TouchableOpacity>
+                                    </ImageBackground>
+                                    <Card.Content>
+                                        <Text style={[styles.sharedItemTitle, themeStyles.text]}>{item.title}</Text>
+                                        <Text style={[{ marginVertical: 1 }, themeStyles.text]}>
+                                            <MaterialIcons name='place' size={15} color={themeStyles.icon.color} />
+                                            {item.place}
+                                        </Text>
+                                        <Text style={[styles.sharedItemBody, themeStyles.text]}>{item.body}</Text>
+                                    </Card.Content>
+                                </Card>
+                            </TouchableOpacity>
+                        )}
+                        alwaysBounceVertical={true}
+                        showsVerticalScrollIndicator={false}
+                    />
+                </View>
             </View>
         </View>
     );
@@ -71,15 +73,18 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
     },
+    innerContainer: {
+        marginTop: StatusBar.currentHeight
+    },
     header: {
-        position: 'static',
         marginTop: 15,
         marginLeft: 15,
-        marginTop: StatusBar.currentHeight - height * 0.01
+        flexDirection: 'row',
     },
     headerText: {
+        fontSize: 18,
+        marginLeft: 5,
         fontFamily: 'Poppins_400Regular',
-        fontSize: 22
     },
     sharedWrapper: {
         marginHorizontal: 5,

@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { StyleSheet, View, Text, Dimensions, StatusBar } from "react-native";
 import { useNavigation } from "@react-navigation/core";
-import { Entypo } from '@expo/vector-icons';
+import { Entypo, Ionicons } from '@expo/vector-icons';
 import colors from "../../assets/colors/colors";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { FlatList } from "react-native-gesture-handler";
@@ -10,7 +10,7 @@ import { Card } from "react-native-paper";
 import { useTheme } from "../../context/ThemeContext";
 import { darkTheme, lightTheme } from "../../assets/colors/themeColors";
 
-const {height, width} = Dimensions.get('window');
+const { height, width } = Dimensions.get('window');
 
 const CommentsSreen = () => {
     const [data, setData] = useState([]);
@@ -30,29 +30,32 @@ const CommentsSreen = () => {
 
     return (
         <View style={[styles.container, themeStyles.container]}>
-            <View style={styles.header}>
-                <Entypo name='chevron-left' size={24} onPress={() => navigation.goBack()} color={themeStyles.icon.color}>
+            <View style={styles.innerContainer}>
+                <View style={styles.header}>
+                    <Ionicons name='arrow-back' size={24} onPress={() => navigation.goBack()} color={themeStyles.icon.color} />
                     <Text style={[styles.headerText, themeStyles.text]}>Comments</Text>
-                </Entypo>
-            </View>
+                </View>
 
-            <FlatList
-                alwaysBounceVertical='true'
-                data={data}
-                keyExtractor={(item) => item.id.toString()}
-                renderItem={({ item }) => (
-                    <Card style={[styles.commentWrapper, themeStyles.card]}>
-                        <Card.Content>
-                            <Entypo name='dots-three-vertical' style={styles.more} size={20} color={themeStyles.icon.color} />
-                            <Text style={[styles.body,themeStyles.text]}>{item.body}</Text>
-                            <View style={[styles.titleWrapper,themeStyles.text]}>
-                                <Entypo name='text-document' size={22} style={styles.icon} color={themeStyles.icon.color} />
-                                <Text style={[styles.title,themeStyles.text]}>{item.title}</Text>
-                            </View>
-                        </Card.Content>
-                    </Card>
-                )}
-            />
+                <View style={[themeStyles.hairLine, { marginBottom: 10 }]} />
+
+                <FlatList
+                    alwaysBounceVertical='true'
+                    data={data}
+                    keyExtractor={(item) => item.id.toString()}
+                    renderItem={({ item }) => (
+                        <Card style={[styles.commentWrapper, themeStyles.card]}>
+                            <Card.Content>
+                                <Entypo name='dots-three-vertical' style={styles.more} size={20} color={themeStyles.icon.color} />
+                                <Text style={[styles.body, themeStyles.text]}>{item.body}</Text>
+                                <View style={[styles.titleWrapper, themeStyles.text]}>
+                                    <Entypo name='text-document' size={22} style={styles.icon} color={themeStyles.icon.color} />
+                                    <Text style={[styles.title, themeStyles.text]}>{item.title}</Text>
+                                </View>
+                            </Card.Content>
+                        </Card>
+                    )}
+                />
+            </View>
             <Text></Text>
         </View>
     );
@@ -62,15 +65,18 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
     },
+    innerContainer: {
+        marginTop: StatusBar.currentHeight
+    },
     header: {
-        position: 'static',
         marginTop: 15,
         marginLeft: 15,
-        marginTop: StatusBar.currentHeight - height * 0.01
+        flexDirection: 'row',
     },
     headerText: {
         fontFamily: 'Poppins_400Regular',
-        fontSize: 22
+        fontSize: 18,
+        marginLeft: 5
     },
     commentWrapper: {
         width: '90%',

@@ -23,31 +23,34 @@ const LanguageScreen = () => {
     return (
         <View style={[styles.container, themeStyles.container]}>
             <View style={styles.innerContainer}>
-            <View style={styles.header}>
-                <Ionicons name='arrow-back' size={24} onPress={() => navigation.goBack()} color={themeStyles.icon.color} />
-                <Text style={[styles.title, themeStyles.text]}>Language</Text>
-            </View>
-            <TouchableOpacity style={[styles.button, themeStyles.button]} onPress={handleButtonPress}>
-                <Text style={[styles.buttonText, themeStyles.buttonText]}>
-                    English
-                </Text>
-            </TouchableOpacity>
-            <TouchableOpacity style={[styles.button, themeStyles.button]} onPress={handleButtonPress}>
-                <Text style={[styles.buttonText, themeStyles.buttonText]}>
-                    Turkish
-                </Text>
-            </TouchableOpacity>
-            <TouchableOpacity style={[styles.button, themeStyles.button]} onPress={handleButtonPress}>
-                <Text style={[styles.buttonText, themeStyles.buttonText]}>
-                    Spanish
-                </Text>
-            </TouchableOpacity>
+                <View style={styles.header}>
+                    <Ionicons name='arrow-back' size={24} onPress={() => navigation.goBack()} color={themeStyles.icon.color} />
+                    <Text style={[styles.title, themeStyles.text]}>Language</Text>
+                </View>
 
-            <TouchableOpacity style={[styles.confirmButton, themeStyles.button]} onPress={handleButtonPress}>
-                <Text style={[styles.confirmButtonText, themeStyles.buttonText]}>
-                    Confirm
-                </Text>
-            </TouchableOpacity>
+                <View style={[themeStyles.hairLine, { marginBottom: 10 }]} />
+
+                <TouchableOpacity style={[styles.button, themeStyles.button]} onPress={handleButtonPress}>
+                    <Text style={[styles.buttonText, themeStyles.buttonText]}>
+                        English
+                    </Text>
+                </TouchableOpacity>
+                <TouchableOpacity style={[styles.button, themeStyles.button]} onPress={handleButtonPress}>
+                    <Text style={[styles.buttonText, themeStyles.buttonText]}>
+                        Turkish
+                    </Text>
+                </TouchableOpacity>
+                <TouchableOpacity style={[styles.button, themeStyles.button]} onPress={handleButtonPress}>
+                    <Text style={[styles.buttonText, themeStyles.buttonText]}>
+                        Spanish
+                    </Text>
+                </TouchableOpacity>
+
+                <TouchableOpacity style={[styles.confirmButton, themeStyles.button]} onPress={handleButtonPress}>
+                    <Text style={[styles.confirmButtonText, themeStyles.buttonText]}>
+                        Confirm
+                    </Text>
+                </TouchableOpacity>
             </View>
         </View>
     )
@@ -58,22 +61,19 @@ const styles = StyleSheet.create({
         flex: 1
     },
     innerContainer: {
-        marginTop: StatusBar.currentHeight - height * 0.02
+        marginTop: StatusBar.currentHeight
     },
     header: {
         marginLeft: 15,
         marginTop: 15,
-        marginBottom: 10,
         flexDirection: 'row'
     },
     title: {
         fontFamily: 'Poppins_400Regular',
         fontSize: 18,
-        marginBottom: 10,
         marginLeft: 5
     },
     button: {
-        backgroundColor: colors.white,
         borderRadius: 10,
         paddingVertical: 10,
         paddingHorizontal: 3,
@@ -96,7 +96,6 @@ const styles = StyleSheet.create({
         textAlign: 'center'
     },
     confirmButton: {
-        backgroundColor: colors.teallight,
         borderRadius: 10,
         paddingVertical: 12,
         paddingHorizontal: 32,
@@ -110,7 +109,7 @@ const styles = StyleSheet.create({
         shadowRadius: 3.84,
         width: 150,
         alignSelf: 'center',
-        bottom: -520
+        marginTop: height * 0.6
     },
     confirmButtonText: {
         color: '#fff',

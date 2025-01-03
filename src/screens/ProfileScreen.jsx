@@ -68,7 +68,7 @@ const ProfileScreen = () => {
             </View>
           </View>
 
-          <View style={themeStyles.hairLine} />
+          {/* <View style={themeStyles.hairLine} /> */}
 
           {/* <View style={styles.detailsContainer}>
             <View style={styles.countContainer}>

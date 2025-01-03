@@ -70,19 +70,31 @@ function DrawerNavigator() {
             screenOptions={{
                 headerShown: false,
                 drawerType: 'slide',
-                
             }}>
-            <Drawer.Screen name="Home" component={StackNavigator} options={{
-                drawerIcon: ({ }) => (
-                    <FontAwesome name='home' size={22} color={colors.blue} />
-                )
-            }} />
-            <Drawer.Screen name="StartPage" component={StartPage} />
-            <Drawer.Screen name='Settings' component={SettingsScreen} options={{
-                drawerIcon: () => (
-                    <FontAwesome name='gear' size={22} color={colors.blue} />
-                )
-            }} />
+            <Drawer.Screen
+                name="Home"
+                component={StackNavigator} options={{
+                    drawerIcon: ({ }) => (
+                        <FontAwesome name='home' size={22} color={colors.blue} />
+                    )
+                }} />
+
+            <Drawer.Screen
+                name="StartPage"
+                component={StartPage}
+                options={{
+                    drawerIcon: () => (
+                        <FontAwesome name='sign-in' size={22} color={colors.blue} />
+                    )
+                }} />
+
+            <Drawer.Screen
+                name='Settings'
+                component={SettingsScreen} options={{
+                    drawerIcon: () => (
+                        <FontAwesome name='gear' size={22} color={colors.blue} />
+                    )
+                }} />
         </Drawer.Navigator>
     );
 }
