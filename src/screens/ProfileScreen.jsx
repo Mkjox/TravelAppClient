@@ -68,6 +68,8 @@ const ProfileScreen = () => {
             </View>
           </View>
 
+          <View style={themeStyles.hairLine} />
+
           {/* <View style={styles.detailsContainer}>
             <View style={styles.countContainer}>
               <TouchableOpacity onPress={() => navigation.navigate('SharedPosts')}>
