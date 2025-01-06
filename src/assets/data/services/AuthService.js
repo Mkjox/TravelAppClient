@@ -24,7 +24,7 @@ const AuthService = {
                 username, password, email
             };
 
-            const response = await axios.post(`${API_URL}/register`, registrationData);
+            const response = await axios.post(`${API_URL}/register`, { userAddDto: registrationData });
 
             await AsyncStorage.setItem('authToken', response.data.token);
             await AuthService.fetchAndStoreUserInfo(response.data.token);
