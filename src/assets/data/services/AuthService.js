@@ -18,10 +18,22 @@ const AuthService = {
         }
     },
 
-    register: async (username, password, email) => {
+    register: async (UserName, Password, Email, FirstName, LastName, PhoneNumber, About, FacebookLink, InstagramLink, TwitterLink, WebsiteLink, YoutubeLink, Picture) => {
         try {
             const registrationData = {
-                username, password, email
+                UserName,
+                Password,
+                Email,
+                FirstName,
+                LastName,
+                PhoneNumber,
+                About,
+                FacebookLink,
+                InstagramLink,
+                TwitterLink,
+                WebsiteLink,
+                YoutubeLink,
+                Picture
             };
 
             const response = await axios.post(`${API_URL}/register`, { userAddDto: registrationData });

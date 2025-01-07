@@ -207,6 +207,8 @@ var styles = StyleSheet.create({
         marginTop: 15,
         color: colors.gray,
         fontSize: 14,
+        alignSelf: 'flex-start',
+        marginLeft: '15%'
     },
     input: {
         marginHorizontal: 10,

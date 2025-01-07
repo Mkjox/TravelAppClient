@@ -12,13 +12,13 @@ const { height, width } = Dimensions.get('window')
 
 const RegisterScreen = () => {
     const navigation = useNavigation();
-    const [username, setUsername] = useState('');
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
     const [error, setError] = useState('');
     const { isDark } = useTheme();
 
+    const [username, setUsername] = useState('');
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
     const [firstName, setFirstName] = useState('');
     const [lastName, setLastName] = useState('');
     const [phoneNumber, setPhoneNumber] = useState('');
@@ -45,19 +45,19 @@ const RegisterScreen = () => {
 
         try {
             await AuthService.register({
-                username,
-                password,
-                email,
-                firstName: firstName || null,
-                lastName: lastName || null,
-                phoneNumber: phoneNumber || null,
-                about: about || null,
-                facebookLink: facebookLink || null,
-                instagramLink: instagramLink || null,
-                twitterLink: twitterLink || null,
-                websiteLink: websiteLink || null,
-                youtubeLink: youtubeLink || null,
-                picture: picture || null
+                UserName: username || null,
+                Password: password || null,
+                Email: email || null,
+                FirstName: firstName || null,
+                LastName: lastName || null,
+                PhoneNumber: phoneNumber || null,
+                About: about || null,
+                FacebookLink: facebookLink || null,
+                InstagramLink: instagramLink || null,
+                TwitterLink: twitterLink || null,
+                WebsiteLink: websiteLink || null,
+                YoutubeLink: youtubeLink || null,
+                Picture: picture || null
             });
             navigation.navigate('Home');
         }
