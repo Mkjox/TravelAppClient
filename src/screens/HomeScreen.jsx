@@ -75,9 +75,10 @@ const HomeScreen = ({ navigation }) => {
             {/* Don't forget to add post parameters for this */}
             <Searchbar style={styles.searchBar}
               placeholder="Search"
-              onChangeText={setSearchQuery}
-              value={searchQuery}
+              // onChangeText={setSearchQuery}
+              // value={searchQuery}
               mode="bar"
+              onFocus={() => navigation.navigate("Search")}
             />
           </View>
 

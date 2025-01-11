@@ -120,6 +120,21 @@ const PostService = {
             throw error.response;
         }
     },
+
+    searchPost: async (keyword, isAscending) => {
+        try {
+            const response = await axios.post(`${API_URL}/Search`, null, {
+                params: {
+                    keyword,
+                    isAscending
+                },
+            });
+            return response.data;
+        }
+        catch (error) {
+            throw error.response?.data || 'Error occured during search';
+        }
+    }
 };
 
 export default PostService;

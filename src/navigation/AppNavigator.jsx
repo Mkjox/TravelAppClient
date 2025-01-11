@@ -30,6 +30,7 @@ import UserProfileScreen from '../screens/subScreens/UserProfileScreen';
 import ResetPasswordScreen from '../screens/subScreens/ResetPasswordScreen';
 import FollowScreen from '../screens/subScreens/FollowScreen';
 import Categories from '../screens/subScreens/Categories';
+import SearchScreen from '../screens/subScreens/SearchScreen';
 import { FontAwesome } from '@expo/vector-icons';
 
 const Tab = createBottomTabNavigator();
@@ -225,6 +226,12 @@ function StackNavigator() {
             <Stack.Screen
                 name='Categories'
                 component={Categories}
+                options={{ headerShown: false }}
+            />
+
+            <Stack.Screen
+                name='Search'
+                component={SearchScreen}
                 options={{ headerShown: false }}
             />
 
