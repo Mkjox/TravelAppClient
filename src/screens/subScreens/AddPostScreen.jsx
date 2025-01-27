@@ -84,7 +84,7 @@ const AddPostScreen = ({ navigation }) => {
             <View style={[styles.container]}>
                 <View style={styles.header}>
                     <TouchableOpacity onPress={() => navigation.goBack()}>
-                        <Entypo name='chevron-left' size={32} color={themeStyles.icon.color} />
+                        <Entypo name='chevron-left' size={30} color={themeStyles.icon.color} />
                     </TouchableOpacity>
                     <Text style={[styles.title, themeStyles.text]}>Add Post</Text>
                 </View>
@@ -188,7 +188,8 @@ var styles = StyleSheet.create({
     },
     title: {
         marginTop: 5,
-        fontFamily: 'Poppins_400Regular'
+        fontFamily: 'Poppins_400Regular',
+        fontSize: 15
     },
     image: {
         borderWidth: 1,
@@ -254,7 +255,7 @@ var styles = StyleSheet.create({
         height: height * 0.05,
         alignSelf: 'center',
         borderRadius: 10,
-        marginBottom: height * 0.1,
+        marginBottom: height * 0.05,
         marginTop: height * 0.03,
         elevation: 5,
         alignItems: 'center',

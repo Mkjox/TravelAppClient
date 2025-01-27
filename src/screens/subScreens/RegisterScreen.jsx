@@ -237,10 +237,11 @@ const styles = StyleSheet.create({
         alignSelf: 'center',
         fontFamily: 'Poppins_500Medium',
         fontSize: 14,
+        marginBottom: 20
     },
     signInText: {
         fontFamily: 'Poppins_700Bold',
-        fontSize: 15
+        fontSize: 15,
     },
     errorText: {
         alignSelf: 'center',

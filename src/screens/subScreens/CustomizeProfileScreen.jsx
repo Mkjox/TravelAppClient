@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { StyleSheet, View, Text, TextInput, Alert } from "react-native";
+import { StyleSheet, View, Text, TextInput, Alert, Dimensions } from "react-native";
 import colors from "../../assets/colors/colors";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { useNavigation } from "@react-navigation/core";
@@ -7,6 +7,10 @@ import { Entypo } from '@expo/vector-icons';
 import { Avatar, Button } from "react-native-paper";
 import DropDownPicker from "react-native-dropdown-picker";
 import { TouchableOpacity } from "react-native-gesture-handler";
+import { useTheme } from '../../context/ThemeContext';
+import { darkTheme, lightTheme } from '../../assets/colors/themeColors';
+
+const { height, width } = Dimensions.get("window")
 
 const CustomizeProfileScreen = () => {
     const navigation = useNavigation();
@@ -17,6 +21,8 @@ const CustomizeProfileScreen = () => {
     const [email, setEmail] = useState('');
     const [open, setOpen] = useState(false);
     const [value, setValue] = useState(null);
+    const { isDark } = useTheme();
+    const themeStyles = isDark ? darkTheme : lightTheme;
     const [items, setItems] = useState([
         { label: 'Male', value: 'male' },
         { label: 'Female', value: 'female' },
@@ -62,29 +68,33 @@ const CustomizeProfileScreen = () => {
     };
 
     return (
-        <SafeAreaView style={{ flex: 1 }}>
+        <SafeAreaView style={[{ flex: 1 }, themeStyles.container]}>
             <View style={styles.container}>
-                <TouchableOpacity onPress={() => navigation.goBack()}>
-                    <Entypo name='chevron-left' size={26} style={styles.backIcon}>
-                        <Text style={styles.title}>Customize Profile</Text>
-                    </Entypo>
-                </TouchableOpacity>
+                <View style={styles.header}>
+                    <TouchableOpacity onPress={() => navigation.goBack()}>
+                        <Entypo name='chevron-left' size={30} color={themeStyles.icon.color} />
+                    </TouchableOpacity>
+                    <Text style={[styles.title, themeStyles.text]}>Customize Profile</Text>
+                </View>
+
+                <View style={themeStyles.hairLine} />
+
                 <View style={styles.content}>
                     <Avatar.Image size={60} style={styles.profilePhoto} />
 
                     <View style={styles.inputWrapper}>
-                        <Text style={styles.inputText}>Full Name</Text>
+                        <Text style={[styles.inputText, themeStyles.text]}>Full Name</Text>
                         <TextInput
-                            style={styles.input}
+                            style={[styles.input, themeStyles.card]}
                             value={fullName}
                             onChangeText={setFullName}
                         />
                     </View>
 
                     <View style={styles.inputWrapper}>
-                        <Text style={styles.inputText}>Nickname</Text>
+                        <Text style={[styles.inputText, themeStyles.text]}>Nickname</Text>
                         <TextInput
-                            style={styles.input}
+                            style={[styles.input, themeStyles.card]}
                             value={nickname}
                             onChangeText={setNickname}
                         />
@@ -92,9 +102,9 @@ const CustomizeProfileScreen = () => {
 
                     {/* USE DATEPICKER */}
                     <View style={styles.inputWrapper}>
-                        <Text style={styles.inputText}>Date of Birth</Text>
+                        <Text style={[styles.inputText, themeStyles.text]}>Date of Birth</Text>
                         <TextInput
-                            style={styles.input}
+                            style={[styles.input, themeStyles.card]}
                             value={dateofbirth}
                             onChangeText={setDateOfBirth}
                         />
@@ -102,9 +112,9 @@ const CustomizeProfileScreen = () => {
 
 
                     <View style={styles.inputWrapper}>
-                        <Text style={styles.inputText}>Email</Text>
+                        <Text style={[styles.inputText, themeStyles.text]}>Email</Text>
                         <TextInput
-                            style={styles.input}
+                            style={[styles.input, themeStyles.card]}
                             value={email}
                             onChangeText={setEmail}
                         />
@@ -112,7 +122,7 @@ const CustomizeProfileScreen = () => {
 
 
                     <View style={styles.inputWrapper}>
-                        <Text style={styles.inputText}>Gender</Text>
+                        <Text style={[styles.inputText, themeStyles.text]}>Gender</Text>
                         <DropDownPicker
                             open={open}
                             value={value}
@@ -121,14 +131,14 @@ const CustomizeProfileScreen = () => {
                             setValue={setValue}
                             setItems={setItems}
                             placeholder=""
-                            style={styles.dropdown}
-                            dropDownContainerStyle={styles.dropdownContainer}
+                            style={[styles.dropdown, themeStyles.card]}
+                            dropDownContainerStyle={[styles.dropdownContainer, themeStyles.text]}
                         />
                     </View>
 
                     <TouchableOpacity onPress={handlePress}>
-                        <View style={styles.button}>
-                            <Text style={styles.buttonText}>Update</Text>
+                        <View style={[styles.button, themeStyles.button]}>
+                            <Text style={[styles.buttonText, themeStyles.buttonText]}>Update</Text>
                         </View>
                     </TouchableOpacity>
                 </View>
@@ -141,13 +151,16 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
     },
-    backIcon: {
+    header: {
+        marginTop: 25,
         marginLeft: 15,
-        marginTop: 15,
+        position: 'relative',
+        flexDirection: 'row'
     },
     title: {
-        fontSize: 18,
+        fontSize: 15,
         fontFamily: 'Poppins_400Regular',
+        marginTop: 5
     },
     content: {
         alignItems: 'center'
@@ -161,7 +174,6 @@ const styles = StyleSheet.create({
     },
     inputText: {
         fontFamily: 'Poppins_400Regular',
-        color: '#615F5F'
     },
     input: {
         width: 300,
@@ -202,7 +214,6 @@ const styles = StyleSheet.create({
     },
     button: {
         width: 300,
-        bottom: -130,
         padding: 18,
         shadowColor: colors.black,
         shadowOffset: {
@@ -215,6 +226,7 @@ const styles = StyleSheet.create({
         borderRadius: 15,
         backgroundColor: colors.teallight,
         alignItems: 'center',
+        marginTop: height * 0.05
     },
     buttonText: {
         color: '#FFFFFF',
