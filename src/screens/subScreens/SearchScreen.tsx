@@ -1,10 +1,11 @@
 import { ActivityIndicator, FlatList, StatusBar, StyleSheet, Text, View } from 'react-native'
-import React, { useState } from 'react'
+import React, { useState, useCallback } from 'react'
 import { useNavigation } from '@react-navigation/native'
 import { useTheme } from "../../context/ThemeContext";
 import { darkTheme, lightTheme } from "../../assets/colors/themeColors";
 import PostService from '../../assets/data/services/PostService';
 import { Searchbar } from 'react-native-paper';
+import debounce from 'lodash.debounce';
 
 interface Post {
   id: number;
@@ -14,31 +15,40 @@ interface Post {
 
 const SearchScreen = () => {
   const navigation = useNavigation()
-  // const [searchQuery, setSearchQuery] = useState([]);
   const [searchQuery, setSearchQuery] = useState('');
   const [results, setResults] = useState<Post[]>([]);
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
   const { isDark } = useTheme();
 
   const themeStyles = isDark ? darkTheme : lightTheme;
 
-  const handleSearch = async (query: string) => {
-    setSearchQuery(query);
+  const handleSearch = useCallback(
+    debounce(async (query: string) => {
+      setSearchQuery(query);
 
-    if (!query.trim()) {
-      setResults([]); // Clear results if query is empty
-      return;
-    }
+      if (!query.trim()) {
+        setResults([]); // Clear results if query is empty
+        setLoading(false);
+        return;
+      }
 
-    try {
-      const results: Post[] = await PostService.searchPost(query, true);
-      console.log(results);
-      setResults(results);
-    } catch (error) {
-      console.error('Error performing search:', error);
-      setResults([]);
-    }
-  };
+      setLoading(true);
+      setError(null);
+
+      try {
+        const results: Post[] = await PostService.searchPost(query, true);
+        setResults(results);
+      } catch (error) {
+        console.error('Error performing search:', error);
+        setError('Error performing search');
+        setResults([]);
+      } finally {
+        setLoading(false);
+      }
+    }, 300),
+    []
+  );
 
   const renderPost = ({ item }: { item: Post }) => (
     <View style={styles.postContainer}>
@@ -59,30 +69,22 @@ const SearchScreen = () => {
             style={{ marginBottom: 16, width: '80%' }}
             autoFocus
           />
-
+          {loading && <ActivityIndicator size="large" />}
+          {error && <Text style={styles.errorText}>{error}</Text>}
           <FlatList
             data={results} // Results from search
             keyExtractor={(item) => item.id.toString()} // Use the id field
             renderItem={renderPost} // Render each post
-            ListEmptyComponent={() => (
-              <Text style={styles.noResultsText}>
-                No posts found. Try a different search.
-              </Text>
-            )}
           />
-
         </View>
       </View>
     </View>
-  )
-}
-
+  );
+};
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    // justifyContent: 'center',
-    // alignItems: 'center',
   },
   innerContainer: {
     marginTop: StatusBar.currentHeight,
@@ -92,23 +94,27 @@ const styles = StyleSheet.create({
     padding: 16,
     borderBottomWidth: 1,
     borderBottomColor: '#ccc',
-},
-postTitle: {
+  },
+  postTitle: {
     fontSize: 18,
     fontWeight: 'bold',
     marginBottom: 8,
-},
-postContent: {
+  },
+  postContent: {
     fontSize: 14,
     color: '#555',
-},
-noResultsText: {
+  },
+  noResultsText: {
     textAlign: 'center',
     marginTop: 16,
     fontSize: 16,
     color: '#888',
-},
-})
+  },
+  errorText: {
+    color: 'red',
+    textAlign: 'center',
+    marginTop: 16,
+  },
+});
 
-
-export default SearchScreen
+export default SearchScreen;
