@@ -5,7 +5,6 @@ import { useTheme } from "../../context/ThemeContext";
 import { darkTheme, lightTheme } from "../../assets/colors/themeColors";
 import PostService from '../../assets/data/services/PostService';
 import { Searchbar } from 'react-native-paper';
-import debounce from 'lodash.debounce';
 
 interface Post {
   id: number;
@@ -15,47 +14,36 @@ interface Post {
 
 const SearchScreen = () => {
   const navigation = useNavigation()
-  const [searchQuery, setSearchQuery] = useState('');
-  const [results, setResults] = useState<Post[]>([]);
-  const [loading, setLoading] = useState(false);
+  // const [searchQuery, setSearchQuery] = useState('');
+  // const [results, setResults] = useState<Post[]>([]);
+  const [keyword, setKeyword] = useState('');
+  const [posts, setPosts] = useState<Post[]>([]);
+  // const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const { isDark } = useTheme();
 
   const themeStyles = isDark ? darkTheme : lightTheme;
 
-  const handleSearch = useCallback(
-    debounce(async (query: string) => {
-      setSearchQuery(query);
 
-      if (!query.trim()) {
-        setResults([]); // Clear results if query is empty
-        setLoading(false);
-        return;
-      }
 
-      setLoading(true);
-      setError(null);
+  const handleSearch = async () => {
+    try {
+      const result = await PostService.searchPost(keyword);
+      setPosts(result.data.posts);
+      console.log(result);
+      console.log(result.data);
+      console.log(result.data.posts);
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
-      try {
-        const results: Post[] = await PostService.searchPost(query, true);
-        setResults(results);
-      } catch (error) {
-        console.error('Error performing search:', error);
-        setError('Error performing search');
-        setResults([]);
-      } finally {
-        setLoading(false);
-      }
-    }, 300),
-    []
-  );
-
-  const renderPost = ({ item }: { item: Post }) => (
-    <View style={styles.postContainer}>
-      <Text style={styles.postTitle}>{item.title}</Text>
-      <Text style={styles.postContent}>{item.content}</Text>
-    </View>
-  );
+  // const renderPost = ({ item }: { item: Post }) => (
+  //   <View style={styles.postContainer}>
+  //     <Text style={styles.postTitle}>{item.title}</Text>
+  //     <Text style={styles.postContent}>{item.content}</Text>
+  //   </View>
+  // );
 
   return (
     <View style={styles.container}>
@@ -63,18 +51,24 @@ const SearchScreen = () => {
         <View style={{ padding: 16 }}>
           <Searchbar
             placeholder="Search posts"
-            value={searchQuery}
-            onChangeText={(text) => handleSearch(text)}
-            onIconPress={() => handleSearch(searchQuery)}
+            value={keyword}
+            onChangeText={setKeyword}
+            // onIconPress={() => handleSearch(searchQuery)}
             style={{ marginBottom: 16, width: '80%' }}
             autoFocus
+            onSubmitEditing={handleSearch}
           />
-          {loading && <ActivityIndicator size="large" />}
-          {error && <Text style={styles.errorText}>{error}</Text>}
+          {/* {loading && <ActivityIndicator size="large" />} */}
+          {/* {error && <Text style={styles.errorText}>{error}</Text>} */}
           <FlatList
-            data={results} // Results from search
+            data={posts} // Results from search
             keyExtractor={(item) => item.id.toString()} // Use the id field
-            renderItem={renderPost} // Render each post
+            renderItem={({ item }) => (
+              <View style={styles.postContainer}>
+                <Text style={styles.postTitle}>{item.title}</Text>
+                <Text style={styles.postContent}>{item.content}</Text>
+              </View>
+            )} // Render each post
           />
         </View>
       </View>

@@ -121,19 +121,19 @@ const PostService = {
         }
     },
 
-        searchPost: async (keyword, isAscending) => {
-            try {
-                const response = await axios.get(`${API_URL}/Search`, {
-                    params: {
-                        keyword,
-                        isAscending
-                    },
-                });
-                return response.data;
-            }
-            catch (error) {
-                throw error.response?.data || 'Error occurred during search';
-            }
+    searchPost: async (keyword, isAscending) => {
+        try {
+            const response = await axios.get(`${API_URL}/Search`, {
+                params: {
+                    keyword,
+                    isAscending
+                },
+            });
+            return response;
+        }
+        catch (error) {
+            throw error.response || 'Error occurred during search';
+        }
     }
 };
 
