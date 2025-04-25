@@ -54,7 +54,7 @@ const SearchScreen = () => {
             value={keyword}
             onChangeText={setKeyword}
             // onIconPress={() => handleSearch(searchQuery)}
-            style={{ marginBottom: 16, width: '80%' }}
+            style={{ marginBottom: 16, width: '100%' }}
             autoFocus
             onSubmitEditing={handleSearch}
           />
