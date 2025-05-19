@@ -101,24 +101,24 @@ const styles = StyleSheet.create({
     justifyContent: "flex-start",
   },
   headerText: {
-    fontFamily: 'Poppins_400Regular',
-    fontSize: 16,
-    marginLeft: 10
+    fontFamily: 'Poppins_500Medium',
+    fontSize: 20,
+    marginLeft: 10,
   },
   settingsWrapper: {
     alignItems: "center",
     padding: 20,
-    marginTop: 80,
+    flex: 1,
+    justifyContent: 'center'
   },
   listWrapper: {
-    marginTop: 50,
     backgroundColor: '#fff',
     margin: 20,
     borderRadius: 10,
     padding: 25,
     elevation: 3,
     borderColor: '#ccc',
-    borderWidth: 1
+    borderWidth: 1,
   },
   switch: {
     marginLeft: 15
