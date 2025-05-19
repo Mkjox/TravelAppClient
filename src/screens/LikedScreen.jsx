@@ -140,14 +140,14 @@ const styles = StyleSheet.create({
     width: width * 0.8,
     marginHorizontal: 5,
     backgroundColor: '#FFFFFF',
-    borderWidth: 0.1,
+    borderWidth: 1,
+    borderColor: '#ccc',
     height: height * 0.06
   },
   title: {
     fontSize: 16,
     marginTop: 16,
     fontFamily: 'Poppins_500Medium',
-    textAlign: 'center',
   },
   likedWrapper: {
     marginHorizontal: 5,

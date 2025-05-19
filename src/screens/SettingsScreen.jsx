@@ -116,9 +116,9 @@ const styles = StyleSheet.create({
     margin: 20,
     borderRadius: 10,
     padding: 25,
-    elevation: 2,
-    borderColor: '#FFFFFF',
-    borderWidth: 0.5
+    elevation: 3,
+    borderColor: '#ccc',
+    borderWidth: 1
   },
   switch: {
     marginLeft: 15

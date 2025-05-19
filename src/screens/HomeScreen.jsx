@@ -11,7 +11,7 @@ import {
 } from "react-native";
 import Feather from "@expo/vector-icons/Feather";
 import Activity from "../components/Activity";
-import { DrawerActions } from '@react-navigation/drawer';
+// import { DrawerActions } from '@react-navigation/drawer';
 // import { Appbar } from '../components/Appbar';
 import Explore from '../components/Explore';
 import Post from '../components/Post';
@@ -128,7 +128,8 @@ const styles = StyleSheet.create({
     elevation: 5,
     shadowOpacity: 0.25,
     shadowRadius: 3.84,
-    borderWidth: 0.1,
+    borderWidth: 1,
+    borderColor: '#ccc',
   },
   menuWrapper: {
     marginHorizontal: 10,

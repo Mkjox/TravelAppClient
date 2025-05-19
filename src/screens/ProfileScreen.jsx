@@ -1,221 +1,195 @@
-import React, { useState, useEffect } from "react";
-import { StyleSheet, Linking, Platform, View, Text, ImageBackground, TouchableOpacity, Dimensions, StatusBar } from "react-native";
-import { useNavigation } from "@react-navigation/core";
+import {
+  StyleSheet,
+  View,
+  Text,
+  Dimensions,
+  TouchableOpacity,
+  ImageBackground,
+} from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { Avatar, Caption, Title, TouchableRipple } from "react-native-paper";
-import { Entypo, FontAwesome } from '@expo/vector-icons';
-import LikedData from '../assets/data/likedData.json';
-import colors from "../assets/colors/colors";
-import { ScrollView } from "react-native-gesture-handler";
+import { Avatar } from "react-native-paper";
+import { Entypo, FontAwesome } from "@expo/vector-icons";
+import { useNavigation } from "@react-navigation/core";
 import { useTheme } from "../context/ThemeContext";
 import { darkTheme, lightTheme } from "../assets/colors/themeColors";
 
-const { height, width } = Dimensions.get('window');
+const { width } = Dimensions.get("window");
 
 const ProfileScreen = () => {
-  const [data, setData] = useState([]);
   const navigation = useNavigation();
   const { isDark } = useTheme();
+  const theme = isDark ? darkTheme : lightTheme;
 
-  const themeStyles = isDark ? darkTheme : lightTheme;
-
-  useEffect(() => {
-    try {
-      setData(LikedData);
-    } catch (error) {
-      console.error("Error fetching data:", error);
-    }
-  }, []);
+  // Placeholder
+  const user = {
+    fullName: "Jane Doe",
+    userName: "janedoe",
+    avatarUrl: "https://via.placeholder.com/300",
+    location: "New York, NY",
+    phone: "+1 212-555-1234",
+    email: "jane.doe@example.com",
+    followers: 240,
+    following: 180,
+  };
 
   return (
-    <View style={[styles.container, themeStyles.container]}>
-      <ScrollView style={styles.topSection}>
-        <View style={styles.profileTopWrapper}>
+    <SafeAreaView style={[styles.container, theme.container]}>
+      {/* Cover Banner */}
+      <ImageBackground
+        src={"https://picsum.photos/700"}
+        style={styles.banner}
+      >
+        <View style={styles.bannerOverlay} />
+      </ImageBackground>
 
-          <View style={styles.information}>
-            <Avatar.Image size={70} style={styles.avatar} />
-            <View style={styles.informationInnerWrapper}>
-              <Text style={[styles.headerText, themeStyles.text]}>Welcome USER</Text>
-              <Text style={[styles.headerText, themeStyles.text, { marginBottom: 5 }]}>@</Text>
-            </View>
-          </View>
+      {/* Avatar */}
+      <View style={styles.avatarContainer}>
+        <Avatar.Image
+          size={100}
+          source={{ uri: user.avatarUrl }}
+          style={styles.avatar}
+        />
+      </View>
 
-          <Entypo name="location-pin" size={18} color='#FFFFFF' style={styles.profileDetails}>
-            <Text style={[styles.profileDetailsText, themeStyles.text]}> Location</Text>
-          </Entypo>
+      {/* Name & Username */}
+      <View style={styles.nameSection}>
+        <Text style={[styles.fullName, theme.text]}>{user.fullName}</Text>
+        <Text style={[styles.userName, theme.text]}>@{user.userName}</Text>
+      </View>
 
-          <Entypo name="phone" size={18} color='#FFFFFF' style={styles.profileDetails}>
-            <Text style={[styles.profileDetailsText, themeStyles.text]}> Phone Number</Text>
-          </Entypo>
+      {/* Contact Row */}
+      <View style={[styles.contactRow, theme.primaryBackground]}>
+        <TouchableOpacity style={styles.contactItem}>
+          <Entypo name="location-pin" size={20} color="#fff" />
+          <Text style={[styles.contactText, theme.text]}>{user.location}</Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.contactItem}>
+          <Entypo name="phone" size={20} color="#fff" />
+          <Text style={[styles.contactText, theme.text]}>{user.phone}</Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.contactItem}>
+          <Entypo name="mail" size={20} color="#fff" />
+          <Text style={[styles.contactText, theme.text]}>{user.email}</Text>
+        </TouchableOpacity>
+      </View>
 
-          <Entypo name="mail" size={18} color='#FFFFFF' style={styles.profileDetails}>
-            <Text style={[styles.profileDetailsText, themeStyles.text]}> Email</Text>
-          </Entypo>
-
-          {/* FIX STYLING ON THIS AREA  ALSO ADD DB DATA */}
-          <View style={styles.detailsContainer}>
-            <View style={styles.detailsWrapper}>
-              <TouchableOpacity onPress={() => navigation.navigate('Follow')}>
-                <Text style={[styles.detailsText, themeStyles.text]}>0</Text>
-                <Caption style={[styles.detailsText, themeStyles.text]}>Followers</Caption>
-              </TouchableOpacity>
-            </View>
-            <View style={styles.followingDetails}>
-              <TouchableOpacity onPress={() => navigation.navigate('Follow')}>
-                <Text style={[styles.detailsText, themeStyles.text]}>0</Text>
-                <Caption style={[styles.detailsText, themeStyles.text]}>Following</Caption>
-              </TouchableOpacity>
-            </View>
-          </View>
-
-          {/* <View style={themeStyles.hairLine} /> */}
-
-          {/* <View style={styles.detailsContainer}>
-            <View style={styles.countContainer}>
-              <TouchableOpacity onPress={() => navigation.navigate('SharedPosts')}>
-                <Text style={styles.detailsText}>4</Text>
-                <Caption style={styles.detailsText}>Post Count</Caption>
-              </TouchableOpacity>
-            </View>
-            <View style={styles.countContainer}>
-              <TouchableOpacity onPress={() => navigation.navigate('Comments')}>
-                <Text style={styles.detailsText}>5</Text>
-                <Caption style={styles.detailsText}>Comment Count</Caption>
-              </TouchableOpacity>
-            </View>
-          </View> */}
-
-          {/* <TouchableOpacity onPress={() => navigation.navigate('UserProfile')} style={[styles.temporaryUserProfile]}>
-            <Text style={themeStyles.text}>Go to User Profile Screen</Text>
-          </TouchableOpacity> */}
-          <View style={styles.line} />
+      {/* Stats Cards */}
+      <View style={styles.statsRow}>
+        <View style={[styles.statCard, theme.cardBackground]}>
+          <Text style={[styles.statCount, theme.text]}>{user.followers}</Text>
+          <Text style={[styles.statLabel, theme.text]}>Followers</Text>
         </View>
-
-        <View style={styles.options}>
-          <TouchableOpacity onPress={() => navigation.navigate("SharedPosts")}>
-            <FontAwesome name="heart" style={[styles.optionItem, themeStyles.primary]} size={17}>
-              <Text style={[styles.optionItemText, themeStyles.text]}> Shared Posts</Text>
-            </FontAwesome>
-          </TouchableOpacity>
-
-          <TouchableOpacity onPress={() => navigation.navigate("Comments")}>
-            <FontAwesome name="comment" style={[styles.optionItem, themeStyles.primary]} size={17}>
-              <Text style={[styles.optionItemText, themeStyles.text]}> Comments</Text>
-            </FontAwesome>
-          </TouchableOpacity>
-
-          <TouchableOpacity onPress={() => navigation.navigate("CustomizeProfile")}>
-            <FontAwesome name="pencil" style={[styles.optionItem, themeStyles.primary]} size={17}>
-              <Text style={[styles.optionItemText, themeStyles.text]}> Customize Profile</Text>
-            </FontAwesome>
-          </TouchableOpacity>
-
-          <TouchableOpacity>
-            <FontAwesome name="share" style={[styles.optionItem, themeStyles.primary]} size={17}>
-              <Text style={[styles.optionItemText, themeStyles.text]}> Recommend the app to your friend</Text>
-            </FontAwesome>
-          </TouchableOpacity>
-
-          <TouchableOpacity onPress={() => navigation.navigate("Settings")}>
-            <FontAwesome name="gear" style={[styles.optionItem, themeStyles.primary]} size={17}>
-              <Text style={[styles.optionItemText, themeStyles.text]}> Settings</Text>
-            </FontAwesome>
-          </TouchableOpacity>
+        <View style={[styles.statCard, theme.cardBackground]}>
+          <Text style={[styles.statCount, theme.text]}>{user.following}</Text>
+          <Text style={[styles.statLabel, theme.text]}>Following</Text>
         </View>
-      </ScrollView>
-    </View>
+      </View>
+
+      {/* Options List */}
+      <View style={styles.options}>
+        {[
+          { icon: "heart", label: "Shared Posts", onPress: () => navigation.navigate("SharedPosts") },
+          { icon: "comment", label: "Comments", onPress: () => navigation.navigate("Comments") },
+          { icon: "share", label: "Recommend App", onPress: () => {/* share logic */ } },
+          { icon: "gear", label: "Settings", onPress: () => navigation.navigate("Settings") },
+        ].map(({ icon, label, onPress }) => (
+          <TouchableOpacity
+            key={label}
+            style={[styles.optionRow, theme.cardBackground]}
+            onPress={onPress}
+          >
+            <FontAwesome name={icon} size={20} style={theme.text} />
+            <Text style={[styles.optionLabel, theme.text]}>{label}</Text>
+            <Entypo name="chevron-right" size={20} style={theme.text} />
+          </TouchableOpacity>
+        ))}
+      </View>
+    </SafeAreaView>
   );
 };
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
+  container: { flex: 1 },
 
+  banner: {
+    width,
+    height: width * 0.5,
   },
-  topSection: {
+  bannerOverlay: {
+    ...StyleSheet.absoluteFillObject,
+    backgroundColor: "rgba(0,0,0,0.3)",
   },
-  profileTopWrapper: {
-    borderBottomEndRadius: 20,
-    borderBottomLeftRadius: 20,
-    height: height * 0.45,
-
+  avatarContainer: {
+    position: "absolute",
+    top: width * 0.5 - 30,
+    left: width / 2 - 50,
   },
   avatar: {
-    marginBottom: 10,
-    alignSelf: 'left',
-    justifyContent: 'center',
-    alignSelf: 'center',
-    marginVertical: height * 0.01
+    borderWidth: 3,
+    borderColor: "#fff",
   },
-  information: {
-    flexDirection: 'column',
-    marginTop: StatusBar.currentHeight + height * 0.01
+  nameSection: {
+    marginTop: width * 0.13,
+    alignItems: "center",
   },
-  informationInnerWrapper: {
-    marginVertical: height * 0.01
+  fullName: {
+    fontSize: 22,
+    fontWeight: "600"
   },
-  headerText: {
-    fontFamily: 'Poppins_500Medium',
-    fontSize: 18,
-    alignSelf: 'center'
+  userName: {
+    fontSize: 16,
+    color: "#888"
   },
-  profileDetails: {
-    marginVertical: 4,
-    justifyContent: 'center',
-    alignSelf: 'center'
+  contactRow: {
+    flexDirection: "column",
+    alignItems: 'center',
+    justifyContent: "space-around",
+    marginTop: 20,
   },
-  profileDetailsText: {
-    fontFamily: 'Poppins_300Light',
-    textAlign: 'left'
+  contactItem: {
+    flexDirection: "row",
+    alignItems: "center"
   },
-  detailsContainer: {
-    marginVertical: height * 0.01,
-    flexDirection: 'row',
+  contactText: {
+    marginLeft: 6,
+    fontSize: 14
   },
-  detailsWrapper: {
-    marginHorizontal: width * 0.23,
+  statsRow: {
+    flexDirection: "row",
+    justifyContent: "space-around",
+    marginTop: 20,
   },
-  detailsText: {
-    fontFamily: 'Poppins_400Regular',
+  statCard: {
+    width: width * 0.4,
+    alignItems: "center",
+    padding: 15,
+    borderRadius: 10,
+  },
+  statCount: {
+    fontSize: 20,
+    fontWeight: "600"
+  },
+  statLabel: {
     fontSize: 14,
-    color: colors.white,
-    alignSelf: 'center'
-  },
-  followingDetails: {
-  },
-  // countContainer: {
-  //   marginHorizontal: 40,
-  //   alignItems: 'center',
-  //   marginRight: 25
-  // },
-  // temporaryUserProfile: {
-  //   alignSelf: 'center',
-  //   marginVertical: 15,
-  //   borderRadius: 10,
-  //   borderWidth: 0.5,
-  //   height: 30,
-  //   alignItems: 'center'
-  // },
-  line: {
-    borderBottomWidth: 0.5,
-    width: '90%',
-    alignSelf: 'center',
-    marginTop: 10
+    color: "#666"
   },
   options: {
-    flexDirection: 'column',
-    marginLeft: 40,
-    marginTop: height * 0.03,
+    marginTop: 25,
+    paddingHorizontal: 20,
   },
-  optionItem: {
-    marginVertical: 10,
-    height: 20,
+  optionRow: {
+    flexDirection: "row",
+    alignItems: "center",
+    paddingVertical: 5,
+    paddingHorizontal: 20,
+    marginBottom: 15,
+    borderRadius: 8,
   },
-  optionItemText: {
-    color: colors.black,
-    fontFamily: 'Poppins_400Regular',
+  optionLabel: {
+    flex: 1,
+    marginLeft: 15,
     fontSize: 16,
-  }
+  },
 });
 
 export default ProfileScreen;
