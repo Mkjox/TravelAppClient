@@ -5,10 +5,10 @@ import { Card } from "react-native-paper";
 import { MaterialIcons } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/core";
 import { Entypo } from '@expo/vector-icons';
-import PostService from '../assets/data/services/PostService.js';
+import PostService from '../services/PostService.js';
 import { FlatList } from "react-native-gesture-handler";
-import LikeService from "../assets/data/services/LikeService";
-import CategoryService from "../assets/data/services/CategoryService.js";
+import LikeService from "../services/LikeService.js";
+import CategoryService from "../services/CategoryService.js";
 import { useTheme } from "../context/ThemeContext.tsx";
 import { darkTheme, lightTheme } from "../assets/colors/themeColors.tsx";
 

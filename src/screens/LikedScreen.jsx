@@ -15,7 +15,7 @@ import { MaterialIcons, Entypo } from "@expo/vector-icons";
 import colors from "../assets/colors/colors";
 import { useNavigation } from "@react-navigation/core";
 import { Card, Searchbar } from "react-native-paper";
-import PostService from "../assets/data/services/PostService";
+import PostService from "../services/PostService";
 import { useTheme } from "../context/ThemeContext";
 import { darkTheme, lightTheme } from "../assets/colors/themeColors";
 import { ScrollView } from "react-native-gesture-handler";
@@ -69,13 +69,13 @@ const LikedScreen = () => {
           />
         </View>
 
-        <View>
+        {/* <View>
           <Text style={[styles.title, themeStyles.text]}>
             Liked Posts
           </Text>
         </View>
 
-        <View style={[themeStyles.hairLine]} />
+        <View style={[themeStyles.hairLine]} /> */}
 
         <View style={styles.likedWrapper}>
           <FlatList

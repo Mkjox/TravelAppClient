@@ -4,7 +4,7 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { useNavigation } from "@react-navigation/core";
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import colors from '../../assets/colors/colors';
-import AuthService from '../../assets/data/services/AuthService';
+import AuthService from '../../services/AuthService';
 import { useTheme } from '../../context/ThemeContext';
 import { darkTheme, lightTheme } from '../../assets/colors/themeColors';
 

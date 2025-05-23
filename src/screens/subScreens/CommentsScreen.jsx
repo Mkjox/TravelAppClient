@@ -1,32 +1,42 @@
 import { useState, useEffect } from "react";
-import { StyleSheet, View, Text, Dimensions, StatusBar } from "react-native";
+import { StyleSheet, View, Text, Dimensions, StatusBar, ActivityIndicator } from "react-native";
 import { useNavigation } from "@react-navigation/core";
 import { Entypo, Ionicons } from '@expo/vector-icons';
 import colors from "../../assets/colors/colors";
-import { SafeAreaView } from "react-native-safe-area-context";
 import { FlatList } from "react-native-gesture-handler";
 import LikedData from '../../assets/data/likedData.json';
 import { Card } from "react-native-paper";
 import { useTheme } from "../../context/ThemeContext";
 import { darkTheme, lightTheme } from "../../assets/colors/themeColors";
+import CommentService from "../../services/CommentService";
 
 const { height, width } = Dimensions.get('window');
 
 const CommentsSreen = () => {
-    const [data, setData] = useState([]);
+    const [comment, setComment] = useState([]);
+    const [loading, setLoading] = useState(true);
     var navigation = useNavigation();
     const { isDark } = useTheme();
 
     const themeStyles = isDark ? darkTheme : lightTheme;
 
+    async function getComments() {
+        var result = await CommentService.getAllCommentsByNonDeletedAndActive();
+        setComment(result.data.comments);
+        setLoading(false);
+    }
+
     useEffect(() => {
-        try {
-            setData(LikedData);
-        }
-        catch (error) {
-            console.error("Error fetching data:", error)
-        }
+        getComments();
     }, []);
+
+    if (loading) {
+        return <ActivityIndicator size="large" color={colors.orange}/>
+    }
+
+    if (error) {
+        return <Text style={styles.errorText}>{error}</Text>
+    }
 
     return (
         <View style={[styles.container, themeStyles.container]}>
@@ -40,7 +50,7 @@ const CommentsSreen = () => {
 
                 <FlatList
                     alwaysBounceVertical='true'
-                    data={data}
+                    data={comment}
                     keyExtractor={(item) => item.id.toString()}
                     renderItem={({ item }) => (
                         <Card style={[styles.commentWrapper, themeStyles.card]}>
@@ -109,6 +119,10 @@ const styles = StyleSheet.create({
         width: '95%',
         marginTop: 10,
         marginBottom: -5
+    },
+        errorText: {
+        color: colors.red,
+        textAlign: 'center'
     }
 });
 

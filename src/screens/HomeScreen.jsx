@@ -18,7 +18,7 @@ import Post from '../components/Post';
 import { ScrollView } from "react-native-gesture-handler";
 import { Searchbar } from "react-native-paper";
 import colors from "../assets/colors/colors";
-import PostService from "../assets/data/services/PostService";
+import PostService from "../services/PostService";
 import { useTheme } from '../context/ThemeContext';
 import { darkTheme, lightTheme } from '../assets/colors/themeColors';
 

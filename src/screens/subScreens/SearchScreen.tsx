@@ -3,7 +3,7 @@ import React, { useState, useCallback } from 'react'
 import { useNavigation } from '@react-navigation/native'
 import { useTheme } from "../../context/ThemeContext";
 import { darkTheme, lightTheme } from "../../assets/colors/themeColors";
-import PostService from '../../assets/data/services/PostService';
+import PostService from '../../services/PostService';
 import { Searchbar } from 'react-native-paper';
 
 interface Post {
