@@ -2,14 +2,11 @@ import axios from 'axios';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import api from '../services/api';
 
-// const API_URL = 'http://10.0.2.2:5001/api/auth';
-
 const AuthService = {
     login: async (email, password) => {
         try {
             const credentials = { email, password };
-            // const response = await axios.post(`${API_URL}/login`, credentials);
-            const response = await api.post("/auth/login", credentials);
+            const response = await api.post("auth/login", credentials);
 
             await AsyncStorage.setItem('authToken', response.data.token);
             await AuthService.fetchAndStoreUserInfo(response.data.token);
@@ -38,7 +35,7 @@ const AuthService = {
                 Picture
             };
 
-            const response = await axios.post(`${API_URL}/register`, { userAddDto: registrationData });
+            const response = await axios.post(`auth/register`, { userAddDto: registrationData });
 
             await AsyncStorage.setItem('authToken', response.data.token);
             await AuthService.fetchAndStoreUserInfo(response.data.token);
@@ -51,7 +48,7 @@ const AuthService = {
 
     fetchAndStoreUserInfo: async (token) => {
         try {
-            const response = await axios.get(`${API_URL}/current-user`, {
+            const response = await axios.get(`auth/current-user`, {
                 headers: {
                     Authorization: `Bearer ${token}`
                 }

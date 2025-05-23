@@ -1,11 +1,10 @@
 import axios from 'axios';
-
-const API_URL = 'http://10.0.2.2:5001/api/post';
+import api from './api';
 
 const PostService = {
     addPost: async (title, content, thumbnail, balance, rating, duration, categoryId, location) => {
         try {
-            const response = await axios.post(`${API_URL}/Add`, {
+            const response = await api.post('post/Add', {
                 title,
                 content,
                 thumbnail,
@@ -24,7 +23,7 @@ const PostService = {
 
     updatePost: async (title, content, thumbnail, balance, rating, duration, categoryId, location) => {
         try {
-            const response = await axios.post(`${API_URL}/Update`, {
+            const response = await api.post('post/Update', {
                 title,
                 content,
                 thumbnail,
@@ -43,7 +42,7 @@ const PostService = {
 
     deletePost: async (postId) => {
         try {
-            const response = await axios.delete(`${API_URL}/Delete/${postId}`);
+            const response = await api.delete(`post/Delete/${postId}`);
             return response.data;
         }
         catch (error) {
@@ -53,7 +52,7 @@ const PostService = {
 
     hardDeletePost: async (postId) => {
         try {
-            const response = await axios.delete(`${API_URL}/HardDelete/${postId}`);
+            const response = await api.delete(`post/HardDelete/${postId}`);
             return response.data;
         }
         catch (error) {
@@ -63,7 +62,7 @@ const PostService = {
 
     undoDeletePost: async (postId) => {
         try {
-            const response = await axios.post(`${API_URL}/UndoDelete/${postId}`);
+            const response = await api.post(`post/UndoDelete/${postId}`);
             return response.data;
         }
         catch (error) {
@@ -73,7 +72,7 @@ const PostService = {
 
     getPost: async (postId) => {
         try {
-            const response = await axios.get(`${API_URL}/GetPost/${postId}`);
+            const response = await api.get(`post/GetPost/${postId}`);
             return response;
         }
         catch (error) {
@@ -83,7 +82,7 @@ const PostService = {
 
     getAllPosts: async () => {
         try {
-            const response = await axios.get(`${API_URL}/GetAllPosts`);
+            const response = await api.get('post/GetAllPosts');
             return response;
         }
         catch (error) {
@@ -93,7 +92,7 @@ const PostService = {
 
     getAllPostsByNonDeleted: async () => {
         try {
-            const response = await axios.get(`${API_URL}/GetAllByNonDeleted`);
+            const response = await api.get('post/GetAllByNonDeleted');
             return response;
         }
         catch (error) {
@@ -103,7 +102,7 @@ const PostService = {
 
     getAllPostsByNonDeletedAndActive: async () => {
         try {
-            const response = await axios.get(`${API_URL}/GetAllByNonDeletedAndActive`);
+            const response = await api.get('post/GetAllByNonDeletedAndActive');
             return response;
         }
         catch (error) {
@@ -113,7 +112,7 @@ const PostService = {
 
     getAllPostsByDeleted: async () => {
         try {
-            const response = await axios.get(`${API_URL}/GetAllDeleted`);
+            const response = await api.get('post/GetAllDeleted');
             return response;
         }
         catch (error) {
@@ -123,7 +122,7 @@ const PostService = {
 
     searchPost: async (keyword, isAscending) => {
         try {
-            const response = await axios.get(`${API_URL}/Search`, {
+            const response = await api.get('post/Search', {
                 params: {
                     keyword,
                     isAscending

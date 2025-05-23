@@ -1,10 +1,9 @@
-import axios from 'axios';
+import api from './api';
 
-const API_URL = 'https://10.0.2.2:5001/api/follow/';
 
 const followUser = async (followerId, followeeId) => {
     try {
-        const response = await axios.post(`${API_URL}/followUser`, { followerId, followeeId });
+        const response = await api.post(`follow/followUser`, { followerId, followeeId });
         return response.data;
     }
     catch (error) {
@@ -14,7 +13,7 @@ const followUser = async (followerId, followeeId) => {
 
 const unfollowUser = async (followerId, followeeId) => {
     try {
-        const response = await axios.post(`${API_URL}/unfollowUser`, { followerId, followeeId });
+        const response = await api.post(`follow/unfollowUser`, { followerId, followeeId });
         return response.data;
     }
     catch (error) {
@@ -24,7 +23,7 @@ const unfollowUser = async (followerId, followeeId) => {
 
 const listFollowingUsers = async (followerId, followeeId) => {
     try {
-        const response = await axios.get(`${API_URL}/following`, { followerId, followeeId });
+        const response = await api.get(`follow/following`, { followerId, followeeId });
         return response.data;
     }
     catch (error) {
@@ -34,7 +33,7 @@ const listFollowingUsers = async (followerId, followeeId) => {
 
 const listFollowerUsers = async (followeeId, followerId) => {
     try {
-        const response = await axios.get(`${API_URL}/followers`, {followeeId, followerId});
+        const response = await api.get(`follow/followers`, {followeeId, followerId});
         return response.data;
     }
     catch (error) {

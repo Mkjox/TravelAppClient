@@ -1,11 +1,9 @@
-import axios from 'axios';
-
-const API_URL = 'http://10.0.2.2:5001/api/like';
+import api from './api';
 
 const LikeService = {
     likePost: async (userId, postId) => {
         try {
-            const response = await axios.post(`${API_URL}/likePost`, { userId, postId });
+            const response = await api.post(`like/likePost`, { userId, postId });
             return response.data;
         }
         catch (error) {
@@ -15,7 +13,7 @@ const LikeService = {
 
     unlikePost: async (userId, postId) => {
         try {
-            const response = await axios.post(`${API_URL}/unlikePost`, { userId, postId });
+            const response = await api.post(`like/unlikePost`, { userId, postId });
             return response.data;
         }
         catch (error) {
@@ -25,7 +23,7 @@ const LikeService = {
 
     likeComment: async (userId, commentId) => {
         try {
-            const response = await axios.post(`${API_URL}/likeComment`, { userId, commentId });
+            const response = await api.post(`like/likeComment`, { userId, commentId });
             return response.data;
         }
         catch (error) {
@@ -35,7 +33,7 @@ const LikeService = {
 
     unlikeComment: async (userId, commentId) => {
         try {
-            const response = await axios.post(`${API_URL}/unlikeComment`, { userId, commentId });
+            const response = await api.post(`like/unlikeComment`, { userId, commentId });
             return response.data;
         }
         catch (error) {
@@ -45,7 +43,7 @@ const LikeService = {
 
     isPostLiked: async (postId, userId) => {
         try {
-            const response = await axios.get(`${API_URL}/IsLikedPost/${postId}/${userId}`);
+            const response = await api.get(`like/IsLikedPost/${postId}/${userId}`);
             console.log(response.data);
             return response.data.IsLiked;
         }
@@ -57,7 +55,7 @@ const LikeService = {
 
     isCommentLiked: async (commentId, userId) => {
         try {
-            const response = await axios.get(`${API_URL}/IsLikedComment/${commentId}/${userId}`);
+            const response = await api.get(`like/IsLikedComment/${commentId}/${userId}`);
             return response.data.IsLiked;
         }
         catch (error) {

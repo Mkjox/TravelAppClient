@@ -1,13 +1,12 @@
-import axios from 'axios';
+import api from './api';
 
-const API_URL = 'http://10.0.2.2:5001/api/comment';
 
 // need CreatedByName into it
 // IT NEEDS UNDO DELETE
 
 const addComment = async (comment, postId) => {
     try {
-        const response = await axios.post(`${API_URL}/AddComment`, {
+        const response = await api.post(`comment/AddComment`, {
             comment,
             postId
         });
@@ -20,7 +19,7 @@ const addComment = async (comment, postId) => {
 
 const updateComment = async (comment, postId) => {
     try {
-        const response = await axios.put(`${API_URL}/UpdateComment`, {
+        const response = await api.put(`comment/UpdateComment`, {
             comment,
             postId
         });
@@ -33,7 +32,7 @@ const updateComment = async (comment, postId) => {
 
 const deleteComment = async (commentId) => {
     try {
-        const response = await axios.put(`${API_URL}/DeleteComment`, {
+        const response = await api.put(`comment/DeleteComment`, {
             commentId
         });
         return response.data;
@@ -45,7 +44,7 @@ const deleteComment = async (commentId) => {
 
 const hardDeleteComment = async (commentId) => {
     try {
-        const response = await axios.delete(`${API_URL}/HardDeleteComment`, {
+        const response = await api.delete(`comment/HardDeleteComment`, {
             commentId
         });
         return response.data;
@@ -58,7 +57,7 @@ const hardDeleteComment = async (commentId) => {
 
 const getCommentById = async (commentId) => {
     try {
-        const response = await axios.get(`${API_URL}/GetCommentById`, {
+        const response = await api.get(`comment/GetCommentById`, {
             commentId
         });
         return response.data;
@@ -70,7 +69,7 @@ const getCommentById = async (commentId) => {
 
 const getAllComments = async () => {
     try {
-        const response = await axios.get(`${API_URL}/GetAllComments`);
+        const response = await api.get(`comment/GetAllComments`);
         return response.data;
     }
     catch (error) {
@@ -80,7 +79,7 @@ const getAllComments = async () => {
 
 const getDeletedComments = async () => {
     try {
-        const response = await axios.get(`${API_URL}/GetDeletedComments`);
+        const response = await api.get(`comment/GetDeletedComments`);
         return response.data;
     }
     catch (error) {
@@ -90,7 +89,7 @@ const getDeletedComments = async () => {
 
 const getAllCommentsByNonDeleted = async () => {
     try {
-        const response = await axios.get(`${API_URL}/GetAllByNonDeleted`);
+        const response = await api.get(`comment/GetAllByNonDeleted`);
         return response.data;
     }
     catch (error) {
@@ -100,7 +99,7 @@ const getAllCommentsByNonDeleted = async () => {
 
 const getAllCommentsByNonDeletedAndActive = async () => {
     try {
-        const response = await axios.get(`${API_URL}/GetAllByNonDeletedAndActive`);
+        const response = await api.get(`comment/GetAllByNonDeletedAndActive`);
         return response.data;
     }
     catch (error) {
@@ -110,7 +109,7 @@ const getAllCommentsByNonDeletedAndActive = async () => {
 
 const countComments = async () => {
     try {
-        const response = await axios.get(`${API_URL}/CountComments`);
+        const response = await api.get(`comment/CountComments`);
         return response.data;
     }
     catch (error) {
@@ -120,7 +119,7 @@ const countComments = async () => {
 
 const countNonDeletedComments = async () => {
     try {
-        const response = await axios.get(`${API_URL}/CountNonDeletedComments`);
+        const response = await api.get(`comment/CountNonDeletedComments`);
         return response.data;
     }
     catch (error) {

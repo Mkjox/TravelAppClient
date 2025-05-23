@@ -1,10 +1,9 @@
-import axios from 'axios';
+import api from './api';
 
-const API_URL = 'http://10.0.2.2:5001/api/role';
 
 export const assignRole = async (userId, roleName) => {
     try {
-        const response = await axios.post(`${API_URL}/AssignRole`, null, {
+        const response = await api.post(`role/AssignRole`, null, {
             params: {
                 userId,
                 roleName
